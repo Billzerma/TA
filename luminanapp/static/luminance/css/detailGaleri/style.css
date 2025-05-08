@@ -1,0 +1,22 @@
+.title-style-top{
+  margin: 0px 0px 8px 8px;
+  padding-top: 32px;
+}
+
+.title-style{
+  margin: 0px 0px 16px 8px;
+  padding-top: 16px;
+}
+
+.galeri-img-artwork{
+  width: 200px !important;
+  height: 200px !important;
+  object-fit: cover; /* Menjaga proporsi gambar agar tidak terdistorsi */
+  margin: 8px 0px 0px 8px;
+}
+
+.list-inline-item {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+

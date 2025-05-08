@@ -14,3 +14,6 @@ def tentang_view(request):
 
 def galeri_view(request):
     return render(request, 'luminance/galeri.html')
+
+def detailGaleri_view(request):
+    return render(request, 'luminance/detailGaleri.html')
