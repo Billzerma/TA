@@ -1,0 +1,26 @@
+.footer-part{
+    background-color: #0A84FF;
+}
+
+.footer-yap{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1rem;
+  text-decoration: none;
+  color: black;
+}
+
+.text-dark{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 16px;
+    text-decoration: none;
+    color: black;
+}
+
+.footer-medsos{
+    margin-right: 8px;
+    margin-top: 16px;
+}

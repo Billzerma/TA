@@ -1,0 +1,48 @@
+/* Container luar navbar */
+.nav-h {
+  width: 100%;
+  background-color: blue;
+}
+
+/* Navbar tinggi tetap hanya untuk layar besar */
+.navbar {
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+/* Font dan spacing untuk link */
+.font-nav {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1rem;
+  text-decoration: none;
+  color: black;
+}
+
+
+
+/* Spacing antar item nav */
+.nav-item {
+  margin: 0 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+/* RESPONSIVE FIX */
+@media (max-width: 991.98px) {
+  .navbar {
+    height: auto; /* agar collapse bisa tampil penuh */
+    align-items: flex-start; /* align isi ke atas */
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-collapse {
+    padding: 1rem;
+  }
+
+  .nav-item {
+    padding: 8px 0; /* lebih ringan untuk mobile */
+  }
+}

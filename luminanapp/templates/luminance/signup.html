@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up Form</title>
+    <link rel="stylesheet" href="{% static 'luminance/css/signup/global.css' %}" />
+    <link rel="stylesheet" href="{% static 'luminance/css/signup/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'luminance/css/signup/styleguide.css' %}" />
+  </head>
+  <body>
+    <main class="desktop">
+      <div class="account-wireframes-wrapper">
+        <div class="account-wireframes">
+          <div class="overlap-group">
+            <form class="form" action="#" method="post">
+              <div class="content">
+                <header class="header">
+                  <!-- <div class="logo-container">
+                    <div class="logo">
+                      <img
+                        class="vector"
+                        src="https://c.animaapp.com/ma6xafe0JpogJs/img/vector.svg"
+                        alt="Logo part 1"
+                      />
+                      <img class="group" src="https://c.animaapp.com/ma6xafe0JpogJs/img/group.png" alt="Logo part 2" />
+                      <img class="img" src="https://c.animaapp.com/ma6xafe0JpogJs/img/vector-2.svg" alt="Logo part 3" />
+                      <img
+                        class="group-2"
+                        src="https://c.animaapp.com/ma6xafe0JpogJs/img/group-1.png"
+                        alt="Logo part 4"
+                      />
+                      <img
+                        class="vector-2"
+                        src="https://c.animaapp.com/ma6xafe0JpogJs/img/vector-1.svg"
+                        alt="Logo part 5"
+                      />
+                    </div>
+                  </div> -->
+                  <div class="text">
+                    <h1 class="text-wrapper">Sign Up</h1>
+                    <p class="p">Sudah punya akun, <a href="#">Sign in</a></p>
+                  </div>
+                </header>
+                <div class="form-fields">
+                  <div class="form-input">
+                    <label for="username" class="visually-hidden">Username</label>
+                    <div class="input">
+                      <div class="icon-input">
+                        <input id="username" class="form-field" placeholder="Username" type="text" required />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-input">
+                    <label for="email" class="visually-hidden">Email</label>
+                    <div class="input">
+                      <div class="icon-input">
+                        <input id="email" class="form-field" placeholder="Email" type="email" required />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-input">
+                    <label for="password" class="visually-hidden">Password</label>
+                    <div class="input">
+                      <div class="icon-input">
+                        <input id="password" class="form-field" placeholder="Password" type="password" required />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="button">
+                  <span class="button-text">Sign up</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

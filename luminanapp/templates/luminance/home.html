@@ -1,0 +1,94 @@
+
+{% extends 'luminance/base.html' %}
+
+{% block title %}Beranda{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container-fluid">
+    <div class="row shadow-lg">
+        <div class="col-md-6 jumbotron text-container">
+            <h3 class="home-yap">Selamat Datang di,</h3>
+            <h1 class="home-appname">ARTIVIO</h1>
+            <p class="home-subyap">Nikmati beragam karya seni dari banyak seniman, <br>
+                 tersaji dalam galeri digital yang simpel dan nyaman untuk dinikmati.</p>
+            <a class="btn  btn-home " href="#" role="button"><h3>Mulai Galeri Anda</h3></a>
+        </div>
+        <div class="col-md-6 jumbotron d-none d-sm-block">
+            <img src="{% static 'luminance/img/imgHome.png' %}" class="img-fluid img-res " alt="...">
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid sec-artwork">
+    <div class="row ">
+      <div class="col-md-4">
+        <div class="row pos-sub-copy-writting-home">
+           <p class="sub-copy-writting-home"> Lihat,<br> Rasakan,<br> dan temukan inspirasi</p>
+        </div>
+        <div class="row sub-imghome d-none d-sm-block">
+            <img src="{% static 'luminance/img/imgsubhome.png' %}" class="img-fluid img-res" alt="...">
+        </div>
+      </div>
+
+    <div class="col-md-8 flex-wrap art">
+        
+            <img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid home-img-artwork shadow">
+            <img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid home-img-artwork shadow">
+            <img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid home-img-artwork shadow">
+            <img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid home-img-artwork shadow">
+            <img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid home-img-artwork shadow">
+            <img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid home-img-artwork shadow">
+            <img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid home-img-artwork shadow">
+            <img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid home-img-artwork shadow">
+        
+    </div>
+     
+    </div>
+</div>
+
+<div class="container-fluid sec-home-gallery ">
+    <div class="row flex-wrap yap-home-galeri text-center">
+        <p>hhhhhhhhhhhhhhhh</p>
+    </div>
+ <div class="row flex-wrap">
+    <div class="card sec-card" style="width: 21rem;">
+        <img src="{% static 'luminance/img/abs.png' %}" class="card-img-top fit-image" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+      <div class="card  sec-card" style="width: 21rem;">
+        <img src="{% static 'luminance/img/abs.png' %}" class="card-img-top fit-image" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+      <div class="card  sec-card" style="width: 21rem;">
+        <img src="{% static 'luminance/img/abs.png' %}" class="card-img-top fit-image" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+      <div class="card  sec-card" style="width: 21rem;">
+        <img src="{% static 'luminance/img/abs.png' %}" class="card-img-top fit-image" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+ </div>
+</div>
+
+{% endblock %}

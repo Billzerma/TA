@@ -1,0 +1,11 @@
+:root {
+  --text-blue: rgba(95, 105, 128, 1);
+  --black-900: rgba(40, 40, 40, 1);
+  --white: rgba(255, 255, 255, 1);
+  --text-16px-semibold-font-family: "Inter", Helvetica;
+  --text-16px-semibold-font-weight: 600;
+  --text-16px-semibold-font-size: 16px;
+  --text-16px-semibold-letter-spacing: 0px;
+  --text-16px-semibold-line-height: 26px;
+  --text-16px-semibold-font-style: normal;
+}
