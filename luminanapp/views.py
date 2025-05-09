@@ -17,3 +17,6 @@ def galeri_view(request):
 
 def detailGaleri_view(request):
     return render(request, 'luminance/detailGaleri.html')
+
+def detailKarya_view(request):
+    return render(request, 'luminance/detailKarya.html')

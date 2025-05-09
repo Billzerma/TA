@@ -1,18 +1,26 @@
 .title-style-top{
   margin: 0px 0px 8px 8px;
   padding-top: 32px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 24px !important;
 }
 
 .title-style{
   margin: 0px 0px 16px 8px;
   padding-top: 16px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 24px !important;
 }
 
 .galeri-img-artwork{
   width: 200px !important;
   height: 200px !important;
   object-fit: cover; /* Menjaga proporsi gambar agar tidak terdistorsi */
-  margin: 8px 0px 0px 8px;
+  margin: 16px 0px 0px 8px;
 }
 
 .list-inline-item {
@@ -20,3 +28,45 @@
   padding: 0px !important;
 }
 
+
+.gallery-name{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 24px !important;
+  margin: 32px 16px 16px 16px;
+}
+
+.gallery-loc{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px !important;
+ 
+}
+
+.dgaleri-info-galeri{
+  background-color: #f2f2f2;
+}
+
+.pos-loc{
+  margin: 0px 8px 16px 8px !important;
+}
+
+.contact-gallery{
+  margin: 16px 16px 16px 16px;
+  padding-bottom: 16px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px !important;
+}
+
+.gal-info{
+  margin-top: 48px !important;
+  background-color: #ffffff;
+}
+
+.dgaleri-artwork{
+  background-color: #d9d9d9;
+}
