@@ -1,0 +1,99 @@
+.karya-info{
+     margin-top: 48px !important;
+     background-color: #ffffff;
+}
+
+.dkarya-info-karya{
+      background-color: #f2f2f2;
+}
+
+.prof-gal-onkarya{
+   margin-bottom: 16px;
+
+}
+
+.artwork-title{
+     font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px !important;
+  margin: 16px 0px 16px 8pxpx;
+  padding-top: 16px;
+}
+
+.artwork-medium{
+     font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px !important;
+  margin: 0px 0px 16px 4px;
+}
+
+.artwork-desc{
+     font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 12px !important;
+  margin: 0px 16px 16px 4px !important;
+  text-align: justify;
+}
+
+.artwork-view{
+    width: 100% !important;
+    height: auto !important;
+    padding: 24px;
+}
+
+.arrow-btn {
+        font-size: 1.5rem;            /* Ukuran panah */
+        width: 50px;                  /* Lebar tombol */
+        height: 50px;                 /* Tinggi tombol */
+        border-radius: 50%;           /* Membuat tombol bulat */
+        background-color: rgba(0, 0, 0, 0.5); /* Warna background semi-transparan */
+        border: none;                 /* Menghilangkan border */
+        color: white;                 /* Warna panah */
+        opacity: 0.7;                 /* Transparansi sedikit */
+        margin-left: 16px !important;
+        margin-right: 16px !important;
+    }
+
+.arrow-btn:hover {
+        opacity: 1;                   /* Lebih jelas saat hover */
+        background-color: rgba(0, 0, 0, 0.8); /* Lebih gelap saat hover */
+        transition: opacity 0.2s;
+    }
+
+    .artwork-port{
+        margin-top: 16px !important;
+        overflow-y: auto !important;
+        scroll-behavior: smooth !important;
+    }
+
+    .more-art-by{
+        margin-top: 32px !important;
+    }
+
+    .more-img-artwork{
+         width: 100px !important;
+        height: 100px !important;
+        object-fit: cover; /* Menjaga proporsi gambar agar tidak terdistorsi */
+        margin-left: 4px;
+        margin-top: 4px;
+    }
+
+    .more-by-bg{
+        font-family: "Montserrat", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        font-size: 12px !important;
+        background-color: #bfbfbf;
+        display: inline-block !important;
+    }
+       .more-by-bg h3{
+        font-family: "Montserrat", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        font-size: 12px !important;
+        background-color: #bfbfbf;
+        display: inline-block !important;
+    }
