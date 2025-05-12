@@ -1,106 +1,364 @@
-
 {% extends 'luminance/base.html' %}
 
 {% block title %}Beranda{% endblock %}
 
 {% block content %}
 {% load static %}
-    <div class="container-fluid">
-       
-
-        <div class="row ">
-            <div class="col-md-9 dgaleri-artwork flex-wrap overflow-x-scroll" style="max-height: 100vh;">
-                <div class="content-wrapper">
-                    <div class="row realisme">
-                        <h2 class="title-style-top">Realisme</h2>
-                        <ul class="list-inline">
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                        </ul>
-                    </div>
-            
-                    <div class="row">
-                        <h2 class="title-style">Realisme</h2>
-                        <ul class="list-inline">
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                        </ul>
-                    </div>
-            
-                    <div class="row">
-                        <h2 class="title-style">Realisme</h2>
-                        <ul class="list-inline">
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                        </ul>
-                    </div>
-
-                    <div class="row">
-                        <h2 class="title-style">Realisme</h2>
-                        <ul class="list-inline">
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                        </ul>
-                    </div>
-
-                    <div class="row">
-                        <h2 class="title-style">Realisme</h2>
-                        <ul class="list-inline">
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                            <li class="list-inline-item list-realis"><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid galeri-img-artwork shadow"></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-3 dgaleri-info-galeri bg-ligth">
-                <div class="container-fluid border  rounded gal-info">
-                    <div class="row">
-                        <div class="col-sm-4 justify-content-center">
-                            <img src="{% static 'luminance/img/abs.png' %}" class="img-thumbnail photo-profil-galeri rounded-circle" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <h1 class="gallery-name">Omke Gallery Pvt. Ltd.</h1>
-                        </div>
-                    </div>
-                    
-                    <div class="row pos-loc">
-                        <div class="col-sm-1">
-                            <i class="fa-solid fa-location-dot fa-lg"></i>
-                        </div>
-                        <div class="col-sm-10 gallery-loc">
-                            <p> Plump Tower, 2nd Floor, 43,
-                                Asweirct Weirthdicth Avenue
-                                Malang, west wetan 20222</p>
-                        </div>
-                    </div>
-                  
-                    
-                    <h3 class="contact-gallery">Kontak kami</h3>
-                    <ul class="list-group list-group-flush contact-gallery">
-                        <li class="list-group-item"><i class="fa-solid fa-phone"></i> </li>
-                        <li class="list-group-item"><i class="fa-solid fa-envelope"></i> </li>
-                    </ul>
-                    <h3 class="contact-gallery">Media sosial</h3>
-                    <ul class="list-group list-group-flush contact-gallery">
-                        <li class="list-group-item"><i class="fa-brands fa-instagram"></i></li>
-                        <li class="list-group-item"><i class="fa-brands fa-facebook"></i> </li>
-                        <li class="list-group-item"><i class="fa-brands fa-square-x-twitter"></i> </li>
-                      </ul>
-                </div>
-            </div>
+<div class="container-fluid">
+  <div class="row">
+        <div class="col-md-3 dgaleri-info-galeri bg-ligth">
+      <div class="container-fluid border rounded gal-info">
+        <div class="row">
+          <div class="col-sm-4 justify-content-center">
+            <img
+              src="{% static 'luminance/img/abs.png' %}"
+              class="img-thumbnail photo-profil-galeri rounded-circle"
+              alt="..."
+            />
+          </div>
+          <div class="col-md-8">
+            <h1 class="gallery-name">Omke Gallery Pvt. Ltd.</h1>
+          </div>
         </div>
+
+        <div class="row pos-loc">
+          <div class="col-sm-1">
+            <i class="fa-solid fa-location-dot fa-lg"></i>
+          </div>
+          <div class="col-sm-10 gallery-loc">
+            <p>
+              Plump Tower, 2nd Floor, 43, Asweirct Weirthdicth Avenue Malang,
+              west wetan 20222
+            </p>
+          </div>
+        </div>
+
+        <h3 class="contact-gallery">Kontak kami</h3>
+        <ul class="list-group list-group-flush contact-gallery">
+          <li class="list-group-item"><i class="fa-solid fa-phone"></i></li>
+          <li class="list-group-item"><i class="fa-solid fa-envelope"></i></li>
+        </ul>
+        <h3 class="contact-gallery">Media sosial</h3>
+        <ul class="list-group list-group-flush contact-gallery">
+          <li class="list-group-item">
+            <i class="fa-brands fa-instagram"></i>
+          </li>
+          <li class="list-group-item"><i class="fa-brands fa-facebook"></i></li>
+          <li class="list-group-item">
+            <i class="fa-brands fa-square-x-twitter"></i>
+          </li>
+        </ul>
+      </div>
     </div>
-    {% endblock %}
+    
+    <div
+      class="col-md-9 dgaleri-artwork flex-wrap overflow-x-scroll"
+      style="max-height: 100vh"
+    >
+      <div class="content-wrapper">
+        <div class="row realisme">
+          <h2 class="title-style-top">Realisme</h2>
+          <ul class="list-inline home-list-artwork">
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 1</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 2</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 3</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 4</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 5</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 6</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="row">
+          <h2 class="title-style">Realisme</h2>
+          <ul class="list-inline home-list-artwork">
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 1</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 2</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 3</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 4</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 5</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 6</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="row">
+          <h2 class="title-style">Realisme</h2>
+          <ul class="list-inline home-list-artwork">
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 1</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 2</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 3</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 4</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 5</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 6</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="row">
+          <h2 class="title-style">Realisme</h2>
+          <ul class="list-inline home-list-artwork">
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 1</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 2</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 3</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 4</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 5</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 6</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="row">
+          <h2 class="title-style">Realisme</h2>
+          <ul class="list-inline home-list-artwork">
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 1</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 2</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 3</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 4</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 5</div>
+              </div>
+            </li>
+            <li class="list-inline-item list-realis">
+              <div class="image-hover-wrapper">
+                <img
+                  src="{% static 'luminance/img/recolor.jpg' %}"
+                  class="img-fluid galeri-img-artwork shadow"
+                />
+                <div class="image-title">Artwork Title 6</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+{% endblock %}

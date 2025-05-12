@@ -1,60 +1,59 @@
-.jumbotron{
-  background-color: #0A84FF;
+.jumbotron {
+  background-color: #0a84ff;
   width: 100%;
   height: 100vh;
-  
 }
 
-.img-res{
+.img-res {
   width: 90vh;
   height: auto;
   margin-left: 16px;
   margin-bottom: 16px;
 }
 
-.home-yap{
+.home-yap {
   font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 32px;
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-    justify-content: center;
-    margin-left: 48px;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 32px;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  justify-content: center;
+  margin-left: 48px;
 }
 
-.home-appname{
+.home-appname {
   font-family: "Montserrat", sans-serif;
-    font-weight: 900;
-    font-style: normal;
-    font-size: 96px;
-    text-decoration: none;
-    color: #FFF59D;
-    margin-left: 48px;
-    margin-top: 16px;
-    justify-content: center;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 96px;
+  text-decoration: none;
+  color: #fff59d;
+  margin-left: 48px;
+  margin-top: 16px;
+  justify-content: center;
 }
 
-.home-subyap{
+.home-subyap {
   font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 24px;
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-    margin-left: 48px;
-    margin-top: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 24px;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  margin-left: 48px;
+  margin-top: 16px;
 }
 
 .text-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;   
-  align-items: flex-start;   
-  text-align: left;      
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
 }
 
-.btn-home{
+.btn-home {
   margin-left: 96px;
   height: 48px;
   width: 242px;
@@ -64,7 +63,7 @@
   margin-left: 48px;
 }
 
-.btn-home h3{
+.btn-home h3 {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-style: normal;
@@ -72,85 +71,99 @@
   text-decoration: none;
   color: black;
   margin-top: 8px;
-  
 }
 
-.sub-imghome{
+.sub-imghome {
   width: 60vh;
   height: auto;
   margin-left: 48px;
   padding-top: 16px;
-  
-  
 }
-.sub-copy-writting-home{
+.sub-copy-writting-home {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-style: normal;
-  font-size: 32px;
+  font-size: 40px;
   text-decoration: none;
   color: rgb(0, 0, 0);
   margin-left: 48px;
-  
-
-  
+  margin-top: 64px !important;
 }
 
-.pos-sub-copy-writting-home{
+.yap-copy-writting-home {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 24px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  margin-left: 48px !important;
+}
+
+.pos-sub-copy-writting-home {
   display: flex;
-  justify-content: center; 
-  
-
+  justify-content: center;
 }
 
-.home-artwork{
+.home-artwork {
   width: 100%;
   height: auto;
-  background-color: #0A84FF;
+  background-color: #0a84ff;
 }
 
-.home-img-artwork{
-  height: auto;
-  width: 220px;
+.home-img-artwork {
   margin-right: 16px;
   margin-top: 16px;
+  margin-left: 16px;
 }
 
-.sec-artwork{
-  margin-top: 48px;
+.home-l-artwork {
+  margin-left: 56px;
+  padding-top: 32px;
+}
+
+.sec-artwork {
   height: 100vh;
-  
+  background-color: #f2f2f2;
+
 }
 
-.sec-card{
+.art{
+  height: 100vh;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+
+}
+
+
+.sec-card {
   margin: 0px 8px 0 24px;
   margin-top: 48px !important;
-  
 }
 
-.sec-home-gallery{
+.sec-home-gallery {
   margin-top: 48px;
   
 }
 
 .fit-image {
-  width: 100% !important;            /* Lebar penuh dari parent */
-  height: 200px;          /* Tinggi diatur tetap, bisa disesuaikan */
-  object-fit: cover;      /* Gambar akan di-crop agar penuh */
+  width: 100% !important; /* Lebar penuh dari parent */
+  height: 200px; /* Tinggi diatur tetap, bisa disesuaikan */
+  object-fit: cover; /* Gambar akan di-crop agar penuh */
   object-position: center; /* Gambar akan di-posisikan di tengah */
-  border-radius: 8px;     /* Opsional, sudut melengkung */
+  border-radius: 8px; /* Opsional, sudut melengkung */
 }
 
 .yap-home-galeri p {
-  width: 80%;             /* Lebar 50% dari parent */
-  margin: 0 auto;         /* Center secara horizontal */
+  width: 80%; /* Lebar 50% dari parent */
+  margin: 0 auto; /* Center secara horizontal */
   background-color: #f8f9fa; /* Background biar terlihat */
-  padding: 10px;          /* Jarak dalam */
-  border-radius: 8px;     /* Sudut tumpul */
+  padding: 10px; /* Jarak dalam */
+  border-radius: 8px; /* Sudut tumpul */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow lembut */
   margin-bottom: 32px;
 }
-
 
 @media (max-width: 576px) {
   .art {
@@ -159,10 +172,218 @@
     gap: 16px;
     max-height: 400px; /* Atur tinggi maksimal untuk overflow */
     overflow-y: auto; /* Scroll vertikal jika konten melebihi tinggi */
-
   }
 
   .art img {
     width: 80%; /* Lebar penuh saat vertikal */
   }
 }
+
+/* tablet */
+
+@media (max-width: 991.98px) {
+  /* jumbotron*/
+
+  .home-yap {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 32px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    justify-content: center;
+    margin-left: 48px;
+  }
+
+  .home-appname {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 64px;
+    text-decoration: none;
+    color: #fff59d;
+    margin-left: 48px;
+    margin-top: 16px;
+    justify-content: center;
+  }
+
+  .home-subyap {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 16px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    margin-left: 48px;
+    margin-top: 16px;
+  }
+
+  .btn-home {
+    margin-left: 96px;
+    height: 48px;
+    width: 200px;
+    border-radius: 20px !important;
+    background-color: white !important;
+    margin-top: 16px;
+    margin-left: 48px;
+  }
+
+  .btn-home h3 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 16px !important;
+    text-decoration: none;
+    color: black;
+    margin-top: 8px;
+  }
+
+  .img-res {
+    width: 90vh;
+    height: auto;
+    margin: 96px 16px 0px 8px;
+
+
+   
+  }
+
+
+   /* list artwork on home */
+  .sub-copy-writting-home {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 40px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  margin-left: 48px;
+  margin-top: 64px !important;
+}
+
+.yap-copy-writting-home {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  margin-left: 48px !important;
+}
+
+
+
+/* galeri home */
+.sec-home-gallery {
+  margin-top: 48px;
+  height: 100vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.sec-card {
+  margin: 0px 8px 0 104px;
+  margin-top: 48px !important;
+}
+
+}
+
+/* potrait phone */
+@media (max-width: 575.98px) {
+  /* jumbotron*/
+  .home-yap {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 40px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    justify-content: center;
+    margin-left: 48px;
+  }
+
+  .home-appname {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 56px;
+    text-decoration: none;
+    color: #fff59d;
+    margin-left: 48px;
+    margin-top: 16px;
+    justify-content: center;
+  }
+
+  .home-subyap {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 16px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    margin-left: 48px;
+    margin-top: 16px;
+  }
+
+  .btn-home {
+    margin-left: 96px;
+    height: 48px;
+    width: 200px;
+    border-radius: 20px !important;
+    background-color: white !important;
+    margin-top: 16px;
+    margin-left: 48px;
+    margin-bottom: 32px;
+  }
+
+  .btn-home h3 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 16px !important;
+    text-decoration: none;
+    color: black;
+    margin-top: 8px;
+  }
+
+  .jumbotron {
+    background-color: #0a84ff;
+    width: 100%;
+    height: 70vh;
+  }
+
+  .img-res {
+    display: none;
+  }
+
+     /* list artwork on home */
+  .sub-copy-writting-home {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 32px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  margin-left: 48px;
+  margin-top: 32px !important;
+}
+
+.yap-copy-writting-home {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  margin-left: 48px !important;
+}
+
+.home-l-artwork{
+  margin-left: 72px;
+}
+
+/* galeri home */
+
+}
+
+

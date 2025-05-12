@@ -97,3 +97,29 @@
         background-color: #bfbfbf;
         display: inline-block !important;
     }
+
+    @media (max-width: 991.98px){
+          .more-img-artwork{
+         width: 80px !important;
+        height: 80px !important;
+        object-fit: cover; /* Menjaga proporsi gambar agar tidak terdistorsi */
+        margin-top: 4px;
+        margin-left: 12px;
+    }
+
+    .con-art{
+        margin-top: 64px !important;
+    }
+    }
+
+    @media (max-width: 575.98px){
+        .more-img-artwork{
+         width: 100px !important;
+        height: 100px !important;
+        object-fit: cover; /* Menjaga proporsi gambar agar tidak terdistorsi */
+        margin-top: 4px;
+        margin-left: 4px;
+    }
+
+    
+}

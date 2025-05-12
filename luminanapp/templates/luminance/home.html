@@ -1,94 +1,247 @@
-
 {% extends 'luminance/base.html' %}
-
-{% block title %}Beranda{% endblock %}
-
-{% block content %}
-{% load static %}
+{% block title %}Beranda{% endblock %} 
+{%block content %} 
+ 
+ {% load static %}
 <div class="container-fluid">
-    <div class="row shadow-lg">
-        <div class="col-md-6 jumbotron text-container">
-            <h3 class="home-yap">Selamat Datang di,</h3>
-            <h1 class="home-appname">ARTIVIO</h1>
-            <p class="home-subyap">Nikmati beragam karya seni dari banyak seniman, <br>
-                 tersaji dalam galeri digital yang simpel dan nyaman untuk dinikmati.</p>
-            <a class="btn  btn-home " href="#" role="button"><h3>Mulai Galeri Anda</h3></a>
-        </div>
-        <div class="col-md-6 jumbotron d-none d-sm-block">
-            <img src="{% static 'luminance/img/imgHome.png' %}" class="img-fluid img-res " alt="...">
-        </div>
+  <div class="row shadow-lg">
+    <div class="col-md-6 jumbotron text-container">
+      <h3 class="home-yap">Selamat Datang di,</h3>
+      <h1 class="home-appname">ARTIVIO</h1>
+      <p class="home-subyap">
+        Nikmati beragam karya seni dari banyak seniman, <br />
+        tersaji dalam galeri digital yang simpel dan nyaman untuk dinikmati.
+      </p>
+      <a class="btn btn-home" href="#" role="button"
+        ><h3>Mulai Galeri Anda</h3></a
+      >
     </div>
+    <div class="col-md-6 jumbotron d-none d-md-block lands-n">
+      <img
+        src="{% static 'luminance/img/imgHome.png' %}"
+        class="img-fluid img-res"
+        alt="..."
+      />
+    </div>
+  </div>
 </div>
 
 <div class="container-fluid sec-artwork">
-    <div class="row ">
-      <div class="col-md-4">
-        <div class="row pos-sub-copy-writting-home">
-           <p class="sub-copy-writting-home"> Lihat,<br> Rasakan,<br> dan temukan inspirasi</p>
-        </div>
-        <div class="row sub-imghome d-none d-sm-block">
-            <img src="{% static 'luminance/img/imgsubhome.png' %}" class="img-fluid img-res" alt="...">
-        </div>
+  <div class="row">
+    <div class="col-md-4 col-yap rounded">
+      <div
+        class="row pos-sub-copy-writting-home justify-content-center align-items-center"
+      >
+        <p class="sub-copy-writting-home">
+          Lihat,<br />
+          Rasakan,<br />
+          dan temukan inspirasi
+        </p>
+        <p class="yap-copy-writting-home">
+          Mulai dari lukisan, ilustrasi, hingga karya digital — semua punya
+          cerita sendiri. Jelajahi dan temukan karya yang kamu sukai
+        </p>
       </div>
+    </div>
 
-    <div class="col-md-8 flex-wrap art">
-        
-            <img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid home-img-artwork shadow">
-            <img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid home-img-artwork shadow">
-            <img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid home-img-artwork shadow">
-            <img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid home-img-artwork shadow">
-            <img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid home-img-artwork shadow">
-            <img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid home-img-artwork shadow">
-            <img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid home-img-artwork shadow">
-            <img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid home-img-artwork shadow">
-        
+    <div class="col-md-8 flex-wrap ">
+      <div class="row art">
+        <ul class="list-inline home-l-artwork">
+          <li class="list-inline-item list-realis">
+            <div class="image-hover-wrapper">
+              <img
+                src="{% static 'luminance/img/recolor.jpg' %}"
+                class="img-fluid galeri-img-artwork shadow"
+              />
+              <div class="image-title">Artwork Title 1</div>
+            </div>
+          </li>
+          <li class="list-inline-item list-realis">
+            <div class="image-hover-wrapper">
+              <img
+                src="{% static 'luminance/img/recolor.jpg' %}"
+                class="img-fluid galeri-img-artwork shadow"
+              />
+              <div class="image-title">Artwork Title 2</div>
+            </div>
+          </li>
+          <li class="list-inline-item list-realis">
+            <div class="image-hover-wrapper">
+              <img
+                src="{% static 'luminance/img/recolor.jpg' %}"
+                class="img-fluid galeri-img-artwork shadow"
+              />
+              <div class="image-title">Artwork Title 3</div>
+            </div>
+          </li>
+          <li class="list-inline-item list-realis">
+            <div class="image-hover-wrapper">
+              <img
+                src="{% static 'luminance/img/recolor.jpg' %}"
+                class="img-fluid galeri-img-artwork shadow"
+              />
+              <div class="image-title">Artwork Title 4</div>
+            </div>
+          </li>
+          <li class="list-inline-item list-realis">
+            <div class="image-hover-wrapper">
+              <img
+                src="{% static 'luminance/img/recolor.jpg' %}"
+                class="img-fluid galeri-img-artwork shadow"
+              />
+              <div class="image-title">Artwork Title 5</div>
+            </div>
+          </li>
+          <li class="list-inline-item list-realis">
+            <div class="image-hover-wrapper">
+              <img
+                src="{% static 'luminance/img/recolor.jpg' %}"
+                class="img-fluid galeri-img-artwork shadow"
+              />
+              <div class="image-title">Artwork Title 6</div>
+            </div>
+          </li>
+          <li class="list-inline-item list-realis">
+            <div class="image-hover-wrapper">
+              <img
+                src="{% static 'luminance/img/recolor.jpg' %}"
+                class="img-fluid galeri-img-artwork shadow"
+              />
+              <div class="image-title">Artwork Title 6</div>
+            </div>
+          </li>
+          <li class="list-inline-item list-realis">
+            <div class="image-hover-wrapper">
+              <img
+                src="{% static 'luminance/img/recolor.jpg' %}"
+                class="img-fluid galeri-img-artwork shadow"
+              />
+              <div class="image-title">Artwork Title 6</div>
+            </div>
+          </li>
+          <li class="list-inline-item list-realis">
+            <div class="image-hover-wrapper">
+              <img
+                src="{% static 'luminance/img/recolor.jpg' %}"
+                class="img-fluid galeri-img-artwork shadow"
+              />
+              <div class="image-title">Artwork Title 6</div>
+            </div>
+          </li>
+          <li class="list-inline-item list-realis">
+            <div class="image-hover-wrapper">
+              <img
+                src="{% static 'luminance/img/recolor.jpg' %}"
+                class="img-fluid galeri-img-artwork shadow"
+              />
+              <div class="image-title">Artwork Title 6</div>
+            </div>
+          </li>
+          <li class="list-inline-item list-realis">
+            <div class="image-hover-wrapper">
+              <img
+                src="{% static 'luminance/img/recolor.jpg' %}"
+                class="img-fluid galeri-img-artwork shadow"
+              />
+              <div class="image-title">Artwork Title 6</div>
+            </div>
+          </li>
+          <li class="list-inline-item list-realis">
+            <div class="image-hover-wrapper">
+              <img
+                src="{% static 'luminance/img/recolor.jpg' %}"
+                class="img-fluid galeri-img-artwork shadow"
+              />
+              <div class="image-title">Artwork Title 6</div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
-     
-    </div>
+  </div>
 </div>
 
-<div class="container-fluid sec-home-gallery ">
-    <div class="row flex-wrap yap-home-galeri text-center">
-        <p>hhhhhhhhhhhhhhhh</p>
+<div class="container-fluid sec-home-gallery">
+  <div class="row flex-wrap yap-home-galeri text-center">
+    <p>hhhhhhhhhhhhhhhh</p>
+  </div>
+  <div class="row horizontal-scroll">
+    <div class="card sec-card" style="width: 21rem">
+      <img
+        src="{% static 'luminance/img/abs.png' %}"
+        class="card-img-top fit-image"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">
+          Some quick example text to build on the card title and make up the
+          bulk of the card’s content.
+        </p>
+        <div class="d-flex justify-content-between align-items-center">
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <i class="fa-solid fa-heart text-danger fs-4 cursor-pointer"></i>
+        </div>
+      </div>
     </div>
- <div class="row flex-wrap">
-    <div class="card sec-card" style="width: 21rem;">
-        <img src="{% static 'luminance/img/abs.png' %}" class="card-img-top fit-image" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+
+    <div class="card sec-card" style="width: 21rem">
+      <img
+        src="{% static 'luminance/img/abs.png' %}"
+        class="card-img-top fit-image"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">
+          Some quick example text to build on the card title and make up the
+          bulk of the card’s content.
+        </p>
+        <div class="d-flex justify-content-between align-items-center">
           <a href="#" class="btn btn-primary">Go somewhere</a>
+          <i class="fa-solid fa-heart text-danger fs-4 cursor-pointer"></i>
         </div>
       </div>
+    </div>
 
-      <div class="card  sec-card" style="width: 21rem;">
-        <img src="{% static 'luminance/img/abs.png' %}" class="card-img-top fit-image" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+    <div class="card sec-card" style="width: 21rem">
+      <img
+        src="{% static 'luminance/img/abs.png' %}"
+        class="card-img-top fit-image"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">
+          Some quick example text to build on the card title and make up the
+          bulk of the card’s content.
+        </p>
+        <div class="d-flex justify-content-between align-items-center">
           <a href="#" class="btn btn-primary">Go somewhere</a>
+          <i class="fa-solid fa-heart text-danger fs-4 cursor-pointer"></i>
         </div>
       </div>
+    </div>
 
-      <div class="card  sec-card" style="width: 21rem;">
-        <img src="{% static 'luminance/img/abs.png' %}" class="card-img-top fit-image" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+    <div class="card sec-card" style="width: 21rem">
+      <img
+        src="{% static 'luminance/img/abs.png' %}"
+        class="card-img-top fit-image"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">
+          Some quick example text to build on the card title and make up the
+          bulk of the card’s content.
+        </p>
+        <div class="d-flex justify-content-between align-items-center">
           <a href="#" class="btn btn-primary">Go somewhere</a>
+          <i class="fa-solid fa-heart text-danger fs-4 cursor-pointer"></i>
         </div>
       </div>
-
-      <div class="card  sec-card" style="width: 21rem;">
-        <img src="{% static 'luminance/img/abs.png' %}" class="card-img-top fit-image" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-
- </div>
+    </div>
+  </div>
 </div>
 
 {% endblock %}

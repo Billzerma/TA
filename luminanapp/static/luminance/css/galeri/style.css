@@ -10,3 +10,21 @@
 .pagi-pos{
     margin-top: 32px !important;
 }
+
+.con-gal{
+    width: 100% !important;
+    height: auto !important;
+}
+
+  @media (max-width: 575px) {
+    .sec-home-gallery .pad-gal {
+      display: flex;         /* jadikan flex container */
+      flex-wrap: nowrap;     /* jangan wrap ke baris baru */
+      overflow-x: auto;      /* scroll horizontal */
+      -webkit-overflow-scrolling: touch; /* smooth scroll di iOS */
+    }
+    .sec-home-gallery .sec-card {
+      flex: 0 0 auto;        /* jangan menyusut atau melebihi basis 21rem */
+      margin-right: 1rem;    /* beri jarak antar kartu */
+    }
+  }

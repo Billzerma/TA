@@ -1,4 +1,4 @@
-.title-style-top{
+.title-style-top {
   margin: 0px 0px 8px 8px;
   padding-top: 32px;
   font-family: "Montserrat", sans-serif;
@@ -7,7 +7,7 @@
   font-size: 24px !important;
 }
 
-.title-style{
+.title-style {
   margin: 0px 0px 16px 8px;
   padding-top: 16px;
   font-family: "Montserrat", sans-serif;
@@ -16,7 +16,7 @@
   font-size: 24px !important;
 }
 
-.galeri-img-artwork{
+.galeri-img-artwork {
   width: 200px !important;
   height: 200px !important;
   object-fit: cover; /* Menjaga proporsi gambar agar tidak terdistorsi */
@@ -28,8 +28,7 @@
   padding: 0px !important;
 }
 
-
-.gallery-name{
+.gallery-name {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-style: normal;
@@ -37,24 +36,22 @@
   margin: 48px 16px 32px 16px;
 }
 
-.gallery-loc{
+.gallery-loc {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-style: normal;
   font-size: 14px !important;
-  
- 
 }
 
-.dgaleri-info-galeri{
+.dgaleri-info-galeri {
   background-color: #f2f2f2;
 }
 
-.pos-loc{
+.pos-loc {
   margin: 16px 8px 16px 8px !important;
 }
 
-.contact-gallery{
+.contact-gallery {
   margin: 16px 16px 16px 16px;
   padding-bottom: 16px;
   font-family: "Montserrat", sans-serif;
@@ -63,19 +60,137 @@
   font-size: 16px !important;
 }
 
-.gal-info{
+.gal-info {
   margin-top: 48px !important;
   background-color: #ffffff;
 }
 
-.dgaleri-artwork{
+.dgaleri-artwork {
   background-color: #d9d9d9;
 }
 
-.photo-profil-galeri{
-
+.photo-profil-galeri {
   margin-top: 32px;
   margin-left: 24px;
   width: 75px !important;
   height: 75px !important;
+}
+
+/* hover */
+.home-list-artwork {
+  gap: 10px;
+}
+
+.image-hover-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 200px; /* Ukuran gambar */
+  height: 200px; /* Ukuran gambar */
+}
+
+.image-hover-wrapper img {
+  transition: transform 0.3s ease, filter 0.3s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-hover-wrapper:hover img {
+  transform: scale(1.1);
+  filter: brightness(0.8);
+}
+
+.image-title {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  font-size: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-weight: bold;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.image-hover-wrapper:hover .image-title {
+  opacity: 1;
+}
+
+
+@media (max-width: 991.98px){
+
+  .gallery-name {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 16px !important;
+  margin: 48px 16px 32px 16px;
+}
+
+.gallery-loc {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 12px !important;
+}
+
+.photo-profil-galeri {
+  margin-top: 48px;
+  margin-left: 16px;
+  width: 50px !important;
+  height: 50px !important;
+}
+
+.contact-gallery {
+  margin: 16px 16px 16px 16px;
+  padding-bottom: 16px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 12px !important;
+}
+
+}
+
+@media (max-width: 575.98px){
+
+    .gallery-name {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 32px !important;
+  margin: 48px 16px 32px 16px;
+}
+
+.gallery-loc {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px !important;
+}
+
+.photo-profil-galeri {
+  margin-top: 48px;
+  margin-left: 16px;
+  width: 100px !important;
+  height: 100px !important;
+}
+
+.contact-gallery {
+  margin: 16px 16px 16px 16px;
+  padding-bottom: 16px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px !important;
+}
+
+.list-realis{
+  margin-left: 48px !important;
+}
+
+
+
 }
