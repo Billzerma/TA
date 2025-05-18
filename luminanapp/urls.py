@@ -10,4 +10,6 @@ urlpatterns = [
     path('onGaleri/', views.detailGaleri_view, name='onGaleri'),
     path('onKarya/', views.detailKarya_view, name='onKarya'),
     path('dashboard/', views.dashboard_view, name='dashboard'),
+    path('galeriSaya/', views.manageGaleri_view, name='galeriSaya'),
+    path('tambahGaleri/', views.tambahGaleri_view, name='tambahGaleri'),
 ]

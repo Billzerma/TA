@@ -1,0 +1,22 @@
+.mygaleri{
+    padding-bottom: 50vh;
+}
+
+.add-gal{
+    width:180px;
+    height:250px;
+    background-color: wheat;
+    margin-top: 72px;
+}
+
+.border-plus{
+    width: 90px;
+    height: 90px;
+    padding: 28px;
+    border-radius:50px ;
+    margin: 32px 16px 16px 16px;
+}
+
+.mygalleries-list{
+    margin: 16px 8px 8px 16px;
+}

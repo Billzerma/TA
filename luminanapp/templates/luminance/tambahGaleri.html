@@ -1,0 +1,37 @@
+{% extends 'luminance/baseDash.html' %} {% block title %}Beranda{% endblock %}
+{%block content %} {% load static %}
+
+<div id="content-wrapper" class="d-flex flex-column">
+  <div id="content">
+    <div class="container-fluid">
+      <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Buat Galeri</h1>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-floating mb-3">
+            <input
+              type="email"
+              class="form-control"
+              id="floatingInput"
+              placeholder="name@example.com"
+            />
+            <label for="floatingInput">Email address</label>
+          </div>
+          <div class="form-floating">
+            <input
+              type="password"
+              class="form-control"
+              id="floatingPassword"
+              placeholder="Password"
+            />
+            <label for="floatingPassword">Password</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
