@@ -12,4 +12,5 @@ urlpatterns = [
     path('dashboard/', views.dashboard_view, name='dashboard'),
     path('galeriSaya/', views.manageGaleri_view, name='galeriSaya'),
     path('tambahGaleri/', views.tambahGaleri_view, name='tambahGaleri'),
+    path('editGaleri/', views.editGaleri_view, name='tambahGaleri'),
 ]

@@ -1,0 +1,23 @@
+  .scroll-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    white-space: nowrap;
+    padding: 1rem 0;
+    height: 23rem; /* Atur sedikit lebih tinggi dari card */
+  }
+
+  .scroll-wrapper .mygalleries-list {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 1rem;
+  }
+
+  .sec-card-mygaleri {
+    height: 18rem; /* Tinggi card, disesuaikan */
+  }
+
+  .bg-edit-img{
+    background-color: #ffffff;
+    padding: 16px;
+  }

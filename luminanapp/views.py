@@ -30,3 +30,6 @@ def manageGaleri_view(request):
 def tambahGaleri_view(request):
     return render(request, 'luminance/tambahGaleri.html')
 
+
+def editGaleri_view(request):
+    return render(request, 'luminance/editGaleri.html')
