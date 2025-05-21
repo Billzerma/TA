@@ -6,119 +6,232 @@
     <div class="container-fluid">
       <div class="row mygaleri">
         <div class="col-md-5">
-          <p class="d-inline-flex gap-1">
-            <button
-              class="btn btn-primary"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseExample"
-              aria-expanded="false"
-              aria-controls="collapseExample"
-            >
-              Button with data-bs-target
-            </button>
-          </p>
-          <div class="collapse" id="collapseExample">
-            <div class="container-fluid border rounded form-tambah-galeri">
-              <form>
-                <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label"
-                    >Judul</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                  />
-                </div>
-                <div class="mb-3">
+          <div class="container-fluid border rounded karya collapse-pad">
+            <p class="d-inline-flex gap-1">
+              <button
+                class="btn btn-primary"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseExample"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                Edit info galeri
+              </button>
+            </p>
+            <div class="collapse" id="collapseExample">
+              <div class="container-fluid border rounded form-tambah-galeri">
+                <form>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label"
+                      >Judul</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label"
+                      >Kontak*</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleInputPassword1"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label"
+                      >Lokasi</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleInputPassword1"
+                    />
+                  </div>
+
                   <label for="exampleInputPassword1" class="form-label"
-                    >Kontak*</label
+                    >Thumbnail galeri*</label
                   >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="exampleInputPassword1"
-                  />
-                </div>
-
-                <div class="mb-3">
+                  <div class="input-group mb-3">
+                    <input
+                      type="file"
+                      class="form-control"
+                      id="inputGroupFile02"
+                      accept="image/*"
+                    />
+                    <label class="input-group-text" for="inputGroupFile02"
+                      >Upload</label
+                    >
+                  </div>
                   <label for="exampleInputPassword1" class="form-label"
-                    >Lokasi</label
+                    >Media sosial</label
                   >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="exampleInputPassword1"
-                  />
-                </div>
+                  <div class="row g-3">
+                    <div class="col">
+                      <i class="fa-brands fa-instagram"></i>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="First name"
+                        aria-label="First name"
+                      />
+                    </div>
 
-                <label for="exampleInputPassword1" class="form-label"
-                  >Thumbnail galeri*</label
-                >
-                <div class="input-group mb-3">
-                  <input
-                    type="file"
-                    class="form-control"
-                    id="inputGroupFile02"
-                    accept="image/*"
-                  />
-                  <label class="input-group-text" for="inputGroupFile02"
-                    >Upload</label
-                  >
-                </div>
-                <label for="exampleInputPassword1" class="form-label"
-                  >Media sosial</label
-                >
-                <div class="row g-3">
-                  <div class="col">
-                    <i class="fa-brands fa-instagram"></i>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="First name"
-                      aria-label="First name"
-                    />
+                    <div class="col">
+                      <i class="fa-brands fa-facebook"></i>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Last name"
+                        aria-label="Last name"
+                      />
+                    </div>
+                    <div class="col mb-3">
+                      <i class="fa-brands fa-square-x-twitter"></i>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Last name"
+                        aria-label="Last name"
+                      />
+                    </div>
                   </div>
 
-                  <div class="col">
-                    <i class="fa-brands fa-facebook"></i>
-                    <input
-                      type="text"
+                  <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label"
+                      >Deskripsi</label
+                    >
+                    <textarea
                       class="form-control"
-                      placeholder="Last name"
-                      aria-label="Last name"
-                    />
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                    ></textarea>
                   </div>
-                  <div class="col mb-3">
-                    <i class="fa-brands fa-square-x-twitter"></i>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Last name"
-                      aria-label="Last name"
-                    />
-                  </div>
-                </div>
 
-                <div class="mb-3">
-                  <label for="exampleFormControlTextarea1" class="form-label"
-                    >Deskripsi</label
-                  >
-                  <textarea
-                    class="form-control"
-                    id="exampleFormControlTextarea1"
-                    rows="3"
-                  ></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Buat</button>
-              </form>
+                  <button type="submit" class="btn btn-primary">Edit</button>
+                </form>
+              </div>
             </div>
           </div>
 
-          
+
+
+            <div class="container-fluid border rounded karya collapse-pad">
+            <p class="d-inline-flex gap-1">
+              <button
+                class="btn btn-primary"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapse-tambah-galeri"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                Tambah karya
+              </button>
+            </p>
+            <div class="collapse" id="collapse-tambah-galeri">
+              <div class="container-fluid border rounded form-tambah-galeri">
+                <form>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label"
+                      >Judul</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label"
+                      >Tahun</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleInputPassword1"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label"
+                      >Media</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleInputPassword1"
+                    />
+                  </div>
+
+                   <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label"
+                      >Dimensi</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label"
+                      >Seniman</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleInputPassword1"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label"
+                      >Kontak seniman</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleInputPassword1"
+                    />
+                  </div>
+
+                  <label for="exampleInputPassword1" class="form-label"
+                    >Unggah karya</label
+                  >
+             <div class="input-group mb-3">
+  <input type="file" class="form-control" id="inputGroupFile02">
+  <label class="input-group-text" for="inputGroupFile02">Upload</label>
+</div>
+                
+        
+
+                  <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label"
+                      >Deskripsi</label
+                    >
+                    <textarea
+                      class="form-control"
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                    ></textarea>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">Unggah</button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+         
         </div>
 
         <div class="col-md-7 bg-edit-img border rounded">
