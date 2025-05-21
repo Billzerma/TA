@@ -12,6 +12,9 @@ def register_view(request):
 def tentang_view(request):
     return render(request, 'luminance/tentang.html')
 
+def bantuan_view(request):
+    return render(request, 'luminance/bantuan.html')
+
 def galeri_view(request):
     return render(request, 'luminance/galeri.html')
 

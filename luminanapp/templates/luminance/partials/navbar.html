@@ -13,14 +13,14 @@
       <div class="collapse navbar-collapse bg-body-tertiary" id="navbarSupportedContent">
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0 pos-nav">
           <li class="nav-item">
-            <a class="active font-nav" aria-current="page" href="#">Home</a>
+            <a class="active font-nav" aria-current="page" href="{% url 'home' %}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="font-nav" href="#">Galeri</a>
+            <a class="font-nav" href="{% url 'galeri' %}">Galeri</a>
           </li>
   
           <li class="nav-item">
-            <a class="font-nav" href="#">Dashboard</a>
+            <a class="font-nav" href="{% url 'galeriSaya' %}">Galeri saya</a>
           </li>
 
              <li class="dropdown font-nav button-more">
@@ -28,8 +28,8 @@
             Lainnya
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">About</a></li>
-            <li><a class="dropdown-item" href="#">Help</a></li>
+            <li><a class="dropdown-item" href="{% url 'tentang' %}">Tentang</a></li>
+            <li><a class="dropdown-item" href="{% url 'bantuan' %}">Bantuan</a></li>
           </ul>
         </li>
         </ul>

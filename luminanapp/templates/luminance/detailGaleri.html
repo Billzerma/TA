@@ -1,12 +1,14 @@
-{% extends 'luminance/base.html' %}
-
-{% block title %}Beranda{% endblock %}
-
-{% block content %}
-{% load static %}
+{% extends 'luminance/base.html' %} {% block title %}Beranda{% endblock %}
+ {%block content %} {% load static %}
 <div class="container-fluid">
   <div class="row">
-        <div class="col-md-3 dgaleri-info-galeri bg-ligth">
+    <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb" class="nav-bread border rounded">
+      <ol class="breadcrumb bread-pad">
+        <li class="breadcrumb-item"><a href="{% url 'galeri' %}">Galeri</a></li>
+        <li class="breadcrumb-item active" aria-current="page">galeri <Span></Span></li>
+      </ol>
+    </nav>
+    <div class="col-md-3 dgaleri-info-galeri bg-ligth">
       <div class="container-fluid border rounded gal-info">
         <div class="row">
           <div class="col-sm-4 justify-content-center">
@@ -50,7 +52,7 @@
         </ul>
       </div>
     </div>
-    
+
     <div
       class="col-md-9 dgaleri-artwork flex-wrap overflow-x-scroll"
       style="max-height: 100vh"
@@ -357,8 +359,6 @@
         </div>
       </div>
     </div>
-
-
   </div>
 </div>
 {% endblock %}
