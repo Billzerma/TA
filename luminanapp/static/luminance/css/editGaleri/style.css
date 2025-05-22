@@ -26,3 +26,21 @@
     margin-top: 16px;
     padding: 16px;
   }
+
+  .edit-info-gall-name{
+     font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px !important;
+  color: black;
+
+  }
+
+  .edit-info-gall{
+    font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px !important;
+  color: black;
+ 
+  }

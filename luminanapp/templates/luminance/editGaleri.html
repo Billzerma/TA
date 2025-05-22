@@ -7,7 +7,38 @@
       <div class="row mygaleri">
         <div class="col-md-5">
           <div class="container-fluid border rounded karya collapse-pad">
-            <p class="d-inline-flex gap-1">
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item edit-info-gall-name">
+                Omke Gallery Pvt. Ltd.
+              </li>
+              <li class="list-group-item edit-info-gall">
+                <i class="fa-solid fa-location-dot fa-lg"></i> ini lokasi galeri
+              </li>
+              <li class="list-group-item edit-info-gall">
+                <i class="fa-solid fa-phone"></i> 12222267887
+              </li>
+              <li class="list-group-item edit-info-gall">
+                <i class="fa-solid fa-envelope"></i> nabilzerma@gmail.com
+              </li>
+              <li class="list-group-item edit-info-gall">
+                <i class="fa-brands fa-instagram"></i> An item
+              </li>
+              <li class="list-group-item edit-info-gall">
+                <i class="fa-brands fa-facebook"></i> A second item
+              </li>
+              <li class="list-group-item edit-info-gall">
+                <i class="fa-brands fa-square-x-twitter"></i> A third item
+              </li>
+              <li class="list-group-item edit-info-gall">
+                <p>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Autem ipsa possimus quis molestiae ducimus quidem non esse
+                  asperiores incidunt? Nam, dignissimos ipsa perspiciatis fugiat
+                  consectetur quaerat quis harum eligendi ea?
+                </p>
+              </li>
+            </ul>
+            <p class="d-inline-flex gap-1 mt-2">
               <button
                 class="btn btn-primary"
                 type="button"
@@ -55,20 +86,6 @@
                     />
                   </div>
 
-                  <label for="exampleInputPassword1" class="form-label"
-                    >Thumbnail galeri*</label
-                  >
-                  <div class="input-group mb-3">
-                    <input
-                      type="file"
-                      class="form-control"
-                      id="inputGroupFile02"
-                      accept="image/*"
-                    />
-                    <label class="input-group-text" for="inputGroupFile02"
-                      >Upload</label
-                    >
-                  </div>
                   <label for="exampleInputPassword1" class="form-label"
                     >Media sosial</label
                   >
@@ -120,9 +137,7 @@
             </div>
           </div>
 
-
-
-            <div class="container-fluid border rounded karya collapse-pad">
+          <div class="container-fluid border rounded karya collapse-pad">
             <p class="d-inline-flex gap-1">
               <button
                 class="btn btn-primary"
@@ -171,7 +186,7 @@
                     />
                   </div>
 
-                   <div class="mb-3">
+                  <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label"
                       >Dimensi</label
                     >
@@ -207,12 +222,16 @@
                   <label for="exampleInputPassword1" class="form-label"
                     >Unggah karya</label
                   >
-             <div class="input-group mb-3">
-  <input type="file" class="form-control" id="inputGroupFile02">
-  <label class="input-group-text" for="inputGroupFile02">Upload</label>
-</div>
-                
-        
+                  <div class="input-group mb-3">
+                    <input
+                      type="file"
+                      class="form-control"
+                      id="inputGroupFile02"
+                    />
+                    <label class="input-group-text" for="inputGroupFile02"
+                      >Upload</label
+                    >
+                  </div>
 
                   <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label"
@@ -230,8 +249,6 @@
               </div>
             </div>
           </div>
-
-         
         </div>
 
         <div class="col-md-7 bg-edit-img border rounded">
@@ -249,12 +266,20 @@
                     <div class="card-body">
                       <h5 class="card-title">Card title</h5>
                       <div
-                        class="d-flex justify-content-between align-items-center"
+                        class="d-flex justify-content-left align-items-center"
                       >
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                        <i
-                          class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
-                        ></i>
+                        <button type="submit" class="btn btn-outline-danger">
+                          <i class="fa-solid fa-trash fa-xl"></i>
+                        </button>
+                        <button
+                          class="btn btn-outline-warning ms-2"
+                          type="button"
+                          data-bs-toggle="offcanvas"
+                          data-bs-target="#offcanvasRight"
+                          aria-controls="offcanvasRight"
+                        >
+                          <i class="fa-solid fa-pencil fa-xl"></i> Edit
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -301,30 +326,6 @@
                     </div>
                   </div>
                 </li>
-
-                <li class="list-inline-item mygalleries-list">
-                  <div class="card sec-card-editgaleri" style="width: 16rem">
-                    <img
-                      src="{% static 'luminance/img/abs.png' %}"
-                      class="card-img-top fit-image"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <div
-                        class="d-flex justify-content-between align-items-center"
-                      >
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                        <i
-                          class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
-                        ></i>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-
-                <!-- Duplikat card lainnya -->
-                <!-- ... -->
               </ul>
             </div>
           </div>
@@ -395,31 +396,109 @@
                     </div>
                   </div>
                 </li>
-
-                <li class="list-inline-item mygalleries-list">
-                  <div class="card sec-card-editgaleri" style="width: 16rem">
-                    <img
-                      src="{% static 'luminance/img/abs.png' %}"
-                      class="card-img-top fit-image"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <div
-                        class="d-flex justify-content-between align-items-center"
-                      >
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                        <i
-                          class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
-                        ></i>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-
-                <!-- Duplikat card lainnya -->
-                <!-- ... -->
               </ul>
+            </div>
+          </div>
+
+          <div
+            class="offcanvas offcanvas-end"
+            tabindex="-1"
+            id="offcanvasRight"
+            aria-labelledby="offcanvasRightLabel"
+          >
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasRight">Edit Informasi Karya</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="container-fluid border rounded form-tambah-galeri">
+                <form>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label"
+                      >Judul</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label"
+                      >Tahun</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleInputPassword1"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label"
+                      >Media</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleInputPassword1"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label"
+                      >Dimensi</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label"
+                      >Seniman</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleInputPassword1"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label"
+                      >Kontak seniman</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleInputPassword1"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label"
+                      >Deskripsi</label
+                    >
+                    <textarea
+                      class="form-control"
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                    ></textarea>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">Unggah</button>
+                </form>
+              </div>
+             
             </div>
           </div>
         </div>

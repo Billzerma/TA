@@ -35,7 +35,13 @@
   font-size: 18px !important;
   margin: 48px 16px 32px 16px;
 }
-
+.gallery-desc{
+    font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px !important;
+  text-align: left;
+}
 .gallery-loc {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
