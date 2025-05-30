@@ -1,10 +1,12 @@
 from django.urls import path
 from . import views
+from luminanapp.views import register_view
 
 urlpatterns = [
     path('', views.home, name='home'),
     path('login/', views.login_view, name='login'),  
-    path('register/', views.register_view, name='signup'), 
+    path('register/', views.register_view, name='register'),
+     
     path('tentang/', views.tentang_view, name='tentang'), 
     path('bantuan/', views.bantuan_view, name='bantuan'), 
     path('galeri/', views.galeri_view, name='galeri'),
@@ -14,4 +16,5 @@ urlpatterns = [
     path('galeriSaya/', views.manageGaleri_view, name='galeriSaya'),
     path('tambahGaleri/', views.tambahGaleri_view, name='tambahGaleri'),
     path('editGaleri/', views.editGaleri_view, name='editGaleri'),
+    path('logout/', views.logout_view, name='logout'),
 ]
