@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -15,7 +16,7 @@ class Gallery(models.Model):
     description = models.TextField(blank=True)
     location = models.CharField(max_length=255, blank=True)
     contact = models.CharField(max_length=100, blank=True)
-    thumbnail =  models.TextField()
+    thumbnail = CloudinaryField('image', blank=True, null=True)
     ig = models.URLField()
     fb = models.URLField()
     xtwt = models.URLField()
@@ -30,7 +31,7 @@ class Style(models.Model):
 class Artwork(models.Model):
     gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    image_url = models.TextField()
+    image_url = CloudinaryField('image', blank=True, null=True)
     year = models.IntegerField(blank=True, null=True)
     media = models.CharField(max_length=100, blank=True)
     dimension = models.CharField(max_length=50, null=True, blank=True)

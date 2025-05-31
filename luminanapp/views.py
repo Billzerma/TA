@@ -4,12 +4,13 @@ from django.contrib.auth import login
 from django.contrib.auth.models import Group
 from .forms import RegisterForm  
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from luminanapp.decorator import group_required
+from .forms import UploadGalleryForm
+from .models import Gallery
 
 def is_gallery_owner(user):
     return user.groups.filter(name='gallery_owner').exists()
@@ -89,10 +90,21 @@ def dashboard_view(request):
 
 @login_required
 def manageGaleri_view(request):
-    return render(request, 'luminance/manageGaleri.html')
+    galleries = Gallery.objects.filter(owner=request.user)
+    return render(request, 'luminance/manageGaleri.html', {'galleries': galleries})
 
 def tambahGaleri_view(request):
-    return render(request, 'luminance/tambahGaleri.html')
+    if request.method == 'POST':
+        form = UploadGalleryForm(request.POST, request.FILES)
+        if form.is_valid():
+            gallery = form.save(commit=False)
+            gallery.owner = request.user
+            gallery.save()
+            return redirect('galeriSaya')  # Redirect ke halaman galeriSaya tanpa pk
+    else:
+        form = UploadGalleryForm()
+    return render(request, 'luminance/tambahGaleri.html', {'form': form})
+
 
 
 def editGaleri_view(request):

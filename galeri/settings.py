@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
+    'cloudinary_storage', 
      'luminanapp',
 ]
 
@@ -136,3 +138,21 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_COOKIE_AGE = 86400  # 1 hari
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dk4gsst3q',
+    'API_KEY': '666531126741566',
+    'API_SECRET': 'N9iyQdRUA-5A6flUyxHQWUqwDNs',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+cloudinary.config( 
+  cloud_name = CLOUDINARY_STORAGE['CLOUD_NAME'], 
+  api_key = CLOUDINARY_STORAGE['API_KEY'], 
+  api_secret = CLOUDINARY_STORAGE['API_SECRET'] 
+)

@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Gallery
 
 class RegisterForm(UserCreationForm):
     is_gallery_owner = forms.BooleanField(required=False)
@@ -15,3 +16,8 @@ class RegisterForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+class UploadGalleryForm(forms.ModelForm):
+    class Meta:
+        model = Gallery
+        fields = ['title', 'contact', 'location', 'thumbnail', 'ig', 'fb', 'xtwt', 'description']

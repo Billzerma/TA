@@ -22,11 +22,13 @@
   <div class="row">
     <div class="col-md-8">
       <div class="container-fluid border rounded form-tambah-galeri">
-        <form>
+        <form method="POST" enctype="multipart/form-data">
+           {% csrf_token %}
           <div class="mb-3">
             <label for="judulGaleri" class="form-label">Judul</label>
             <input
               type="text"
+              name="title"
               class="form-control"
               id="judulGaleri"
               aria-describedby="judulHelp"
@@ -35,6 +37,7 @@
           <div class="mb-3">
             <label for="kontakGaleri" class="form-label">Kontak*</label>
             <input
+            name="contact"
               type="text"
               class="form-control"
               id="kontakGaleri"
@@ -44,6 +47,7 @@
           <div class="mb-3">
             <label for="lokasiGaleri" class="form-label">Lokasi</label>
             <input
+            name="location"
               type="text"
               class="form-control"
               id="lokasiGaleri"
@@ -53,6 +57,7 @@
           <label for="inputGroupFile02" class="form-label">Thumbnail galeri*</label>
           <div class="input-group mb-3">
             <input
+            name="thumbnail"
               type="file"
               class="form-control"
               id="inputGroupFile02"
@@ -66,6 +71,7 @@
             <div class="col">
               <i class="fa-brands fa-instagram"></i>
               <input
+              name="ig"
                 type="text"
                 class="form-control"
                 placeholder="Instagram URL" {# Ganti placeholder agar lebih spesifik #}
@@ -76,6 +82,7 @@
             <div class="col">
               <i class="fa-brands fa-facebook"></i>
               <input
+              name="fb"
                 type="text"
                 class="form-control"
                 placeholder="Facebook URL" {# Ganti placeholder agar lebih spesifik #}
@@ -85,6 +92,7 @@
             <div class="col mb-3">
               <i class="fa-brands fa-square-x-twitter"></i>
               <input
+              name="xtwt"
                 type="text"
                 class="form-control"
                 placeholder="Twitter URL" {# Ganti placeholder agar lebih spesifik #}
@@ -96,6 +104,7 @@
           <div class="mb-3">
             <label for="deskripsiGaleri" class="form-label">Deskripsi</label>
             <textarea
+            name="description"
               class="form-control"
               id="deskripsiGaleri"
               rows="3"

@@ -1,114 +1,43 @@
 {% extends 'luminance/baseDash.html' %} 
 
-{% block title %}Galeri Saya{% endblock %} {# Ubah judul halaman menjadi "Galeri Saya" #}
+{% block title %}Galeri Saya{% endblock %}
 
-{% block content %} 
+{% block content %}
 {% load static %}
-
-{# Hapus div id="content-wrapper" dan div id="content" karena sudah ada di baseDash.html #}
-{# Cukup dimulai dengan div container-fluid #}
 
 <div class="container-fluid">
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Galeri Saya</h1>
-    <a href="{% url 'tambahGaleri' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-      ><i class="fa-solid fa-plus fa-lg text-white-50"></i> Buat Galeri</a
-    >
+    <a href="{% url 'tambahGaleri' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+      <i class="fa-solid fa-plus fa-lg text-white-50"></i> Buat Galeri
+    </a>
   </div>
 
   <div class="row mygaleri">
     <ul class="list-inline">
-      <li class="list-inline-item mygalleries-list">
-        <div class="card sec-card-mygaleri" style="width: 21rem">
-          <img
-            src="{% static 'luminance/img/abs.png' %}"
-            class="card-img-top fit-image"
-            alt="..."
-          />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card’s content.
-            </p>
-            <div class="d-flex justify-content-between align-items-center">
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-              <i
-                class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
-              ></i>
+      {% if galleries %}
+        {% for gallery in galleries %}
+          <li class="list-inline-item mygalleries-list">
+            <div class="card sec-card-mygaleri" style="width: 21rem">
+              <img
+                src="{{ gallery.thumbnail.url }}"
+                class="card-img-top fit-image"
+                alt="{{ gallery.title }}"
+              />
+              <div class="card-body">
+                <h5 class="card-title">{{ gallery.title }}</h5>
+                <p class="card-text">{{ gallery.description|default:"(Tidak ada deskripsi)" }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <a href="#" class="btn btn-primary">Lihat Detail</a>
+                  <i class="fa-solid fa-heart text-danger fs-4 cursor-pointer"></i>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </li>
-
-      <li class="list-inline-item mygalleries-list">
-        <div class="card sec-card-mygaleri" style="width: 21rem">
-          <img
-            src="{% static 'luminance/img/abs.png' %}"
-            class="card-img-top fit-image"
-            alt="..."
-          />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card’s content.
-            </p>
-            <div class="d-flex justify-content-between align-items-center">
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-              <i
-                class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
-              ></i>
-            </div>
-          </div>
-        </div>
-      </li>
-
-      <li class="list-inline-item mygalleries-list">
-        <div class="card sec-card-mygaleri" style="width: 21rem">
-          <img
-            src="{% static 'luminance/img/abs.png' %}"
-            class="card-img-top fit-image"
-            alt="..."
-          />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card’s content.
-            </p>
-            <div class="d-flex justify-content-between align-items-center">
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-              <i
-                class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
-              ></i>
-            </div>
-          </div>
-        </div>
-      </li>
-
-      <li class="list-inline-item mygalleries-list">
-        <div class="card sec-card-mygaleri" style="width: 21rem">
-          <img
-            src="{% static 'luminance/img/abs.png' %}"
-            class="card-img-top fit-image"
-            alt="..."
-          />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card’s content.
-            </p>
-            <div class="d-flex justify-content-between align-items-center">
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-              <i
-                class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
-              ></i>
-            </div>
-          </div>
-        </div>
-      </li>
+          </li>
+        {% endfor %}
+      {% else %}
+        <p class="text-muted">Kamu belum memiliki galeri. Yuk buat galeri baru!</p>
+      {% endif %}
     </ul>
   </div>
 </div>
