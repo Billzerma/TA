@@ -1,140 +1,131 @@
-{% extends 'luminance/baseDash.html' %} {% block title %}Beranda{% endblock %}
-{%block content %} {% load static %}
+{% extends 'luminance/baseDash.html' %} 
 
-<div id="content-wrapper" class="d-flex flex-column">
-  <div id="content">
-    <div class="container-fluid">
-      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'galeriSaya' %}">Galeri</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Buat Galeri</li>
-  </ol>
-</nav>
-      <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Buat Galeri</h1>
-      </div>
+{% block title %}Buat Galeri{% endblock %} {# Ubah judul halaman menjadi "Buat Galeri" #}
 
-      <div class="row">
-        <div class="col-md-8">
-          <div class="container-fluid border rounded form-tambah-galeri">
-            <form>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Judul</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                />
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label"
-                  >Kontak*</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                />
-              </div>
+{% block content %} 
+{% load static %}
 
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label"
-                  >Lokasi</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                />
-              </div>
+{# Hapus div id="content-wrapper" dan div id="content" karena sudah ada di baseDash.html #}
+{# Cukup dimulai dengan div container-fluid #}
 
-              <label for="exampleInputPassword1" class="form-label"
-                >Thumbnail galeri*</label
-              >
-              <div class="input-group mb-3">
-                <input
-                  type="file"
-                  class="form-control"
-                  id="inputGroupFile02"
-                  accept="image/*"
-                />
-                <label class="input-group-text" for="inputGroupFile02"
-                  >Upload</label
-                >
-              </div>
-              <label for="exampleInputPassword1" class="form-label"
-                >Media sosial</label
-              >
-              <div class="row g-3">
-                
-                <div class="col">
-                  <i class="fa-brands fa-instagram"></i>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="First name"
-                    aria-label="First name"
-                  />
-                </div>
-                
-                <div class="col">
-                  <i class="fa-brands fa-facebook"></i>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Last name"
-                    aria-label="Last name"
-                  />
-                </div>
-                <div class="col mb-3">
-                  <i class="fa-brands fa-square-x-twitter"></i>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Last name"
-                    aria-label="Last name"
-                  />
-                </div>
-              </div>
+<div class="container-fluid">
+  <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'galeriSaya' %}">Galeri</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Buat Galeri</li>
+    </ol>
+  </nav>
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Buat Galeri</h1>
+  </div>
 
-              <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label"
-                  >Deskripsi</label
-                >
-                <textarea
-                  class="form-control"
-                  id="exampleFormControlTextarea1"
-                  rows="3"
-                ></textarea>
-              </div>
-
-              <button type="submit" class="btn btn-primary">Buat</button>
-            </form>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <label for="thum-preview">Thumbnail Preview</label>
-          <div
-            class="card sec-card-mygaleri"
-            style="width: 21rem; display: none"
-            id="cardPreview"
-          >
-            <img
-              src=""
-              class="card-img-top fit-image"
-              alt="Preview Image"
-              id="imagePreview"
+  <div class="row">
+    <div class="col-md-8">
+      <div class="container-fluid border rounded form-tambah-galeri">
+        <form>
+          <div class="mb-3">
+            <label for="judulGaleri" class="form-label">Judul</label>
+            <input
+              type="text"
+              class="form-control"
+              id="judulGaleri"
+              aria-describedby="judulHelp"
             />
-            <div class="card-body">
-              <h5 class="card-title">Nama Galeri</h5>
-              <p class="card-text">
-                Isi deskripsi galeri mu, untuk menarik minat banyak orang <i class="fa-regular fa-face-smile-wink fa-lg"></i>
-              </p>
-              
+          </div>
+          <div class="mb-3">
+            <label for="kontakGaleri" class="form-label">Kontak*</label>
+            <input
+              type="text"
+              class="form-control"
+              id="kontakGaleri"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="lokasiGaleri" class="form-label">Lokasi</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lokasiGaleri"
+            />
+          </div>
+
+          <label for="inputGroupFile02" class="form-label">Thumbnail galeri*</label>
+          <div class="input-group mb-3">
+            <input
+              type="file"
+              class="form-control"
+              id="inputGroupFile02"
+              accept="image/*"
+            />
+            <label class="input-group-text" for="inputGroupFile02">Upload</label>
+          </div>
+          <label for="socialMedia" class="form-label">Media sosial</label>
+          <div class="row g-3">
+            
+            <div class="col">
+              <i class="fa-brands fa-instagram"></i>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Instagram URL" {# Ganti placeholder agar lebih spesifik #}
+                aria-label="Instagram URL"
+              />
+            </div>
+            
+            <div class="col">
+              <i class="fa-brands fa-facebook"></i>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Facebook URL" {# Ganti placeholder agar lebih spesifik #}
+                aria-label="Facebook URL"
+              />
+            </div>
+            <div class="col mb-3">
+              <i class="fa-brands fa-square-x-twitter"></i>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Twitter URL" {# Ganti placeholder agar lebih spesifik #}
+                aria-label="Twitter URL"
+              />
             </div>
           </div>
+
+          <div class="mb-3">
+            <label for="deskripsiGaleri" class="form-label">Deskripsi</label>
+            <textarea
+              class="form-control"
+              id="deskripsiGaleri"
+              rows="3"
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Buat</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <label for="thum-preview">Thumbnail Preview</label>
+      <div
+        class="card sec-card-mygaleri"
+        style="width: 21rem; display: none"
+        id="cardPreview"
+      >
+        <img
+          src=""
+          class="card-img-top fit-image"
+          alt="Preview Image"
+          id="imagePreview"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Nama Galeri</h5>
+          <p class="card-text">
+            Isi deskripsi galeri mu, untuk menarik minat banyak orang <i class="fa-regular fa-face-smile-wink fa-lg"></i>
+          </p>
+          
         </div>
       </div>
     </div>

@@ -44,21 +44,18 @@ def register_view(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)  # kita tangkap dulu user-nya
-            user.save()  # simpan ke auth_user
-
-            # Assign grup berdasarkan input checkbox
+            user = form.save(commit=False)  
+            user.save()  
             if form.cleaned_data.get('is_gallery_owner'):
                 group = Group.objects.get(name='gallery_owner')
             else:
                 group = Group.objects.get(name='visitor')
             user.groups.add(group)
 
-            login(request, user)  # login otomatis
+            login(request, user)  
             print("✅ User berhasil didaftarkan dan login:", user.username)
-            return redirect('login')  # arahkan ke halaman home
+            return redirect('login') 
         else:
-            # Cetak error ke terminal untuk debugging
             print("❌ Form tidak valid:", form.errors)
     else:
         form = RegisterForm()
@@ -66,7 +63,7 @@ def register_view(request):
     return render(request, 'luminance/register.html', {'form': form})
 
 def logout_view(request):
-    logout(request)  # Hapus session login user
+    logout(request) 
     return redirect('login')
 
 
@@ -90,7 +87,7 @@ def detailKarya_view(request):
 def dashboard_view(request):
     return render(request, 'luminance/dashboard.html')
 
-
+@login_required
 def manageGaleri_view(request):
     return render(request, 'luminance/manageGaleri.html')
 

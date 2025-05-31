@@ -1,0 +1,49 @@
+<ul
+  class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+  id="accordionSidebar"
+>
+  <a
+    class="sidebar-brand d-flex align-items-center justify-content-center"
+    href="index.html"
+  >
+    <div class="sidebar-brand-icon rotate-n-15">
+      <i class="fas fa-laugh-wink"></i>
+    </div>
+    <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+  </a>
+
+  <hr class="sidebar-divider my-0" />
+
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'galeriSaya' %}">
+      <i class="fa-solid fa-images"></i>
+      <span>Galeri Saya</span></a
+    >
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'dashboard' %}">
+      <i class="fa-solid fa-chart-simple"></i>
+      <span>Statistik Galeri</span></a
+    >
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'home' %}">
+      <i class="fa-solid fa-house"></i>
+      <span>Beranda</span></a
+    >
+  </li>
+
+  <li class="nav-item">
+    <form method="POST" action="{% url 'logout' %}" style="display: inline">
+      {% csrf_token %}
+      <button type="submit" class="nav-link">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <span>Keluar</span>
+      </button>
+    </form>
+  </li>
+
+  <hr class="sidebar-divider" />
+</ul>

@@ -1,505 +1,475 @@
-{% extends 'luminance/baseDash.html' %} {% block title %}Beranda{% endblock %}
-{%block content %} {% load static %}
+{% extends 'luminance/baseDash.html' %} 
 
-<div id="content-wrapper" class="d-flex flex-column">
-  <div id="content">
-    <div class="container-fluid">
-      <div class="row mygaleri">
-        <div class="col-md-5">
-          <div class="container-fluid border rounded karya collapse-pad">
-            <ul class="list-group list-group-flush mb-3">
-              <li class="list-group-item edit-info-gall-name">
-                Omke Gallery Pvt. Ltd.
-              </li>
-              <li class="list-group-item edit-info-gall">
-                <i class="fa-solid fa-location-dot fa-lg"></i> ini lokasi galeri
-              </li>
-              <li class="list-group-item edit-info-gall">
-                <i class="fa-solid fa-phone"></i> 12222267887
-              </li>
-              <li class="list-group-item edit-info-gall">
-                <i class="fa-solid fa-envelope"></i> nabilzerma@gmail.com
-              </li>
-              <li class="list-group-item edit-info-gall">
-                <i class="fa-brands fa-instagram"></i> An item
-              </li>
-              <li class="list-group-item edit-info-gall">
-                <i class="fa-brands fa-facebook"></i> A second item
-              </li>
-              <li class="list-group-item edit-info-gall">
-                <i class="fa-brands fa-square-x-twitter"></i> A third item
-              </li>
-              <li class="list-group-item edit-info-gall">
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Autem ipsa possimus quis molestiae ducimus quidem non esse
-                  asperiores incidunt? Nam, dignissimos ipsa perspiciatis fugiat
-                  consectetur quaerat quis harum eligendi ea?
-                </p>
-              </li>
-            </ul>
-            <p class="d-inline-flex gap-1 mt-2">
-              <button
-                class="btn btn-primary"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseExample"
-                aria-expanded="false"
-                aria-controls="collapseExample"
-              >
-                Edit info galeri
-              </button>
+{% block title %}Detail Galeri & Karya{% endblock %} {# Ubah judul halaman menjadi lebih spesifik #}
+
+{% block content %} 
+{% load static %}
+
+{# Hapus div id="content-wrapper" dan div id="content" karena sudah ada di baseDash.html #}
+{# Cukup dimulai dengan div container-fluid #}
+
+<div class="container-fluid">
+  <div class="row mygaleri">
+    <div class="col-md-5">
+      <div class="container-fluid border rounded karya collapse-pad">
+        <ul class="list-group list-group-flush mb-3">
+          <li class="list-group-item edit-info-gall-name">
+            Omke Gallery Pvt. Ltd.
+          </li>
+          <li class="list-group-item edit-info-gall">
+            <i class="fa-solid fa-location-dot fa-lg"></i> ini lokasi galeri
+          </li>
+          <li class="list-group-item edit-info-gall">
+            <i class="fa-solid fa-phone"></i> 12222267887
+          </li>
+          <li class="list-group-item edit-info-gall">
+            <i class="fa-solid fa-envelope"></i> nabilzerma@gmail.com
+          </li>
+          <li class="list-group-item edit-info-gall">
+            <i class="fa-brands fa-instagram"></i> An item
+          </li>
+          <li class="list-group-item edit-info-gall">
+            <i class="fa-brands fa-facebook"></i> A second item
+          </li>
+          <li class="list-group-item edit-info-gall">
+            <i class="fa-brands fa-square-x-twitter"></i> A third item
+          </li>
+          <li class="list-group-item edit-info-gall">
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem
+              ipsa possimus quis molestiae ducimus quidem non esse asperiores
+              incidunt? Nam, dignissimos ipsa perspiciatis fugiat consectetur
+              quaerat quis harum eligendi ea?
             </p>
-            <div class="collapse" id="collapseExample">
-              <div class="container-fluid border rounded form-tambah-galeri">
-                <form>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label"
-                      >Judul</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label"
-                      >Kontak*</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputPassword1"
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label"
-                      >Lokasi</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputPassword1"
-                    />
-                  </div>
-
-                  <label for="exampleInputPassword1" class="form-label"
-                    >Media sosial</label
-                  >
-                  <div class="row g-3">
-                    <div class="col">
-                      <i class="fa-brands fa-instagram"></i>
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="First name"
-                        aria-label="First name"
-                      />
-                    </div>
-
-                    <div class="col">
-                      <i class="fa-brands fa-facebook"></i>
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Last name"
-                        aria-label="Last name"
-                      />
-                    </div>
-                    <div class="col mb-3">
-                      <i class="fa-brands fa-square-x-twitter"></i>
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Last name"
-                        aria-label="Last name"
-                      />
-                    </div>
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label"
-                      >Deskripsi</label
-                    >
-                    <textarea
-                      class="form-control"
-                      id="exampleFormControlTextarea1"
-                      rows="3"
-                    ></textarea>
-                  </div>
-
-                  <button type="submit" class="btn btn-primary">Edit</button>
-                </form>
+          </li>
+        </ul>
+        <p class="d-inline-flex gap-1 mt-2">
+          <button
+            class="btn btn-primary"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseEditGaleri" {# Ganti id target collapse #}
+            aria-expanded="false"
+            aria-controls="collapseEditGaleri" {# Ganti id controls collapse #}
+          >
+            Edit info galeri
+          </button>
+        </p>
+        <div class="collapse" id="collapseEditGaleri"> {# Ganti id collapse #}
+          <div class="container-fluid border rounded form-tambah-galeri">
+            <form>
+              <div class="mb-3">
+                <label for="editJudulGaleri" class="form-label">Judul</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editJudulGaleri"
+                  aria-describedby="editJudulHelp"
+                />
               </div>
-            </div>
-          </div>
-
-          <div class="container-fluid border rounded karya collapse-pad">
-            <p class="d-inline-flex gap-1">
-              <button
-                class="btn btn-primary"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapse-tambah-galeri"
-                aria-expanded="false"
-                aria-controls="collapseExample"
-              >
-                Tambah karya
-              </button>
-            </p>
-            <div class="collapse" id="collapse-tambah-galeri">
-              <div class="container-fluid border rounded form-tambah-galeri">
-                <form>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label"
-                      >Judul</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label"
-                      >Tahun</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputPassword1"
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label"
-                      >Media</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputPassword1"
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label"
-                      >Dimensi</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label"
-                      >Seniman</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputPassword1"
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label"
-                      >Kontak seniman</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputPassword1"
-                    />
-                  </div>
-
-                  <label for="exampleInputPassword1" class="form-label"
-                    >Unggah karya</label
-                  >
-                  <div class="input-group mb-3">
-                    <input
-                      type="file"
-                      class="form-control"
-                      id="inputGroupFile02"
-                    />
-                    <label class="input-group-text" for="inputGroupFile02"
-                      >Upload</label
-                    >
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label"
-                      >Deskripsi</label
-                    >
-                    <textarea
-                      class="form-control"
-                      id="exampleFormControlTextarea1"
-                      rows="3"
-                    ></textarea>
-                  </div>
-
-                  <button type="submit" class="btn btn-primary">Unggah</button>
-                </form>
+              <div class="mb-3">
+                <label for="editKontakGaleri" class="form-label">Kontak*</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editKontakGaleri"
+                />
               </div>
-            </div>
+
+              <div class="mb-3">
+                <label for="editLokasiGaleri" class="form-label">Lokasi</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editLokasiGaleri"
+                />
+              </div>
+
+              <label for="editThumbGaleri" class="form-label">Thumbnail galeri*</label>
+              <div class="input-group mb-3">
+                <input
+                  type="file"
+                  class="form-control"
+                  id="editThumbGaleri"
+                  accept="image/*"
+                />
+                <label class="input-group-text" for="editThumbGaleri">Upload</label>
+              </div>
+
+              <label for="editSocialMedia" class="form-label">Media sosial</label>
+              <div class="row g-3">
+                <div class="col">
+                  <i class="fa-brands fa-instagram"></i>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Instagram URL"
+                    aria-label="Instagram URL"
+                  />
+                </div>
+                <div class="col">
+                  <i class="fa-brands fa-facebook"></i>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Facebook URL"
+                    aria-label="Facebook URL"
+                  />
+                </div>
+                <div class="col mb-3">
+                  <i class="fa-brands fa-square-x-twitter"></i>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Twitter URL"
+                    aria-label="Twitter URL"
+                  />
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="editDeskripsiGaleri" class="form-label">Deskripsi</label>
+                <textarea
+                  class="form-control"
+                  id="editDeskripsiGaleri"
+                  rows="3"
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Edit</button>
+            </form>
           </div>
         </div>
+      </div>
 
-        <div class="col-md-7 bg-edit-img border rounded">
-          <div class="row">
-            <div class="scroll-wrapper">
-              <h2 class="title-style-top">Realisme</h2>
-              <ul class="list-inline m-0 p-0">
-                <li class="list-inline-item mygalleries-list">
-                  <div class="card sec-card-editgaleri" style="width: 16rem">
-                    <img
-                      src="{% static 'luminance/img/abs.png' %}"
-                      class="card-img-top fit-image"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <div
-                        class="d-flex justify-content-left align-items-center"
-                      >
-                        <button type="submit" class="btn btn-outline-danger">
-                          <i class="fa-solid fa-trash fa-xl"></i>
-                        </button>
-                        <button
-                          class="btn btn-outline-warning ms-2"
-                          type="button"
-                          data-bs-toggle="offcanvas"
-                          data-bs-target="#offcanvasRight"
-                          aria-controls="offcanvasRight"
-                        >
-                          <i class="fa-solid fa-pencil fa-xl"></i> Edit
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="list-inline-item mygalleries-list">
-                  <div class="card sec-card-editgaleri" style="width: 16rem">
-                    <img
-                      src="{% static 'luminance/img/abs.png' %}"
-                      class="card-img-top fit-image"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <div
-                        class="d-flex justify-content-between align-items-center"
-                      >
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                        <i
-                          class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
-                        ></i>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="list-inline-item mygalleries-list">
-                  <div class="card sec-card-editgaleri" style="width: 16rem">
-                    <img
-                      src="{% static 'luminance/img/abs.png' %}"
-                      class="card-img-top fit-image"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <div
-                        class="d-flex justify-content-between align-items-center"
-                      >
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                        <i
-                          class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
-                        ></i>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="scroll-wrapper">
-              <h2 class="title-style-top">Realisme</h2>
-              <ul class="list-inline m-0 p-0">
-                <li class="list-inline-item mygalleries-list">
-                  <div class="card sec-card-editgaleri" style="width: 16rem">
-                    <img
-                      src="{% static 'luminance/img/abs.png' %}"
-                      class="card-img-top fit-image"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <div
-                        class="d-flex justify-content-between align-items-center"
-                      >
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                        <i
-                          class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
-                        ></i>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="list-inline-item mygalleries-list">
-                  <div class="card sec-card-editgaleri" style="width: 16rem">
-                    <img
-                      src="{% static 'luminance/img/abs.png' %}"
-                      class="card-img-top fit-image"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <div
-                        class="d-flex justify-content-between align-items-center"
-                      >
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                        <i
-                          class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
-                        ></i>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="list-inline-item mygalleries-list">
-                  <div class="card sec-card-editgaleri" style="width: 16rem">
-                    <img
-                      src="{% static 'luminance/img/abs.png' %}"
-                      class="card-img-top fit-image"
-                      alt="..."
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <div
-                        class="d-flex justify-content-between align-items-center"
-                      >
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                        <i
-                          class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
-                        ></i>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div
-            class="offcanvas offcanvas-end"
-            tabindex="-1"
-            id="offcanvasRight"
-            aria-labelledby="offcanvasRightLabel"
+      <div class="container-fluid border rounded karya collapse-pad mt-4"> {# Menambahkan margin top untuk pemisah #}
+        <p class="d-inline-flex gap-1">
+          <button
+            class="btn btn-primary"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseTambahKarya" {# Ganti id target collapse #}
+            aria-expanded="false"
+            aria-controls="collapseTambahKarya" {# Ganti id controls collapse #}
           >
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasRight">Edit Informasi Karya</h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="offcanvas-body">
-                <div class="container-fluid border rounded form-tambah-galeri">
-                <form>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label"
-                      >Judul</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label"
-                      >Tahun</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputPassword1"
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label"
-                      >Media</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputPassword1"
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label"
-                      >Dimensi</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label"
-                      >Seniman</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputPassword1"
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label"
-                      >Kontak seniman</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputPassword1"
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label"
-                      >Deskripsi</label
-                    >
-                    <textarea
-                      class="form-control"
-                      id="exampleFormControlTextarea1"
-                      rows="3"
-                    ></textarea>
-                  </div>
-
-                  <button type="submit" class="btn btn-primary">Unggah</button>
-                </form>
+            Tambah karya
+          </button>
+        </p>
+        <div class="collapse" id="collapseTambahKarya"> {# Ganti id collapse #}
+          <div class="container-fluid border rounded form-tambah-galeri">
+            <form>
+              <div class="mb-3">
+                <label for="tambahJudulKarya" class="form-label">Judul</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="tambahJudulKarya"
+                  aria-describedby="tambahJudulHelp"
+                />
               </div>
-             
-            </div>
+              <div class="mb-3">
+                <label for="tambahTahunKarya" class="form-label">Tahun</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="tambahTahunKarya"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="tambahMediaKarya" class="form-label">Media</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="tambahMediaKarya"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="tambahDimensiKarya" class="form-label">Dimensi</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="tambahDimensiKarya"
+                  aria-describedby="tambahDimensiHelp"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="tambahSenimanKarya" class="form-label">Seniman</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="tambahSenimanKarya"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="tambahKontakSenimanKarya" class="form-label">Kontak seniman</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="tambahKontakSenimanKarya"
+                />
+              </div>
+
+              <label for="unggahKaryaFile" class="form-label">Unggah karya</label>
+              <div class="input-group mb-3">
+                <input
+                  type="file"
+                  class="form-control"
+                  id="unggahKaryaFile"
+                  accept="image/*" {# Menambahkan accept untuk gambar #}
+                />
+                <label class="input-group-text" for="unggahKaryaFile">Upload</label>
+              </div>
+
+              <div class="mb-3">
+                <label for="tambahDeskripsiKarya" class="form-label">Deskripsi</label>
+                <textarea
+                  class="form-control"
+                  id="tambahDeskripsiKarya"
+                  rows="3"
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Unggah</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-7 bg-edit-img border rounded">
+      <div class="row">
+        <div class="scroll-wrapper">
+          <h2 class="title-style-top">Realisme</h2>
+          <ul class="list-inline m-0 p-0">
+            <li class="list-inline-item mygalleries-list">
+              <div class="card sec-card-editgaleri" style="width: 16rem">
+                <img
+                  src="{% static 'luminance/img/abs.png' %}"
+                  class="card-img-top fit-image"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <div class="d-flex justify-content-left align-items-center">
+                    <button type="submit" class="btn btn-outline-danger">
+                      <i class="fa-solid fa-trash fa-xl"></i>
+                    </button>
+                    <button
+                      class="btn btn-outline-warning ms-2"
+                      type="button"
+                      data-bs-toggle="offcanvas"
+                      data-bs-target="#offcanvasRight"
+                      aria-controls="offcanvasRight"
+                    >
+                      <i class="fa-solid fa-pencil fa-xl"></i> Edit
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="list-inline-item mygalleries-list">
+              <div class="card sec-card-editgaleri" style="width: 16rem">
+                <img
+                  src="{% static 'luminance/img/abs.png' %}"
+                  class="card-img-top fit-image"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <i
+                      class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="list-inline-item mygalleries-list">
+              <div class="card sec-card-editgaleri" style="width: 16rem">
+                <img
+                  src="{% static 'luminance/img/abs.png' %}"
+                  class="card-img-top fit-image"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <i
+                      class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="scroll-wrapper">
+          <h2 class="title-style-top">Abstrak</h2> {# Mengganti Judul untuk contoh #}
+          <ul class="list-inline m-0 p-0">
+            <li class="list-inline-item mygalleries-list">
+              <div class="card sec-card-editgaleri" style="width: 16rem">
+                <img
+                  src="{% static 'luminance/img/abs.png' %}"
+                  class="card-img-top fit-image"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <i
+                      class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="list-inline-item mygalleries-list">
+              <div class="card sec-card-editgaleri" style="width: 16rem">
+                <img
+                  src="{% static 'luminance/img/abs.png' %}"
+                  class="card-img-top fit-image"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <i
+                      class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="list-inline-item mygalleries-list">
+              <div class="card sec-card-editgaleri" style="width: 16rem">
+                <img
+                  src="{% static 'luminance/img/abs.png' %}"
+                  class="card-img-top fit-image"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <i
+                      class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="offcanvas offcanvas-end"
+        tabindex="-1"
+        id="offcanvasRight"
+        aria-labelledby="offcanvasRightLabel"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasRightLabel">Edit Informasi Karya</h5> {# Mengubah id offcanvas title #}
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="container-fluid border rounded form-tambah-galeri">
+            <form>
+              <div class="mb-3">
+                <label for="editKaryaJudul" class="form-label">Judul</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editKaryaJudul"
+                  aria-describedby="editKaryaJudulHelp"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="editKaryaTahun" class="form-label">Tahun</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editKaryaTahun"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="editKaryaMedia" class="form-label">Media</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editKaryaMedia"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="editKaryaDimensi" class="form-label">Dimensi</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editKaryaDimensi"
+                  aria-describedby="editKaryaDimensiHelp"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="editKaryaSeniman" class="form-label">Seniman</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editKaryaSeniman"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="editKaryaKontakSeniman" class="form-label">Kontak seniman</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editKaryaKontakSeniman"
+                />
+              </div>
+
+              <label for="editUnggahKaryaFile" class="form-label">Unggah karya</label>
+              <div class="input-group mb-3">
+                <input
+                  type="file"
+                  class="form-control"
+                  id="editUnggahKaryaFile"
+                  accept="image/*"
+                />
+                <label class="input-group-text" for="editUnggahKaryaFile">Upload</label>
+              </div>
+
+              <div class="mb-3">
+                <label for="editKaryaDeskripsi" class="form-label">Deskripsi</label>
+                <textarea
+                  class="form-control"
+                  id="editKaryaDeskripsi"
+                  rows="3"
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Unggah</button>
+            </form>
           </div>
         </div>
       </div>
