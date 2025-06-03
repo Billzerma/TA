@@ -15,6 +15,6 @@ urlpatterns = [
     path('dashboard/', views.dashboard_view, name='dashboard'),
     path('galeriSaya/', views.manageGaleri_view, name='galeriSaya'),
     path('tambahGaleri/', views.tambahGaleri_view, name='tambahGaleri'),
-    path('editGaleri/', views.editGaleri_view, name='editGaleri'),
+    path('galeri/<int:pk>/edit/', views.editGaleri_view, name='editGaleri'),
     path('logout/', views.logout_view, name='logout'),
 ]

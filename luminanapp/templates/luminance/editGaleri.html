@@ -1,18 +1,32 @@
 {% extends 'luminance/baseDash.html' %} 
 
-{% block title %}Detail Galeri & Karya{% endblock %} {# Ubah judul halaman menjadi lebih spesifik #}
+{% block title %}Detail Galeri & Karya{% endblock %}
 
 {% block content %} 
 {% load static %}
 
-{# Hapus div id="content-wrapper" dan div id="content" karena sudah ada di baseDash.html #}
-{# Cukup dimulai dengan div container-fluid #}
-
 <div class="container-fluid">
-   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  {% if messages %} {% for message in messages %}
+  <div
+    class="alert alert-{{ message.tags }} alert-dismissible fade show mt-3"
+    role="alert"
+  >
+    {{ message }}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  {% endfor %} {% endif %}
+
+  <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{% url 'galeriSaya' %}">Galeri</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Buat Galeri</li>
+      <li class="breadcrumb-item">
+        <a href="{% url 'galeriSaya' %}">Galeri</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Atur Galeri</li>
     </ol>
   </nav>
   <div class="row mygaleri">
@@ -20,33 +34,37 @@
       <div class="container-fluid border rounded karya collapse-pad">
         <ul class="list-group list-group-flush mb-3">
           <li class="list-group-item edit-info-gall-name">
-            Omke Gallery Pvt. Ltd.
+            {{ gallery.title }}
           </li>
           <li class="list-group-item edit-info-gall">
-            <i class="fa-solid fa-location-dot fa-lg"></i> ini lokasi galeri
+            <i class="fa-solid fa-location-dot fa-lg"></i> {{ gallery.location}}
           </li>
           <li class="list-group-item edit-info-gall">
-            <i class="fa-solid fa-phone"></i> 12222267887
+            <i class="fa-solid fa-phone"></i> {{ gallery.contact }}
           </li>
           <li class="list-group-item edit-info-gall">
-            <i class="fa-solid fa-envelope"></i> nabilzerma@gmail.com
+            <i class="fa-brands fa-instagram"></i> {{ gallery.ig }}
           </li>
           <li class="list-group-item edit-info-gall">
-            <i class="fa-brands fa-instagram"></i> An item
+            <i class="fa-brands fa-facebook"></i> {{ gallery.fb }}
           </li>
           <li class="list-group-item edit-info-gall">
-            <i class="fa-brands fa-facebook"></i> A second item
+            <i class="fa-brands fa-square-x-twitter"></i> {{ gallery.xtwt }}
           </li>
           <li class="list-group-item edit-info-gall">
-            <i class="fa-brands fa-square-x-twitter"></i> A third item
+            <p>{{ gallery.description }}</p>
           </li>
+
           <li class="list-group-item edit-info-gall">
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem
-              ipsa possimus quis molestiae ducimus quidem non esse asperiores
-              incidunt? Nam, dignissimos ipsa perspiciatis fugiat consectetur
-              quaerat quis harum eligendi ea?
-            </p>
+            <label for="thum-preview">Thumbnail</label>
+            <div class="card" style="width: 21rem">
+              <img
+                src="{{ gallery.thumbnail.url }}"
+                class="card-img-top fit-image"
+                alt="Preview Image"
+                id="imagePreview"
+              />
+            </div>
           </li>
         </ul>
         <p class="d-inline-flex gap-1 mt-2">
@@ -54,31 +72,49 @@
             class="btn btn-primary"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#collapseEditGaleri" {# Ganti id target collapse #}
+            data-bs-target="#collapseEditGaleri"
+            {#
+            Ganti
+            id
+            target
+            collapse
+            #}
             aria-expanded="false"
-            aria-controls="collapseEditGaleri" {# Ganti id controls collapse #}
+            aria-controls="collapseEditGaleri"
+            {#
+            Ganti
+            id
+            controls
+            collapse
+            #}
           >
             Edit info galeri
           </button>
         </p>
-        <div class="collapse" id="collapseEditGaleri"> {# Ganti id collapse #}
+        <div class="collapse" id="collapseEditGaleri">
+          {# Ganti id collapse #}
           <div class="container-fluid border rounded form-tambah-galeri">
-            <form>
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
               <div class="mb-3">
                 <label for="editJudulGaleri" class="form-label">Judul</label>
                 <input
                   type="text"
                   class="form-control"
+                  name="title"
                   id="editJudulGaleri"
-                  aria-describedby="editJudulHelp"
+                  value="{{ gallery.title }}"
                 />
               </div>
+
               <div class="mb-3">
                 <label for="editKontakGaleri" class="form-label">Kontak*</label>
                 <input
                   type="text"
                   class="form-control"
+                  name="contact"
                   id="editKontakGaleri"
+                  value="{{ gallery.contact }}"
                 />
               </div>
 
@@ -87,30 +123,40 @@
                 <input
                   type="text"
                   class="form-control"
+                  name="location"
                   id="editLokasiGaleri"
+                  value="{{ gallery.location }}"
                 />
               </div>
 
-              <label for="editThumbGaleri" class="form-label">Thumbnail galeri*</label>
+              <label for="editThumbGaleri" class="form-label"
+                >Thumbnail galeri*</label
+              >
               <div class="input-group mb-3">
                 <input
                   type="file"
                   class="form-control"
+                  name="thumbnail"
                   id="editThumbGaleri"
                   accept="image/*"
                 />
-                <label class="input-group-text" for="editThumbGaleri">Upload</label>
+                <label class="input-group-text" for="editThumbGaleri"
+                  >Upload</label
+                >
               </div>
 
-              <label for="editSocialMedia" class="form-label">Media sosial</label>
+              <label for="editSocialMedia" class="form-label"
+                >Media sosial</label
+              >
               <div class="row g-3">
                 <div class="col">
                   <i class="fa-brands fa-instagram"></i>
                   <input
                     type="text"
                     class="form-control"
+                    name="ig"
+                    value="{{ gallery.ig }}"
                     placeholder="Instagram URL"
-                    aria-label="Instagram URL"
                   />
                 </div>
                 <div class="col">
@@ -118,8 +164,9 @@
                   <input
                     type="text"
                     class="form-control"
+                    name="fb"
+                    value="{{ gallery.fb }}"
                     placeholder="Facebook URL"
-                    aria-label="Facebook URL"
                   />
                 </div>
                 <div class="col mb-3">
@@ -127,41 +174,63 @@
                   <input
                     type="text"
                     class="form-control"
+                    name="xtwt"
+                    value="{{ gallery.xtwt }}"
                     placeholder="Twitter URL"
-                    aria-label="Twitter URL"
                   />
                 </div>
               </div>
 
               <div class="mb-3">
-                <label for="editDeskripsiGaleri" class="form-label">Deskripsi</label>
+                <label for="editDeskripsiGaleri" class="form-label"
+                  >Deskripsi</label
+                >
                 <textarea
                   class="form-control"
+                  name="description"
                   id="editDeskripsiGaleri"
                   rows="3"
-                ></textarea>
+                >
+                {{ gallery.description }}</textarea
+                >
               </div>
 
-              <button type="submit" class="btn btn-primary">Edit</button>
+              <button type="submit" class="btn btn-primary">
+                Simpan perubahan
+              </button>
             </form>
           </div>
         </div>
       </div>
 
-      <div class="container-fluid border rounded karya collapse-pad mt-4"> {# Menambahkan margin top untuk pemisah #}
+      <div class="container-fluid border rounded karya collapse-pad mt-4">
+        {# Menambahkan margin top untuk pemisah #}
         <p class="d-inline-flex gap-1">
           <button
             class="btn btn-primary"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#collapseTambahKarya" {# Ganti id target collapse #}
+            data-bs-target="#collapseTambahKarya"
+            {#
+            Ganti
+            id
+            target
+            collapse
+            #}
             aria-expanded="false"
-            aria-controls="collapseTambahKarya" {# Ganti id controls collapse #}
+            aria-controls="collapseTambahKarya"
+            {#
+            Ganti
+            id
+            controls
+            collapse
+            #}
           >
             Tambah karya
           </button>
         </p>
-        <div class="collapse" id="collapseTambahKarya"> {# Ganti id collapse #}
+        <div class="collapse" id="collapseTambahKarya">
+          {# Ganti id collapse #}
           <div class="container-fluid border rounded form-tambah-galeri">
             <form>
               <div class="mb-3">
@@ -175,24 +244,18 @@
               </div>
               <div class="mb-3">
                 <label for="tambahTahunKarya" class="form-label">Tahun</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="tambahTahunKarya"
-                />
+                <input type="text" class="form-control" id="tambahTahunKarya" />
               </div>
 
               <div class="mb-3">
                 <label for="tambahMediaKarya" class="form-label">Media</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="tambahMediaKarya"
-                />
+                <input type="text" class="form-control" id="tambahMediaKarya" />
               </div>
 
               <div class="mb-3">
-                <label for="tambahDimensiKarya" class="form-label">Dimensi</label>
+                <label for="tambahDimensiKarya" class="form-label"
+                  >Dimensi</label
+                >
                 <input
                   type="text"
                   class="form-control"
@@ -201,7 +264,9 @@
                 />
               </div>
               <div class="mb-3">
-                <label for="tambahSenimanKarya" class="form-label">Seniman</label>
+                <label for="tambahSenimanKarya" class="form-label"
+                  >Seniman</label
+                >
                 <input
                   type="text"
                   class="form-control"
@@ -210,7 +275,9 @@
               </div>
 
               <div class="mb-3">
-                <label for="tambahKontakSenimanKarya" class="form-label">Kontak seniman</label>
+                <label for="tambahKontakSenimanKarya" class="form-label"
+                  >Kontak seniman</label
+                >
                 <input
                   type="text"
                   class="form-control"
@@ -218,19 +285,31 @@
                 />
               </div>
 
-              <label for="unggahKaryaFile" class="form-label">Unggah karya</label>
+              <label for="unggahKaryaFile" class="form-label"
+                >Unggah karya</label
+              >
               <div class="input-group mb-3">
                 <input
                   type="file"
                   class="form-control"
                   id="unggahKaryaFile"
-                  accept="image/*" {# Menambahkan accept untuk gambar #}
+                  accept="image/*"
+                  {#
+                  Menambahkan
+                  accept
+                  untuk
+                  gambar
+                  #}
                 />
-                <label class="input-group-text" for="unggahKaryaFile">Upload</label>
+                <label class="input-group-text" for="unggahKaryaFile"
+                  >Upload</label
+                >
               </div>
 
               <div class="mb-3">
-                <label for="tambahDeskripsiKarya" class="form-label">Deskripsi</label>
+                <label for="tambahDeskripsiKarya" class="form-label"
+                  >Deskripsi</label
+                >
                 <textarea
                   class="form-control"
                   id="tambahDeskripsiKarya"
@@ -286,7 +365,9 @@
                 />
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
-                  <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                     <i
                       class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
@@ -305,7 +386,9 @@
                 />
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
-                  <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                     <i
                       class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
@@ -320,7 +403,8 @@
 
       <div class="row">
         <div class="scroll-wrapper">
-          <h2 class="title-style-top">Abstrak</h2> {# Mengganti Judul untuk contoh #}
+          <h2 class="title-style-top">Abstrak</h2>
+          {# Mengganti Judul untuk contoh #}
           <ul class="list-inline m-0 p-0">
             <li class="list-inline-item mygalleries-list">
               <div class="card sec-card-editgaleri" style="width: 16rem">
@@ -331,7 +415,9 @@
                 />
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
-                  <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                     <i
                       class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
@@ -350,7 +436,9 @@
                 />
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
-                  <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                     <i
                       class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
@@ -369,7 +457,9 @@
                 />
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
-                  <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                     <i
                       class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
@@ -389,7 +479,10 @@
         aria-labelledby="offcanvasRightLabel"
       >
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasRightLabel">Edit Informasi Karya</h5> {# Mengubah id offcanvas title #}
+          <h5 class="offcanvas-title" id="offcanvasRightLabel">
+            Edit Informasi Karya
+          </h5>
+          {# Mengubah id offcanvas title #}
           <button
             type="button"
             class="btn-close"
@@ -398,7 +491,7 @@
           ></button>
         </div>
         <div class="offcanvas-body">
-            <div class="container-fluid border rounded form-tambah-galeri">
+          <div class="container-fluid border rounded form-tambah-galeri">
             <form>
               <div class="mb-3">
                 <label for="editKaryaJudul" class="form-label">Judul</label>
@@ -411,20 +504,12 @@
               </div>
               <div class="mb-3">
                 <label for="editKaryaTahun" class="form-label">Tahun</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editKaryaTahun"
-                />
+                <input type="text" class="form-control" id="editKaryaTahun" />
               </div>
 
               <div class="mb-3">
                 <label for="editKaryaMedia" class="form-label">Media</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editKaryaMedia"
-                />
+                <input type="text" class="form-control" id="editKaryaMedia" />
               </div>
 
               <div class="mb-3">
@@ -438,15 +523,13 @@
               </div>
               <div class="mb-3">
                 <label for="editKaryaSeniman" class="form-label">Seniman</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editKaryaSeniman"
-                />
+                <input type="text" class="form-control" id="editKaryaSeniman" />
               </div>
 
               <div class="mb-3">
-                <label for="editKaryaKontakSeniman" class="form-label">Kontak seniman</label>
+                <label for="editKaryaKontakSeniman" class="form-label"
+                  >Kontak seniman</label
+                >
                 <input
                   type="text"
                   class="form-control"
@@ -454,7 +537,9 @@
                 />
               </div>
 
-              <label for="editUnggahKaryaFile" class="form-label">Unggah karya</label>
+              <label for="editUnggahKaryaFile" class="form-label"
+                >Unggah karya</label
+              >
               <div class="input-group mb-3">
                 <input
                   type="file"
@@ -462,11 +547,15 @@
                   id="editUnggahKaryaFile"
                   accept="image/*"
                 />
-                <label class="input-group-text" for="editUnggahKaryaFile">Upload</label>
+                <label class="input-group-text" for="editUnggahKaryaFile"
+                  >Upload</label
+                >
               </div>
 
               <div class="mb-3">
-                <label for="editKaryaDeskripsi" class="form-label">Deskripsi</label>
+                <label for="editKaryaDeskripsi" class="form-label"
+                  >Deskripsi</label
+                >
                 <textarea
                   class="form-control"
                   id="editKaryaDeskripsi"

@@ -11,6 +11,7 @@ from django.shortcuts import redirect
 from luminanapp.decorator import group_required
 from .forms import UploadGalleryForm
 from .models import Gallery
+from django.shortcuts import render, get_object_or_404, redirect
 
 def is_gallery_owner(user):
     return user.groups.filter(name='gallery_owner').exists()
@@ -107,7 +108,29 @@ def tambahGaleri_view(request):
 
 
 
-def editGaleri_view(request):
-    return render(request, 'luminance/editGaleri.html')
+def editGaleri_view(request, pk):
+    gallery = get_object_or_404(Gallery, pk=pk)
+
+    if request.method == "POST":
+        # Update gallery fields
+        gallery.title = request.POST.get("title")
+        gallery.contact = request.POST.get("contact")
+        gallery.location = request.POST.get("location")
+        gallery.ig = request.POST.get("ig")
+        gallery.fb = request.POST.get("fb")
+        gallery.xtwt = request.POST.get("xtwt")
+        gallery.description = request.POST.get("description")
+
+        # Update thumbnail jika user upload file baru
+        if 'thumbnail' in request.FILES:
+            gallery.thumbnail = request.FILES['thumbnail']
+
+        gallery.save()
+        messages.success(request, "Perubahan galeri berhasil disimpan.")
+        return redirect("editGaleri", pk=pk)  # Ganti dengan URL view-mu
+
+    context = {"gallery": gallery}
+
+    return render(request, 'luminance/editGaleri.html', {'gallery': gallery})
 
 

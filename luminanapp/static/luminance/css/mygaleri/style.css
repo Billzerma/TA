@@ -20,3 +20,24 @@
 .mygalleries-list{
     margin: 16px 8px 8px 16px;
 }
+
+.sec-card-mygaleri {
+  height: 450px; /* sesuaikan tinggi card sesuai kebutuhan */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ov-dsc{
+    flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ov-text-dsc{
+   display: -webkit-box;                
+  -webkit-box-orient: vertical;        
+  overflow: hidden;                   
+  text-overflow: ellipsis;      
+}
