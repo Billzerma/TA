@@ -13,10 +13,93 @@ from .forms import UploadGalleryForm
 from .models import Gallery
 from django.shortcuts import render, get_object_or_404, redirect
 
+from .models import Gallery, Artwork, Style, ViTPrediction
+from django.views.decorators.csrf import csrf_exempt
+import cloudinary.uploader
+import torch
+from transformers import ViTForImageClassification, ViTImageProcessor
+from PIL import Image
+import torchvision.transforms as transforms
+import tempfile
+import os
+from django.conf import settings
+
+
+
+
+model_dir = os.path.join(settings.BASE_DIR, "luminanapp", "vit-style-classification")
+
+model = ViTForImageClassification.from_pretrained(model_dir)
+processor = ViTImageProcessor.from_pretrained(model_dir)
+
+def predict_style(image_path):
+    image = Image.open(image_path).convert("RGB")
+    inputs = processor(images=image, return_tensors="pt")
+
+    with torch.no_grad():
+        outputs = model(**inputs)
+        predicted_class = outputs.logits.argmax(-1).item()
+    
+    label = model.config.id2label.get(predicted_class, None)
+    return label
+
+def upload_artwork(request, pk):
+    if request.method == "POST":
+        gallery = get_object_or_404(Gallery, pk=pk)
+
+        title = request.POST.get("title")
+        year = request.POST.get("year")
+        media = request.POST.get("media")
+        dimension = request.POST.get("dimension")
+        artist = request.POST.get("artist")
+        contact_artist = request.POST.get("contact_artist")
+        description = request.POST.get("description")
+        image_file = request.FILES.get("image")
+
+        # Upload ke Cloudinary
+        uploaded_image = cloudinary.uploader.upload(image_file)
+        image_url = uploaded_image['secure_url']
+
+        # Simpan gambar sementara untuk prediksi
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
+            for chunk in image_file.chunks():
+                temp_file.write(chunk)
+            temp_image_path = temp_file.name
+
+        predicted_style_name = predict_style(temp_image_path)
+        os.remove(temp_image_path)  # Hapus file sementara
+
+        if predicted_style_name is None:
+            predicted_style_name = "Unknown"
+
+        style, _ = Style.objects.get_or_create(name=predicted_style_name)
+
+        artwork = Artwork.objects.create(
+            gallery=gallery,
+            title=title,
+            image_url=image_url,
+            year=year,
+            media=media,
+            dimension=dimension,
+            artist=artist,
+            contact_artist=contact_artist,
+        )
+
+        ViTPrediction.objects.create(
+            artwork=artwork,
+            predicted_style=style,
+            confidence_score=1.0,
+            model_version="ViT-B/16",
+        )
+
+        messages.success(request, "Karya berhasil diunggah dan diprediksi.")
+        return redirect('editGaleri', pk=pk)
+
+
+
+
 def is_gallery_owner(user):
     return user.groups.filter(name='gallery_owner').exists()
-
-
 
 def home(request):
     return render(request, 'luminance/home.html')

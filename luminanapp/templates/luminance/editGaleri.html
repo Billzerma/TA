@@ -232,11 +232,13 @@
         <div class="collapse" id="collapseTambahKarya">
           {# Ganti id collapse #}
           <div class="container-fluid border rounded form-tambah-galeri">
-            <form>
+            <form method="POST" enctype="multipart/form-data" action="{% url 'upload_artwork' pk=gallery.pk %}">
+              {% csrf_token %}
               <div class="mb-3">
                 <label for="tambahJudulKarya" class="form-label">Judul</label>
                 <input
                   type="text"
+                  name="title"
                   class="form-control"
                   id="tambahJudulKarya"
                   aria-describedby="tambahJudulHelp"
@@ -244,12 +246,12 @@
               </div>
               <div class="mb-3">
                 <label for="tambahTahunKarya" class="form-label">Tahun</label>
-                <input type="text" class="form-control" id="tambahTahunKarya" />
+                <input type="text" class="form-control" name="year" id="tambahTahunKarya" />
               </div>
 
               <div class="mb-3">
                 <label for="tambahMediaKarya" class="form-label">Media</label>
-                <input type="text" class="form-control" id="tambahMediaKarya" />
+                <input type="text" class="form-control" name="media" id="tambahMediaKarya" />
               </div>
 
               <div class="mb-3">
@@ -261,6 +263,7 @@
                   class="form-control"
                   id="tambahDimensiKarya"
                   aria-describedby="tambahDimensiHelp"
+                  name="dimension"
                 />
               </div>
               <div class="mb-3">
@@ -271,6 +274,7 @@
                   type="text"
                   class="form-control"
                   id="tambahSenimanKarya"
+                  name="artist"
                 />
               </div>
 
@@ -282,6 +286,7 @@
                   type="text"
                   class="form-control"
                   id="tambahKontakSenimanKarya"
+                  name="contact_artist"
                 />
               </div>
 
@@ -294,12 +299,7 @@
                   class="form-control"
                   id="unggahKaryaFile"
                   accept="image/*"
-                  {#
-                  Menambahkan
-                  accept
-                  untuk
-                  gambar
-                  #}
+                  name="image"
                 />
                 <label class="input-group-text" for="unggahKaryaFile"
                   >Upload</label
@@ -314,6 +314,7 @@
                   class="form-control"
                   id="tambahDeskripsiKarya"
                   rows="3"
+                  name="description"
                 ></textarea>
               </div>
 
@@ -355,56 +356,13 @@
                 </div>
               </div>
             </li>
-
-            <li class="list-inline-item mygalleries-list">
-              <div class="card sec-card-editgaleri" style="width: 16rem">
-                <img
-                  src="{% static 'luminance/img/abs.png' %}"
-                  class="card-img-top fit-image"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                    <i
-                      class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
-                    ></i>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-            <li class="list-inline-item mygalleries-list">
-              <div class="card sec-card-editgaleri" style="width: 16rem">
-                <img
-                  src="{% static 'luminance/img/abs.png' %}"
-                  class="card-img-top fit-image"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                    <i
-                      class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
-                    ></i>
-                  </div>
-                </div>
-              </div>
-            </li>
           </ul>
         </div>
       </div>
 
       <div class="row">
         <div class="scroll-wrapper">
-          <h2 class="title-style-top">Abstrak</h2>
-          {# Mengganti Judul untuk contoh #}
+          <h2 class="title-style-top">Impresionisme</h2>
           <ul class="list-inline m-0 p-0">
             <li class="list-inline-item mygalleries-list">
               <div class="card sec-card-editgaleri" style="width: 16rem">
@@ -418,15 +376,32 @@
                   <div
                     class="d-flex justify-content-between align-items-center"
                   >
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                    <i
-                      class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
-                    ></i>
+                       <button type="submit" class="btn btn-outline-danger">
+                      <i class="fa-solid fa-trash fa-xl"></i>
+                    </button>
+                    <button
+                      class="btn btn-outline-warning ms-2"
+                      type="button"
+                      data-bs-toggle="offcanvas"
+                      data-bs-target="#offcanvasRight"
+                      aria-controls="offcanvasRight"
+                    >
+                      <i class="fa-solid fa-pencil fa-xl"></i> Edit
+                    </button>
+                    
                   </div>
                 </div>
               </div>
             </li>
 
+          </ul>
+        </div>
+      </div>
+
+            <div class="row">
+        <div class="scroll-wrapper">
+          <h2 class="title-style-top">Kubisme</h2>
+          <ul class="list-inline m-0 p-0">
             <li class="list-inline-item mygalleries-list">
               <div class="card sec-card-editgaleri" style="width: 16rem">
                 <img
@@ -439,15 +414,31 @@
                   <div
                     class="d-flex justify-content-between align-items-center"
                   >
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                    <i
-                      class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
-                    ></i>
+                        <button type="submit" class="btn btn-outline-danger">
+                      <i class="fa-solid fa-trash fa-xl"></i>
+                    </button>
+                    <button
+                      class="btn btn-outline-warning ms-2"
+                      type="button"
+                      data-bs-toggle="offcanvas"
+                      data-bs-target="#offcanvasRight"
+                      aria-controls="offcanvasRight"
+                    >
+                      <i class="fa-solid fa-pencil fa-xl"></i> Edit
+                    </button>
                   </div>
                 </div>
               </div>
             </li>
 
+          </ul>
+        </div>
+      </div>
+
+            <div class="row">
+        <div class="scroll-wrapper">
+          <h2 class="title-style-top">Romantisme</h2>
+          <ul class="list-inline m-0 p-0">
             <li class="list-inline-item mygalleries-list">
               <div class="card sec-card-editgaleri" style="width: 16rem">
                 <img
@@ -460,10 +451,55 @@
                   <div
                     class="d-flex justify-content-between align-items-center"
                   >
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                    <i
-                      class="fa-solid fa-heart text-danger fs-4 cursor-pointer"
-                    ></i>
+                         <button type="submit" class="btn btn-outline-danger">
+                      <i class="fa-solid fa-trash fa-xl"></i>
+                    </button>
+                    <button
+                      class="btn btn-outline-warning ms-2"
+                      type="button"
+                      data-bs-toggle="offcanvas"
+                      data-bs-target="#offcanvasRight"
+                      aria-controls="offcanvasRight"
+                    >
+                      <i class="fa-solid fa-pencil fa-xl"></i> Edit
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="scroll-wrapper">
+          <h2 class="title-style-top">Ekspresionisme</h2>
+          <ul class="list-inline m-0 p-0">
+            <li class="list-inline-item mygalleries-list">
+              <div class="card sec-card-editgaleri" style="width: 16rem">
+                <img
+                  src="{% static 'luminance/img/abs.png' %}"
+                  class="card-img-top fit-image"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                         <button type="submit" class="btn btn-outline-danger">
+                      <i class="fa-solid fa-trash fa-xl"></i>
+                    </button>
+                    <button
+                      class="btn btn-outline-warning ms-2"
+                      type="button"
+                      data-bs-toggle="offcanvas"
+                      data-bs-target="#offcanvasRight"
+                      aria-controls="offcanvasRight"
+                    >
+                      <i class="fa-solid fa-pencil fa-xl"></i> Edit
+                    </button>
                   </div>
                 </div>
               </div>
@@ -471,7 +507,6 @@
           </ul>
         </div>
       </div>
-
       <div
         class="offcanvas offcanvas-end"
         tabindex="-1"
