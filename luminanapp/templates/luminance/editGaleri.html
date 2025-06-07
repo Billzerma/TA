@@ -4,7 +4,6 @@
 
 {% block content %} 
 {% load static %}
-
 <div class="container-fluid">
   {% if messages %} {% for message in messages %}
   <div
@@ -232,7 +231,11 @@
         <div class="collapse" id="collapseTambahKarya">
           {# Ganti id collapse #}
           <div class="container-fluid border rounded form-tambah-galeri">
-            <form method="POST" enctype="multipart/form-data" action="{% url 'upload_artwork' pk=gallery.pk %}">
+            <form
+              method="POST"
+              enctype="multipart/form-data"
+              action="{% url 'upload_artwork' pk=gallery.pk %}"
+            >
               {% csrf_token %}
               <div class="mb-3">
                 <label for="tambahJudulKarya" class="form-label">Judul</label>
@@ -246,12 +249,22 @@
               </div>
               <div class="mb-3">
                 <label for="tambahTahunKarya" class="form-label">Tahun</label>
-                <input type="text" class="form-control" name="year" id="tambahTahunKarya" />
+                <input
+                  type="text"
+                  class="form-control"
+                  name="year"
+                  id="tambahTahunKarya"
+                />
               </div>
 
               <div class="mb-3">
                 <label for="tambahMediaKarya" class="form-label">Media</label>
-                <input type="text" class="form-control" name="media" id="tambahMediaKarya" />
+                <input
+                  type="text"
+                  class="form-control"
+                  name="media"
+                  id="tambahMediaKarya"
+                />
               </div>
 
               <div class="mb-3">
@@ -326,23 +339,87 @@
     </div>
 
     <div class="col-md-7 bg-edit-img border rounded">
+      {% for style_name, karya_list in karya_per_style.items %}
       <div class="row">
         <div class="scroll-wrapper">
-          <h2 class="title-style-top">Realisme</h2>
-          <ul class="list-inline m-0 p-0">
-            <li class="list-inline-item mygalleries-list">
-              <div class="card sec-card-editgaleri" style="width: 16rem">
+          <h2 class="title-style-top">{{ style_name }}</h2>
+          <ul class="list-inline m-0 p-0 pb-3">
+            {% for karya in karya_list %}
+            <li class="list-inline-item mygalleries-list mb-4 me-3">
+              <div class="card sec-card-editgaleri mb-3" style="width: 16rem">
                 <img
-                  src="{% static 'luminance/img/abs.png' %}"
+                  src="{{ karya.image_url.url }}"
                   class="card-img-top fit-image"
-                  alt="..."
+                  alt="{{ karya.title }}"
+                  style="height: 200px; object-fit: cover"
                 />
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
+                  <h5 class="card-title">{{ karya.title }}</h5>
                   <div class="d-flex justify-content-left align-items-center">
-                    <button type="submit" class="btn btn-outline-danger">
-                      <i class="fa-solid fa-trash fa-xl"></i>
-                    </button>
+                    <form
+                      method="POST"
+                      action="{% url 'hapus_karya' karya.id %}"
+                    >
+                      {% csrf_token %}
+                      <button
+                        type="button"
+                        class="btn btn-outline-danger"
+                        data-bs-toggle="modal"
+                        data-bs-target="#confirmDeleteModal{{ karya.id }}"
+                      >
+                        <i class="fa-solid fa-trash fa-xl"></i>
+                      </button>
+
+                      <!-- Modal -->
+                      <div
+                        class="modal fade"
+                        id="confirmDeleteModal{{ karya.id }}"
+                        tabindex="-1"
+                        aria-labelledby="deleteModalLabel{{ karya.id }}"
+                        aria-hidden="true"
+                      >
+                        <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5
+                                class="modal-title"
+                                id="deleteModalLabel{{ karya.id }}"
+                              >
+                                Konfirmasi Hapus
+                              </h5>
+                              <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Tutup"
+                              ></button>
+                            </div>
+                            <div class="modal-body">
+                              Apakah kamu yakin ingin menghapus
+                              <strong>{{ karya.title }}</strong>?
+                            </div>
+                            <div class="modal-footer">
+                              <form
+                                method="POST"
+                                action="{% url 'hapus_karya' karya.id %}"
+                              >
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">
+                                  Hapus
+                                </button>
+                              </form>
+                              <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                              >
+                                Batal
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
                     <button
                       class="btn btn-outline-warning ms-2"
                       type="button"
@@ -356,157 +433,17 @@
                 </div>
               </div>
             </li>
+            {% empty %}
+            <p class="ps-3 text-muted">Belum ada karya di aliran ini.</p>
+            {% endfor %}
           </ul>
         </div>
       </div>
 
-      <div class="row">
-        <div class="scroll-wrapper">
-          <h2 class="title-style-top">Impresionisme</h2>
-          <ul class="list-inline m-0 p-0">
-            <li class="list-inline-item mygalleries-list">
-              <div class="card sec-card-editgaleri" style="width: 16rem">
-                <img
-                  src="{% static 'luminance/img/abs.png' %}"
-                  class="card-img-top fit-image"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                       <button type="submit" class="btn btn-outline-danger">
-                      <i class="fa-solid fa-trash fa-xl"></i>
-                    </button>
-                    <button
-                      class="btn btn-outline-warning ms-2"
-                      type="button"
-                      data-bs-toggle="offcanvas"
-                      data-bs-target="#offcanvasRight"
-                      aria-controls="offcanvasRight"
-                    >
-                      <i class="fa-solid fa-pencil fa-xl"></i> Edit
-                    </button>
-                    
-                  </div>
-                </div>
-              </div>
-            </li>
+      <!-- Modal Konfirmasi -->
 
-          </ul>
-        </div>
-      </div>
+      {% endfor %}
 
-            <div class="row">
-        <div class="scroll-wrapper">
-          <h2 class="title-style-top">Kubisme</h2>
-          <ul class="list-inline m-0 p-0">
-            <li class="list-inline-item mygalleries-list">
-              <div class="card sec-card-editgaleri" style="width: 16rem">
-                <img
-                  src="{% static 'luminance/img/abs.png' %}"
-                  class="card-img-top fit-image"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                        <button type="submit" class="btn btn-outline-danger">
-                      <i class="fa-solid fa-trash fa-xl"></i>
-                    </button>
-                    <button
-                      class="btn btn-outline-warning ms-2"
-                      type="button"
-                      data-bs-toggle="offcanvas"
-                      data-bs-target="#offcanvasRight"
-                      aria-controls="offcanvasRight"
-                    >
-                      <i class="fa-solid fa-pencil fa-xl"></i> Edit
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-          </ul>
-        </div>
-      </div>
-
-            <div class="row">
-        <div class="scroll-wrapper">
-          <h2 class="title-style-top">Romantisme</h2>
-          <ul class="list-inline m-0 p-0">
-            <li class="list-inline-item mygalleries-list">
-              <div class="card sec-card-editgaleri" style="width: 16rem">
-                <img
-                  src="{% static 'luminance/img/abs.png' %}"
-                  class="card-img-top fit-image"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                         <button type="submit" class="btn btn-outline-danger">
-                      <i class="fa-solid fa-trash fa-xl"></i>
-                    </button>
-                    <button
-                      class="btn btn-outline-warning ms-2"
-                      type="button"
-                      data-bs-toggle="offcanvas"
-                      data-bs-target="#offcanvasRight"
-                      aria-controls="offcanvasRight"
-                    >
-                      <i class="fa-solid fa-pencil fa-xl"></i> Edit
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-          </ul>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="scroll-wrapper">
-          <h2 class="title-style-top">Ekspresionisme</h2>
-          <ul class="list-inline m-0 p-0">
-            <li class="list-inline-item mygalleries-list">
-              <div class="card sec-card-editgaleri" style="width: 16rem">
-                <img
-                  src="{% static 'luminance/img/abs.png' %}"
-                  class="card-img-top fit-image"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                         <button type="submit" class="btn btn-outline-danger">
-                      <i class="fa-solid fa-trash fa-xl"></i>
-                    </button>
-                    <button
-                      class="btn btn-outline-warning ms-2"
-                      type="button"
-                      data-bs-toggle="offcanvas"
-                      data-bs-target="#offcanvasRight"
-                      aria-controls="offcanvasRight"
-                    >
-                      <i class="fa-solid fa-pencil fa-xl"></i> Edit
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
       <div
         class="offcanvas offcanvas-end"
         tabindex="-1"

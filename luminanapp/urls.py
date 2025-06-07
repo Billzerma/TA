@@ -17,6 +17,7 @@ urlpatterns = [
     path('tambahGaleri/', views.tambahGaleri_view, name='tambahGaleri'),
     path('galeri/<int:pk>/edit/', views.editGaleri_view, name='editGaleri'),
     path('galeri/<int:pk>/edit/upload-artwork/', views.upload_artwork, name='upload_artwork'),
+    path('karya/<int:pk>/hapus/', views.hapus_karya, name='hapus_karya'),
 
     path('logout/', views.logout_view, name='logout'),
 ]

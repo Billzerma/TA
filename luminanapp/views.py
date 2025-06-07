@@ -26,7 +26,6 @@ from django.conf import settings
 
 
 
-
 model_dir = os.path.join(settings.BASE_DIR, "luminanapp", "vit-style-classification")
 
 model = ViTForImageClassification.from_pretrained(model_dir)
@@ -95,7 +94,11 @@ def upload_artwork(request, pk):
         messages.success(request, "Karya berhasil diunggah dan diprediksi.")
         return redirect('editGaleri', pk=pk)
 
-
+def hapus_karya(request, pk):
+    karya = get_object_or_404(Artwork, pk=pk)
+    karya.delete()
+    messages.success(request, "Karya berhasil dihapus.")
+    return redirect('editGaleri', pk=karya.gallery.pk)  # arahkan ke halaman edit galeri
 
 
 def is_gallery_owner(user):
@@ -192,28 +195,48 @@ def tambahGaleri_view(request):
 
 
 def editGaleri_view(request, pk):
-    gallery = get_object_or_404(Gallery, pk=pk)
+    galeri = get_object_or_404(Gallery, pk=pk)
 
     if request.method == "POST":
         # Update gallery fields
-        gallery.title = request.POST.get("title")
-        gallery.contact = request.POST.get("contact")
-        gallery.location = request.POST.get("location")
-        gallery.ig = request.POST.get("ig")
-        gallery.fb = request.POST.get("fb")
-        gallery.xtwt = request.POST.get("xtwt")
-        gallery.description = request.POST.get("description")
+        galeri.title = request.POST.get("title")
+        galeri.contact = request.POST.get("contact")
+        galeri.location = request.POST.get("location")
+        galeri.ig = request.POST.get("ig")
+        galeri.fb = request.POST.get("fb")
+        galeri.xtwt = request.POST.get("xtwt")
+        galeri.description = request.POST.get("description")
 
         # Update thumbnail jika user upload file baru
         if 'thumbnail' in request.FILES:
-            gallery.thumbnail = request.FILES['thumbnail']
+            galeri.thumbnail = request.FILES['thumbnail']
 
-        gallery.save()
+        galeri.save()
         messages.success(request, "Perubahan galeri berhasil disimpan.")
-        return redirect("editGaleri", pk=pk)  # Ganti dengan URL view-mu
+        return redirect("editGaleri", pk=pk)
 
-    context = {"gallery": gallery}
+    # --- Tambahkan logika ini untuk ambil karya berdasarkan style ---
+    karya = Artwork.objects.filter(gallery=galeri)
 
-    return render(request, 'luminance/editGaleri.html', {'gallery': gallery})
+    target_styles = ['Realism', 'Impressionism', 'Cubism', 'Romanticism', 'Expressionism']
+    styles = Style.objects.filter(name__in=target_styles)
+
+    karya_per_style = {}
+    for style in styles:
+        karya_ids = ViTPrediction.objects.filter(
+            artwork__in=karya,
+            predicted_style=style
+        ).values_list('artwork_id', flat=True)
+
+        karya_per_style[style.name] = karya.filter(id__in=karya_ids)
+
+    # ---------------------------------------------------------------
+
+    context = {
+        'gallery': galeri,
+        'karya_per_style': karya_per_style,
+    }
+
+    return render(request, 'luminance/editGaleri.html', context)
 
 
