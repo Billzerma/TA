@@ -101,6 +101,34 @@ def hapus_karya(request, pk):
     return redirect('editGaleri', pk=karya.gallery.pk)  # arahkan ke halaman edit galeri
 
 
+def edit_karya(request, pk):
+    karyaedit = get_object_or_404(Artwork, pk=pk)
+    if request.method == "POST":
+        karyaedit.title = request.POST.get("title")
+        karyaedit.year = request.POST.get("year")
+        karyaedit.media = request.POST.get("media")
+        karyaedit.dimension = request.POST.get("dimension")
+        karyaedit.artist = request.POST.get("artist")
+        karyaedit.contact_artist = request.POST.get("contact_artist")
+        karyaedit.description = request.POST.get("description")
+
+        karyaedit.save()
+        messages.success(request, "Karya berhasil diperbarui.")
+        return redirect("editGaleri", pk=karyaedit.gallery.pk)
+
+# view yang sudah diperbaiki
+def hapus_galeri(request, pk):
+    galeri = get_object_or_404(Gallery, pk=pk)
+    if request.method == "POST":
+        galeri.delete()
+        messages.success(request, "Galeri berhasil dihapus.")
+        # Arahkan ke halaman daftar galeri (misal: 'galeriSaya')
+        return redirect("galeriSaya") 
+    
+    # Jika bukan POST, kembalikan ke halaman detail semula
+    return redirect("editGaleri", pk=pk)
+
+
 def is_gallery_owner(user):
     return user.groups.filter(name='gallery_owner').exists()
 

@@ -1,21 +1,20 @@
-  .scroll-wrapper {
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    white-space: nowrap;
-    padding: 1rem 0;
-    height: 23rem; /* Atur sedikit lebih tinggi dari card */
-  }
+.scroll-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  padding: 1rem 0 2rem 0; /* extra padding bawah */
+}
 
-  .scroll-wrapper .mygalleries-list {
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 1rem;
-  }
+.scroll-wrapper .mygalleries-list {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 1rem;
+}
 
-  .sec-card-editgaleri {
-    height: 18rem; /* Tinggi card, disesuaikan */
-  }
+.sec-card-editgaleri {
+  height: auto; /* biarkan menyesuaikan isi */
+}
 
   .bg-edit-img{
     background-color: #ffffff;

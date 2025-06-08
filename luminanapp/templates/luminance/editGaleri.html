@@ -1,7 +1,5 @@
 {% extends 'luminance/baseDash.html' %} 
-
-{% block title %}Detail Galeri & Karya{% endblock %}
-
+{% block title %}Detail Galeri & Karya{%endblock %} 
 {% block content %} 
 {% load static %}
 <div class="container-fluid">
@@ -336,6 +334,39 @@
           </div>
         </div>
       </div>
+
+      <div
+        class="hapus-gal container-fluid border rounded karya collapse-pad mt-4"
+      >
+<!-- Tombol Hapus Galeri -->
+<button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#hapusGaleriModal">
+  <i class="fa-solid fa-trash"></i> Hapus Galeri
+</button>
+
+<!-- Modal Konfirmasi -->
+<div class="modal fade" id="hapusGaleriModal" tabindex="-1" aria-labelledby="hapusGaleriLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form method="POST" action="{% url 'hapus_galeri' gallery.pk %}">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title" id="hapusGaleriLabel">Konfirmasi Hapus Galeri</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body">
+          Apakah kamu yakin ingin menghapus galeri <strong>{{ galeri.nama }}</strong>?
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+      </div>
     </div>
 
     <div class="col-md-7 bg-edit-img border rounded">
@@ -370,7 +401,7 @@
                         <i class="fa-solid fa-trash fa-xl"></i>
                       </button>
 
-                      <!-- Modal -->
+                      <!-- Modal Konfirmasi Hapus -->
                       <div
                         class="modal fade"
                         id="confirmDeleteModal{{ karya.id }}"
@@ -420,12 +451,14 @@
                         </div>
                       </div>
                     </form>
+
+                    <!-- Tombol Edit -->
                     <button
                       class="btn btn-outline-warning ms-2"
                       type="button"
                       data-bs-toggle="offcanvas"
-                      data-bs-target="#offcanvasRight"
-                      aria-controls="offcanvasRight"
+                      data-bs-target="#editCanvas{{ karya.id }}"
+                      aria-controls="editCanvas{{ karya.id }}"
                     >
                       <i class="fa-solid fa-pencil fa-xl"></i> Edit
                     </button>
@@ -433,113 +466,200 @@
                 </div>
               </div>
             </li>
+
+            <!-- Offcanvas Edit -->
+            <div
+              class="offcanvas offcanvas-end"
+              tabindex="-1"
+              id="editCanvas{{ karya.id }}"
+              aria-labelledby="editCanvasLabel{{ karya.id }}"
+            >
+              <div class="offcanvas-header">
+                <h5 id="editCanvasLabel{{ karya.id }}">
+                  Edit Karya - {{ karya.title }}
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="offcanvas-body">
+                <div class="container-fluid border rounded form-tambah-galeri">
+                  <form
+                    method="POST"
+                    action="{% url 'edit_karya' karya.id %}"
+                    enctype="multipart/form-data"
+                    id="editKaryaForm{{ karya.id }}"
+                  >
+                    {% csrf_token %}
+                    <div class="mb-3">
+                      <label
+                        for="editKaryaJudul{{ karya.id }}"
+                        class="form-label"
+                        >Judul</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="editKaryaJudul{{ karya.id }}"
+                        name="title"
+                        value="{{ karya.title }}"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label
+                        for="editKaryaTahun{{ karya.id }}"
+                        class="form-label"
+                        >Tahun</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="editKaryaTahun{{ karya.id }}"
+                        name="year"
+                        value="{{ karya.year }}"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label
+                        for="editKaryaMedia{{ karya.id }}"
+                        class="form-label"
+                        >Media</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="editKaryaMedia{{ karya.id }}"
+                        name="media"
+                        value="{{ karya.media }}"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label
+                        for="editKaryaDimensi{{ karya.id }}"
+                        class="form-label"
+                        >Dimensi</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="editKaryaDimensi{{ karya.id }}"
+                        name="dimension"
+                        value="{{ karya.dimension }}"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label
+                        for="editKaryaSeniman{{ karya.id }}"
+                        class="form-label"
+                        >Seniman</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="editKaryaSeniman{{ karya.id }}"
+                        name="artist"
+                        value="{{ karya.artist }}"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label
+                        for="editKaryaKontakSeniman{{ karya.id }}"
+                        class="form-label"
+                        >Kontak Seniman</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="editKaryaKontakSeniman{{ karya.id }}"
+                        name="contact_artist"
+                        value="{{ karya.contact_artist }}"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label
+                        for="editKaryaDeskripsi{{ karya.id }}"
+                        class="form-label"
+                        >Deskripsi</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="editKaryaDeskripsi{{ karya.id }}"
+                        name="description"
+                        rows="3"
+                      >
+{{ karya.description }}</textarea
+                      >
+                    </div>
+
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      data-bs-toggle="modal"
+                      data-bs-target="#confirmEditModal{{ karya.id }}"
+                    >
+                      Simpan Perubahan
+                    </button>
+                  </form>
+                </div>
+
+                <div
+                  class="modal fade"
+                  id="confirmEditModal{{ karya.id }}"
+                  tabindex="-1"
+                  aria-labelledby="editModalLabel{{ karya.id }}"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5
+                          class="modal-title"
+                          id="editModalLabel{{ karya.id }}"
+                        >
+                          Konfirmasi Perubahan
+                        </h5>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Tutup"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        Apakah Anda yakin ingin menyimpan perubahan untuk karya
+                        <strong>{{ karya.title }}</strong>?
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          Batal
+                        </button>
+                        <button
+                          type="submit"
+                          class="btn btn-primary"
+                          form="editKaryaForm{{ karya.id }}"
+                        >
+                          Ya, Simpan
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             {% empty %}
             <p class="ps-3 text-muted">Belum ada karya di aliran ini.</p>
             {% endfor %}
           </ul>
         </div>
       </div>
-
-      <!-- Modal Konfirmasi -->
-
       {% endfor %}
-
-      <div
-        class="offcanvas offcanvas-end"
-        tabindex="-1"
-        id="offcanvasRight"
-        aria-labelledby="offcanvasRightLabel"
-      >
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasRightLabel">
-            Edit Informasi Karya
-          </h5>
-          {# Mengubah id offcanvas title #}
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="offcanvas"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="offcanvas-body">
-          <div class="container-fluid border rounded form-tambah-galeri">
-            <form>
-              <div class="mb-3">
-                <label for="editKaryaJudul" class="form-label">Judul</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editKaryaJudul"
-                  aria-describedby="editKaryaJudulHelp"
-                />
-              </div>
-              <div class="mb-3">
-                <label for="editKaryaTahun" class="form-label">Tahun</label>
-                <input type="text" class="form-control" id="editKaryaTahun" />
-              </div>
-
-              <div class="mb-3">
-                <label for="editKaryaMedia" class="form-label">Media</label>
-                <input type="text" class="form-control" id="editKaryaMedia" />
-              </div>
-
-              <div class="mb-3">
-                <label for="editKaryaDimensi" class="form-label">Dimensi</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editKaryaDimensi"
-                  aria-describedby="editKaryaDimensiHelp"
-                />
-              </div>
-              <div class="mb-3">
-                <label for="editKaryaSeniman" class="form-label">Seniman</label>
-                <input type="text" class="form-control" id="editKaryaSeniman" />
-              </div>
-
-              <div class="mb-3">
-                <label for="editKaryaKontakSeniman" class="form-label"
-                  >Kontak seniman</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editKaryaKontakSeniman"
-                />
-              </div>
-
-              <label for="editUnggahKaryaFile" class="form-label"
-                >Unggah karya</label
-              >
-              <div class="input-group mb-3">
-                <input
-                  type="file"
-                  class="form-control"
-                  id="editUnggahKaryaFile"
-                  accept="image/*"
-                />
-                <label class="input-group-text" for="editUnggahKaryaFile"
-                  >Upload</label
-                >
-              </div>
-
-              <div class="mb-3">
-                <label for="editKaryaDeskripsi" class="form-label"
-                  >Deskripsi</label
-                >
-                <textarea
-                  class="form-control"
-                  id="editKaryaDeskripsi"
-                  rows="3"
-                ></textarea>
-              </div>
-
-              <button type="submit" class="btn btn-primary">Unggah</button>
-            </form>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>

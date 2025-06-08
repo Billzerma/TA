@@ -18,6 +18,7 @@ urlpatterns = [
     path('galeri/<int:pk>/edit/', views.editGaleri_view, name='editGaleri'),
     path('galeri/<int:pk>/edit/upload-artwork/', views.upload_artwork, name='upload_artwork'),
     path('karya/<int:pk>/hapus/', views.hapus_karya, name='hapus_karya'),
-
+    path("karya/<int:pk>/edit/", views.edit_karya, name="edit_karya"),
+    path("galeri/hapus/<int:pk>/", views.hapus_galeri, name="hapus_galeri"),
     path('logout/', views.logout_view, name='logout'),
 ]
