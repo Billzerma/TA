@@ -21,6 +21,17 @@
   color: black;
 }
 
+.log-out-button{
+  background: none;
+  border: none;
+  padding-left: 15px;
+  padding-top: 10px;
+  display: flex; 
+  align-items: center; 
+  cursor: pointer;
+}
+
+
 
 
 /* Spacing antar item nav */
@@ -51,5 +62,6 @@
     padding: 8px 0; /* lebih ringan untuk mobile */
   }
 }
+
 
 

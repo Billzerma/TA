@@ -4,7 +4,7 @@ from cloudinary.models import CloudinaryField
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
+    profile_picture = CloudinaryField('image', blank=True, null=True)
     bio = models.TextField(blank=True)
 
     def __str__(self):
@@ -37,6 +37,7 @@ class Artwork(models.Model):
     dimension = models.CharField(max_length=50, null=True, blank=True)
     artist = models.CharField(max_length=50, null=True, blank=True)
     contact_artist= models.CharField(max_length=50, null=True, blank=True)
+    description= models.CharField(max_length=250, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 class ViTPrediction(models.Model):

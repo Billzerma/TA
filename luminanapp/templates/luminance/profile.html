@@ -1,0 +1,286 @@
+{% extends 'luminance/baseDash.html' %} {% block title %}Profile{%endblock %}
+{%block content %} {% load static %}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-4 col-md-4 mt-3">
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card shadow mb-4">
+          <div
+            class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+          >
+            Foto profil
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush mb-3 text-center">
+              <li class="list-group-item pp">
+                {% if profile.profile_picture %}
+                <img
+                  src="{{ profile.profile_picture.url }}"
+                  alt="Foto Profil"
+                  class="pp"
+                  style="
+                    display: block;
+                    margin: 0 auto;
+                    width: 150px;
+                    height: 150px;
+                    object-fit: cover;
+                  "
+                />
+                {% else %}
+                <img
+                  src="{% static 'luminance/img/profilFoto.jpg' %}"
+                  alt="Default Foto"
+                  class="pp"
+                  style="
+                    display: block;
+                    margin: 0 auto;
+                    width: 150px;
+                    height: 150px;
+                    object-fit: cover;
+                  "
+                />
+                {% endif %}
+              </li>
+
+              <li class="list-group-item mt-3">
+                <h6>
+                  Bergabung pada:
+                  <span>{{ user.date_joined|date:"d-m-Y" }}</span>
+                </h6>
+              </li>
+
+              <li class="list-group-item mt-2">
+                <div class="input-group mb-3 justify-content-center">
+                  {{ form.profile_picture }}
+                </div>
+              </li>
+
+              <li class="list-group-item mt-2">
+                <p class="d-inline-flex gap-1">
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseBio"
+                    aria-expanded="false"
+                    aria-controls="collapseBio"
+                  >
+                    Edit Bio
+                  </button>
+                </p>
+                <div class="collapse" id="collapseBio">
+                  <div class="card card-body">
+                {{ form.bio }}
+                  </div>
+                </div>
+              </li>
+
+              <li class="list-group-item">
+                <button type="submit" class="btn btn-success mt-3">
+                  Simpan Perubahan
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-xl-8 col-md-8 mt-3">
+      <div class="card shadow mb-4">
+        <div
+          class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+        >
+          <h6 class="m-0 font-weight-bold text-primary">Informasi Pengguna</h6>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush mb-3">
+            <li class="list-group-item">
+              <h6>Hallo, <span>{{ user.username }}</span></h6>
+            </li>
+            <li class="list-group-item">
+              <h6>
+                <i class="fa-solid fa-envelope"></i> :
+                <span>{{ user.email }}</span>
+              </h6>
+            </li>
+            <li style="list-style: none; padding-left: 0">
+              <ul
+                class="list-group list-group-horizontal"
+                style="list-style: none; padding-left: 0"
+              >
+                <li class="list-group-item border-0">
+                  First name: <span>{{ user.first_name }}</span>
+                </li>
+                <li class="list-group-item border-0">
+                  Last name: <span>{{ user.last_name }}</span>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-600">Statistik galeri</h1>
+  </div>
+
+  <div class="row">
+    <div class="dropdown ms-4">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        Pilih Galeri
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+      </ul>
+    </div>
+  </div>
+  <hr />
+
+  <div class="row">
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-primary shadow h-100 py-2 ms-4">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div
+                class="text-xs font-weight-bold text-primary text-uppercase mb-1"
+              >
+                Earnings (Monthly)
+              </div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-calendar fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div
+                class="text-xs font-weight-bold text-success text-uppercase mb-1"
+              >
+                Earnings (Annual)
+              </div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-8 col-lg-7">
+      <div class="card shadow mb-4 ms-4">
+        <div
+          class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+        >
+          <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+          <div class="dropdown no-arrow">
+            <a
+              class="dropdown-toggle"
+              href="#"
+              role="button"
+              id="dropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+              aria-labelledby="dropdownMenuLink"
+            >
+              <div class="dropdown-header">Dropdown Header:</div>
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas id="myAreaChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-4 col-lg-5">
+      <div class="card shadow mb-4">
+        <div
+          class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+        >
+          <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+          <div class="dropdown no-arrow">
+            <a
+              class="dropdown-toggle"
+              href="#"
+              role="button"
+              id="dropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+              aria-labelledby="dropdownMenuLink"
+            >
+              <div class="dropdown-header">Dropdown Header:</div>
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart-pie pt-4 pb-2">
+            <canvas id="myPieChart"></canvas>
+          </div>
+          <div class="mt-4 text-center small">
+            <span class="mr-2">
+              <i class="fas fa-circle text-primary"></i> Direct
+            </span>
+            <span class="mr-2">
+              <i class="fas fa-circle text-success"></i> Social
+            </span>
+            <span class="mr-2">
+              <i class="fas fa-circle text-info"></i> Referral
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
+</div>

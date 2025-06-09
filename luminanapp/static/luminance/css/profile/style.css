@@ -1,0 +1,7 @@
+.pp{
+    width: 200px;
+    height: 200px;
+    border-radius: 100px !important;
+    object-fit: cover;
+    margin-left: 48px;
+}

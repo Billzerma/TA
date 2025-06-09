@@ -12,7 +12,6 @@ from luminanapp.decorator import group_required
 from .forms import UploadGalleryForm
 from .models import Gallery
 from django.shortcuts import render, get_object_or_404, redirect
-
 from .models import Gallery, Artwork, Style, ViTPrediction
 from django.views.decorators.csrf import csrf_exempt
 import cloudinary.uploader
@@ -23,6 +22,8 @@ import torchvision.transforms as transforms
 import tempfile
 import os
 from django.conf import settings
+from .forms import ProfileForm
+from .models import Profile
 
 
 
@@ -82,6 +83,7 @@ def upload_artwork(request, pk):
             dimension=dimension,
             artist=artist,
             contact_artist=contact_artist,
+            description= description,
         )
 
         ViTPrediction.objects.create(
@@ -199,9 +201,7 @@ def detailGaleri_view(request):
 def detailKarya_view(request):
     return render(request, 'luminance/detailKarya.html')
 
-@login_required
-def dashboard_view(request):
-    return render(request, 'luminance/dashboard.html')
+
 
 @login_required
 def manageGaleri_view(request):
@@ -243,7 +243,6 @@ def editGaleri_view(request, pk):
         messages.success(request, "Perubahan galeri berhasil disimpan.")
         return redirect("editGaleri", pk=pk)
 
-    # --- Tambahkan logika ini untuk ambil karya berdasarkan style ---
     karya = Artwork.objects.filter(gallery=galeri)
 
     target_styles = ['Realism', 'Impressionism', 'Cubism', 'Romanticism', 'Expressionism']
@@ -258,7 +257,6 @@ def editGaleri_view(request, pk):
 
         karya_per_style[style.name] = karya.filter(id__in=karya_ids)
 
-    # ---------------------------------------------------------------
 
     context = {
         'gallery': galeri,
@@ -267,4 +265,23 @@ def editGaleri_view(request, pk):
 
     return render(request, 'luminance/editGaleri.html', context)
 
+@login_required
+def profile_view(request):
+    user = request.user
+    profile, created = Profile.objects.get_or_create(user=user)
 
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Profil berhasil diperbarui.")
+            return redirect('profile')  # ganti dengan nama urlmu
+    else:
+        form = ProfileForm(instance=profile)
+
+    context = {
+        'user': user,
+        'profile': profile,
+        'form': form,
+    }
+    return render(request, 'luminance/profile.html', context)
