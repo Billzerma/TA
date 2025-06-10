@@ -285,3 +285,19 @@ def profile_view(request):
         'form': form,
     }
     return render(request, 'luminance/profile.html', context)
+
+
+def update_foto(request):
+    if request.method == "POST" and request.FILES.get("profile_picture"):
+        profile = request.user.profile
+        profile.profile_picture = request.FILES["profile_picture"]
+        profile.save()
+    return redirect("profile")  # Ganti dengan URL kamu
+
+@login_required
+def update_bio(request):
+    if request.method == "POST":
+        profile = request.user.profile
+        profile.bio = request.POST.get("bio", "")
+        profile.save()
+    return redirect("profile")

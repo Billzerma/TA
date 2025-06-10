@@ -7,89 +7,59 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xl-4 col-md-4 mt-3">
-      <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="card shadow mb-4">
-          <div
-            class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
-          >
-            Foto profil
-          </div>
-          <div class="card-body">
-            <ul class="list-group list-group-flush mb-3 text-center">
-              <li class="list-group-item pp">
-                {% if profile.profile_picture %}
-                <img
-                  src="{{ profile.profile_picture.url }}"
-                  alt="Foto Profil"
-                  class="pp"
-                  style="
-                    display: block;
-                    margin: 0 auto;
-                    width: 150px;
-                    height: 150px;
-                    object-fit: cover;
-                  "
-                />
-                {% else %}
-                <img
-                  src="{% static 'luminance/img/profilFoto.jpg' %}"
-                  alt="Default Foto"
-                  class="pp"
-                  style="
-                    display: block;
-                    margin: 0 auto;
-                    width: 150px;
-                    height: 150px;
-                    object-fit: cover;
-                  "
-                />
-                {% endif %}
-              </li>
 
-              <li class="list-group-item mt-3">
-                <h6>
-                  Bergabung pada:
-                  <span>{{ user.date_joined|date:"d-m-Y" }}</span>
-                </h6>
-              </li>
+  <!-- FORM UPLOAD FOTO PROFIL -->
+  <form method="POST" action="{% url 'update_foto' %}" enctype="multipart/form-data" id="formFoto">
+    {% csrf_token %}
+    <div class="card shadow mb-4">
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        Foto profil
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush mb-3 text-center">
 
-              <li class="list-group-item mt-2">
-                <div class="input-group mb-3 justify-content-center">
-                  {{ form.profile_picture }}
-                </div>
-              </li>
+          <li class="list-group-item">
+            {% if profile.profile_picture %}
+            <img
+              src="{{ profile.profile_picture.url }}"
+              alt="Foto Profil"
+              class="pp"
+              style="display: block; margin: 0 auto; width: 150px; height: 150px; object-fit: cover;" />
+            {% else %}
+            <img
+              src="{% static 'luminance/img/profilFoto.jpg' %}"
+              alt="Default Foto"
+              class="pp"
+              style="display: block; margin: 0 auto; width: 150px; height: 150px; object-fit: cover;" />
+            {% endif %}
+          </li>
 
-              <li class="list-group-item mt-2">
-                <p class="d-inline-flex gap-1">
-                  <button
-                    class="btn btn-primary"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseBio"
-                    aria-expanded="false"
-                    aria-controls="collapseBio"
-                  >
-                    Edit Bio
-                  </button>
-                </p>
-                <div class="collapse" id="collapseBio">
-                  <div class="card card-body">
-                {{ form.bio }}
-                  </div>
-                </div>
-              </li>
+          <li class="list-group-item mt-3">
+            <h6>
+              Bergabung pada:
+              <span>{{ user.date_joined|date:"d-m-Y" }}</span>
+            </h6>
+          </li>
 
-              <li class="list-group-item">
-                <button type="submit" class="btn btn-success mt-3">
-                  Simpan Perubahan
-                </button>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </form>
+          <li class="list-group-item mt-2">
+            <div class="input-group mb-3 justify-content-center">
+              <input
+                type="file"
+                name="profile_picture"
+                class="form-control"
+                id="inputProfilePicture"
+                accept="image/*" />
+            </div>
+          </li>
+
+        </ul>
+      </div>
     </div>
+  </form>
+
+
+
+</div>
 
     <div class="col-xl-8 col-md-8 mt-3">
       <div class="card shadow mb-4">
@@ -120,9 +90,51 @@
                 <li class="list-group-item border-0">
                   Last name: <span>{{ user.last_name }}</span>
                 </li>
+
+              
+                
               </ul>
+
+
             </li>
+              <li class="list-group-item border-0">
+                  <p class="ms-2">{{ profile.bio }}</p>
+
+              </li>
+
+              <li  class="list-group-item border-0">
+                    <!-- FORM UPDATE BIO -->
+  <form method="POST" action="{% url 'update_bio' %}" id="formBio">
+    {% csrf_token %}
+    <div class="card mb-4">
+      <div class="card-body text-center">
+        <button
+          class="btn btn-primary"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseBio"
+          aria-expanded="false"
+          aria-controls="collapseBio">
+          Edit Bio
+        </button>
+
+        <div class="collapse mt-3" id="collapseBio">
+          <div class="card card-body">
+            <textarea
+              class="form-control"
+              name="bio"
+              id="bioTextarea"
+              rows="3"
+            >{{ profile.bio }}</textarea>
+          </div>
+          <button type="submit" class="btn btn-success mt-3">Simpan Bio</button>
+        </div>
+      </div>
+    </div>
+  </form>
+              </li>
           </ul>
+
         </div>
       </div>
     </div>
