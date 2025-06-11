@@ -7,59 +7,76 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xl-4 col-md-4 mt-3">
+      <!-- FORM UPLOAD FOTO PROFIL -->
+      <form
+        method="POST"
+        action="{% url 'update_foto' %}"
+        enctype="multipart/form-data"
+        id="formFoto"
+      >
+        {% csrf_token %}
+        <div class="card shadow mb-4">
+          <div
+            class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+          >
+            <h6 class="m-0 font-weight-bold text-primary">Foto profil</h6>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush mb-3 text-center">
+              <li class="list-group-item">
+                {% if profile.profile_picture %}
+                <img
+                  src="{{ profile.profile_picture.url }}"
+                  alt="Foto Profil"
+                  class="pp"
+                  style="
+                    display: block;
+                    margin: 0 auto;
+                    width: 150px;
+                    height: 150px;
+                    object-fit: cover;
+                  "
+                />
+                {% else %}
+                <img
+                  src="{% static 'luminance/img/profilFoto.jpg' %}"
+                  alt="Default Foto"
+                  class="pp"
+                  style="
+                    display: block;
+                    margin: 0 auto;
+                    width: 150px;
+                    height: 150px;
+                    object-fit: cover;
+                  "
+                />
+                {% endif %}
+              </li>
 
-  <!-- FORM UPLOAD FOTO PROFIL -->
-  <form method="POST" action="{% url 'update_foto' %}" enctype="multipart/form-data" id="formFoto">
-    {% csrf_token %}
-    <div class="card shadow mb-4">
-      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        Foto profil
-      </div>
-      <div class="card-body">
-        <ul class="list-group list-group-flush mb-3 text-center">
+              <li class="list-group-item mt-3">
+                <h6 class="join-date">
+                  Bergabung pada:
+                  <span>{{ user.date_joined|date:"d-m-Y" }}</span>
+                </h6>
+              </li>
 
-          <li class="list-group-item">
-            {% if profile.profile_picture %}
-            <img
-              src="{{ profile.profile_picture.url }}"
-              alt="Foto Profil"
-              class="pp"
-              style="display: block; margin: 0 auto; width: 150px; height: 150px; object-fit: cover;" />
-            {% else %}
-            <img
-              src="{% static 'luminance/img/profilFoto.jpg' %}"
-              alt="Default Foto"
-              class="pp"
-              style="display: block; margin: 0 auto; width: 150px; height: 150px; object-fit: cover;" />
-            {% endif %}
-          </li>
-
-          <li class="list-group-item mt-3">
-            <h6>
-              Bergabung pada:
-              <span>{{ user.date_joined|date:"d-m-Y" }}</span>
-            </h6>
-          </li>
-
-          <li class="list-group-item mt-2">
-            <div class="input-group mb-3 justify-content-center">
-              <input
-                type="file"
-                name="profile_picture"
-                class="form-control"
-                id="inputProfilePicture"
-                accept="image/*" />
-            </div>
-          </li>
-
-        </ul>
-      </div>
+              <li class="list-group-item mt-2">
+                <div class="input-group mb-3 justify-content-center">
+                  <label class="input-group-text btn btn-outline-primary rounded" for="inputProfilePicture">edit foto profil</label>
+                  <input
+                    type="file"
+                    name="profile_picture"
+                    class="form-control d-none"
+                    id="inputProfilePicture"
+                    accept="image/*"
+                  />
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </form>
     </div>
-  </form>
-
-
-
-</div>
 
     <div class="col-xl-8 col-md-8 mt-3">
       <div class="card shadow mb-4">
@@ -71,70 +88,71 @@
         <div class="card-body">
           <ul class="list-group list-group-flush mb-3">
             <li class="list-group-item">
-              <h6>Hallo, <span>{{ user.username }}</span></h6>
+              <h6 class="profil-user">{{ user.username }}</h6>
             </li>
-            <li class="list-group-item">
-              <h6>
-                <i class="fa-solid fa-envelope"></i> :
-                <span>{{ user.email }}</span>
-              </h6>
-            </li>
+          
             <li style="list-style: none; padding-left: 0">
               <ul
                 class="list-group list-group-horizontal"
                 style="list-style: none; padding-left: 0"
               >
-                <li class="list-group-item border-0">
-                  First name: <span>{{ user.first_name }}</span>
+                <li class="list-group-item border-0 l-name">
+                  First name: <span class="fn"> {{ user.first_name }}</span>
                 </li>
-                <li class="list-group-item border-0">
-                  Last name: <span>{{ user.last_name }}</span>
+                <li class="list-group-item border-0 l-name">
+                  Last name: <span class="fn"> {{ user.last_name }}</span>
                 </li>
-
-              
-                
               </ul>
-
-
             </li>
-              <li class="list-group-item border-0">
-                  <p class="ms-2">{{ profile.bio }}</p>
+              <li class="list-group-item">
+              <h6 class="profil-email">
+                <i class="fa-solid fa-envelope "></i> :
+                <span >{{ user.email }}</span>
+              </h6>
+            </li>
+            <li class="list-group-item border-0">
+              <i class="fa-solid fa-quote-left"></i>
+              <p class="ms-2 bio-profile">{{ profile.bio }}</p>
+              <i class="fa-solid fa-quote-right float-right"></i>
+            </li>
 
-              </li>
+            <li class="list-group-item border-0">
+              <!-- FORM UPDATE BIO -->
+              <form method="POST" action="{% url 'update_bio' %}" id="formBio">
+                {% csrf_token %}
+                <div class="card mb-4">
+                  <div class="card-body text-center">
+                    <button
+                      class="btn btn-primary"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseBio"
+                      aria-expanded="false"
+                      aria-controls="collapseBio"
+                    >
+                      Edit Bio
+                    </button>
 
-              <li  class="list-group-item border-0">
-                    <!-- FORM UPDATE BIO -->
-  <form method="POST" action="{% url 'update_bio' %}" id="formBio">
-    {% csrf_token %}
-    <div class="card mb-4">
-      <div class="card-body text-center">
-        <button
-          class="btn btn-primary"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapseBio"
-          aria-expanded="false"
-          aria-controls="collapseBio">
-          Edit Bio
-        </button>
-
-        <div class="collapse mt-3" id="collapseBio">
-          <div class="card card-body">
-            <textarea
-              class="form-control"
-              name="bio"
-              id="bioTextarea"
-              rows="3"
-            >{{ profile.bio }}</textarea>
-          </div>
-          <button type="submit" class="btn btn-success mt-3">Simpan Bio</button>
-        </div>
-      </div>
-    </div>
-  </form>
-              </li>
+                    <div class="collapse mt-3" id="collapseBio">
+                      <div class="card card-body">
+                        <textarea
+                          class="form-control"
+                          name="bio"
+                          id="bioTextarea"
+                          rows="3"
+                        >
+{{ profile.bio }}</textarea
+                        >
+                      </div>
+                      <button type="submit" class="btn btn-success mt-3">
+                        Simpan Bio
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </li>
           </ul>
-
         </div>
       </div>
     </div>

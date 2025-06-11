@@ -41,3 +41,11 @@
   overflow: hidden;                   
   text-overflow: ellipsis;      
 }
+
+.hand-no-gallery{
+   font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 14px !important;
+  margin-top: 98px;
+}

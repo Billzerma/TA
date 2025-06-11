@@ -1,5 +1,5 @@
 <div class="nav-h">
-  <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
+  <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Navbar</a>
       <button
@@ -15,11 +15,53 @@
       </button>
 
       <div
-        class="collapse navbar-collapse bg-body-tertiary"
+        class="collapse navbar-collapse "
         id="navbarSupportedContent"
       >
-        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 pos-nav">
-          <li class="nav-item">
+        <ul class="navbar-nav ms-auto me-5 mb-2 mb-lg-0 pos-nav">
+
+
+          <li class="dropdown font-nav button-more">
+            <a
+              class="nav-link dropdown-toggle font-nav"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Lainnya
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="{% url 'tentang' %}">Tentang</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'bantuan' %}">Bantuan</a>
+              </li>
+              <li>
+                {% if request.user.is_authenticated %}
+                <form
+                  method="POST"
+                  action="{% url 'logout' %}"
+                  class="d-flex me-3"
+                  style="align-items: center;"
+                >
+                  {% csrf_token %}
+                  <button
+                    type="submit"
+                    class="log-out-button"
+                  
+                  >
+                    <i class="fa-solid fa-arrow-right-from-bracket" style="margin-right: 8px;"></i>
+                    <span>Keluar</span>
+                  </button>
+                </form>
+                {% endif %}
+              </li>
+            </ul>
+          </li>
+
+               <li class="nav-item">
             <a
               class="active font-nav"
               aria-current="page"
@@ -32,48 +74,10 @@
           </li>
           {% if request.user.groups.all.0.name == 'gallery_owner' %}
           <li class="nav-item">
-            <a class="font-nav" href="{% url 'galeriSaya' %}">Galeri saya</a>
+            <a class="font-nav" href="{% url 'profile' %}">Profil</a>
           </li>
           {% endif %}
-
-          <li class="dropdown font-nav button-more">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Lainnya
-            </a>
-          <ul class="dropdown-menu">
-            <li>
-              <a class="dropdown-item" href="{% url 'tentang' %}">Tentang</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="{% url 'bantuan' %}">Bantuan</a>
-            </li>
-            <li>
-              {% if request.user.is_authenticated %}
-              <form
-                method="POST"
-                action="{% url 'logout' %}"
-                class="d-flex me-3"
-                style="align-items: center;"
-              >
-                {% csrf_token %}
-                <button
-                  type="submit"
-                  class="log-out-button"
-                
-                >
-                  <i class="fa-solid fa-arrow-right-from-bracket" style="margin-right: 8px;"></i>
-                  <span>Keluar</span>
-                </button>
-              </form>
-              {% endif %}
-            </li>
-          </ul>              
+        </ul>
       </div>
     </div>
   </nav>
