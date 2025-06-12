@@ -10,8 +10,15 @@ urlpatterns = [
     path('tentang/', views.tentang_view, name='tentang'), 
     path('bantuan/', views.bantuan_view, name='bantuan'), 
     path('galeri/', views.galeri_view, name='galeri'),
+    path('galeri/<int:gallery_id>/like/', views.like_gallery, name='like_gallery'),
+    path('galeri/<int:gallery_id>/save/', views.save_gallery, name='save_gallery'),
+
+
     path('onGaleri/', views.detailGaleri_view, name='onGaleri'),
+    path('galeri/<int:pk>/', views.detail_galeri_view, name='detail_galeri'),
+
     path('onKarya/', views.detailKarya_view, name='onKarya'),
+    
     path('galeriSaya/', views.manageGaleri_view, name='galeriSaya'),
     path('tambahGaleri/', views.tambahGaleri_view, name='tambahGaleri'),
     path('profile/', views.profile_view, name='profile'),

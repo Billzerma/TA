@@ -10,7 +10,7 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from luminanapp.decorator import group_required
 from .forms import UploadGalleryForm
-from .models import Gallery
+from .models import Gallery,Like, SaveArtGallery
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Gallery, Artwork, Style, ViTPrediction
 from django.views.decorators.csrf import csrf_exempt
@@ -24,6 +24,7 @@ import os
 from django.conf import settings
 from .forms import ProfileForm
 from .models import Profile
+from django.db.models import Prefetch
 
 
 
@@ -193,10 +194,80 @@ def bantuan_view(request):
 
 @login_required
 def galeri_view(request):
-    return render(request, 'luminance/galeri.html')
+    user = request.user
+
+    liked_gallery_ids = set(
+        Like.objects.filter(user=user, gallery__isnull=False).values_list('gallery_id', flat=True)
+    )
+    saved_gallery_ids = set(
+        SaveArtGallery.objects.filter(user=user, gallery__isnull=False).values_list('gallery_id', flat=True)
+    )
+
+    galleries = Gallery.objects.all()
+
+    context = {
+        'galleries': galleries,
+        'liked_gallery_ids': liked_gallery_ids,
+        'saved_gallery_ids': saved_gallery_ids,
+    }
+    return render(request, 'luminance/galeri.html', context)
+
+
+@login_required
+def like_gallery(request, gallery_id):
+    gallery = get_object_or_404(Gallery, pk=gallery_id)
+    like, created = Like.objects.get_or_create(user=request.user, gallery=gallery)
+    if not created:
+        like.delete()
+    return redirect('galeri')
+
+@login_required
+def save_gallery(request, gallery_id):
+    gallery = get_object_or_404(Gallery, pk=gallery_id)
+    save, created = SaveArtGallery.objects.get_or_create(user=request.user, gallery=gallery)
+    if not created:
+        save.delete()
+    return redirect('galeri')
+
+
 
 def detailGaleri_view(request):
     return render(request, 'luminance/detailGaleri.html')
+
+def detail_galeri_view(request, pk):
+    # Ambil galeri berdasarkan pk
+    gallery = get_object_or_404(Gallery, pk=pk)
+
+    # Ambil profil dari pemilik galeri
+    profile = Profile.objects.filter(user=gallery.owner).first()
+
+    # Ambil semua karya seni dalam galeri tersebut
+    artworks = Artwork.objects.filter(gallery=gallery)
+
+    # Target style yang ingin ditampilkan
+    TARGET_STYLES = ['Realism', 'Impressionism', 'Cubism', 'Romanticism', 'Expressionism']
+
+    # Kelompokkan karya berdasarkan style dari prediksi ViT
+    artworks_by_style = {}
+    for artwork in artworks:
+        vit_prediction = ViTPrediction.objects.filter(artwork=artwork).first()
+        if vit_prediction and vit_prediction.predicted_style:
+            style_name = vit_prediction.predicted_style.name
+            if style_name in TARGET_STYLES:
+                artworks_by_style.setdefault(style_name, []).append(artwork)
+            else:
+                artworks_by_style.setdefault("Tanpa Kategori", []).append(artwork)
+        else:
+            artworks_by_style.setdefault("Tanpa Kategori", []).append(artwork)
+
+    context = {
+        'gallery': gallery,
+        'profile': profile,
+        'artworks_by_style': artworks_by_style,
+    }
+    return render(request, 'luminance/detailGaleri.html', context)
+
+
 
 def detailKarya_view(request):
     return render(request, 'luminance/detailKarya.html')

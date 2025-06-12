@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from django.core.exceptions import ValidationError
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -47,10 +48,7 @@ class ViTPrediction(models.Model):
     model_version = models.CharField(max_length=50)
     predicted_at = models.DateTimeField(auto_now_add=True)
 
-class Like(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    artwork = models.ForeignKey(Artwork, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
+
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -58,3 +56,34 @@ class Comment(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    artwork = models.ForeignKey('Artwork', on_delete=models.CASCADE, null=True, blank=True)
+    gallery = models.ForeignKey('Gallery', on_delete=models.CASCADE, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def clean(self):
+        if not self.artwork and not self.gallery:
+            raise ValidationError("Like harus memiliki salah satu: artwork atau gallery.")
+        if self.artwork and self.gallery:
+            raise ValidationError("Like tidak boleh punya dua target sekaligus.")
+
+    def __str__(self):
+        return f"Like by {self.user.username}"
+
+class SaveArtGallery(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    artwork = models.ForeignKey('Artwork', on_delete=models.CASCADE, null=True, blank=True)
+    gallery = models.ForeignKey('Gallery', on_delete=models.CASCADE, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def clean(self):
+        if not self.artwork and not self.gallery:
+            raise ValidationError("Harus menyimpan salah satu: artwork atau gallery.")
+        if self.artwork and self.gallery:
+            raise ValidationError("Tidak boleh menyimpan artwork dan gallery sekaligus.")
+
+    def __str__(self):
+        return f"Save by {self.user.username}"

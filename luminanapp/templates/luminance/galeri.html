@@ -1,4 +1,4 @@
-{% extends 'luminance/base.html' %} {% block title %}Beranda{% endblock %} 
+{% extends 'luminance/base.html' %} {% block title %}Beranda{% endblock %}
 {%block content %} {% load static %}
 
 <div class="container-fluid">
@@ -26,232 +26,68 @@
 
 <div class="container-fluid sec-home-gallery">
   <div class="row pad-gal">
-    <div class="card sec-card" style="width: 21rem">
-      <img
-        src="{% static 'luminance/img/abs.png' %}"
-        class="card-img-top fit-image"
-        alt="..."
-      />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card’s content.
-        </p>
-        <div class="d-flex justify-content-between align-items-center">
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-          <i class="fa-solid fa-heart text-danger fs-4 cursor-pointer"></i>
-        </div>
-      </div>
-    </div>
+  {% for gallery in galleries %}
+  <div class="card sec-card m-2" style="width: 21rem">
+    {% if gallery.thumbnail %}
+    <img
+      src="{{ gallery.thumbnail.url }}"
+      class="card-img-top fit-image"
+      alt="{{ gallery.title }}"
+    />
+    {% else %}
+    <img
+      src="{% static 'luminance/img/abs.png' %}"
+      class="card-img-top fit-image"
+      alt="{{ gallery.title }}"
+    />
+    {% endif %}
 
-    <div class="card sec-card" style="width: 21rem">
-      <img
-        src="{% static 'luminance/img/abs.png' %}"
-        class="card-img-top fit-image"
-        alt="..."
-      />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card’s content.
-        </p>
-        <div class="d-flex justify-content-between align-items-center">
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-          <i class="fa-solid fa-heart text-danger fs-4 cursor-pointer"></i>
-        </div>
-      </div>
-    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ gallery.title }}</h5>
+      <p class="card-text">{{ gallery.description|truncatewords:20 }}</p>
+      <div class="d-flex justify-content-between align-items-center">
 
-    <div class="card sec-card" style="width: 21rem">
-      <img
-        src="{% static 'luminance/img/abs.png' %}"
-        class="card-img-top fit-image"
-        alt="..."
-      />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card’s content.
-        </p>
-        <div class="d-flex justify-content-between align-items-center">
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-          <i class="fa-solid fa-heart text-danger fs-4 cursor-pointer"></i>
-        </div>
-      </div>
-    </div>
+        <!-- Tombol Lihat Galeri -->
+        <a href="{% url 'detail_galeri' pk=gallery.pk %}" class="btn btn-primary">Lihat Detail</a>
 
-    <div class="card sec-card" style="width: 21rem">
-      <img
-        src="{% static 'luminance/img/abs.png' %}"
-        class="card-img-top fit-image"
-        alt="..."
-      />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card’s content.
-        </p>
-        <div class="d-flex justify-content-between align-items-center">
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-          <i class="fa-solid fa-heart text-danger fs-4 cursor-pointer"></i>
-        </div>
-      </div>
-    </div>
 
-    <div class="card sec-card" style="width: 21rem">
-      <img
-        src="{% static 'luminance/img/abs.png' %}"
-        class="card-img-top fit-image"
-        alt="..."
-      />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card’s content.
-        </p>
-        <div class="d-flex justify-content-between align-items-center">
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-          <i class="fa-solid fa-heart text-danger fs-4 cursor-pointer"></i>
-        </div>
-      </div>
-    </div>
-    <div class="card sec-card" style="width: 21rem">
-      <img
-        src="{% static 'luminance/img/abs.png' %}"
-        class="card-img-top fit-image"
-        alt="..."
-      />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card’s content.
-        </p>
-        <div class="d-flex justify-content-between align-items-center">
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-          <i class="fa-solid fa-heart text-danger fs-4 cursor-pointer"></i>
-        </div>
-      </div>
-    </div>
+        <!-- Group tombol love dan save -->
+        <div class="d-flex gap-3">
 
-    <div class="card sec-card" style="width: 21rem">
-      <img
-        src="{% static 'luminance/img/abs.png' %}"
-        class="card-img-top fit-image"
-        alt="..."
-      />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card’s content.
-        </p>
-        <div class="d-flex justify-content-between align-items-center">
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-          <i class="fa-solid fa-heart text-danger fs-4 cursor-pointer"></i>
-        </div>
-      </div>
-    </div>
+          <!-- Tombol Like -->
+          <form method="POST" action="{% url 'like_gallery' gallery.id %}" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-link p-0 border-0">
+              {% if gallery.id in liked_gallery_ids %}
+                <i class="fa-solid fa-heart fa-lg" style="color:red;"></i>
+              {% else %}
+                <i class="fa-regular fa-heart fa-lg"></i>
+              {% endif %}
+            </button>
+          </form>
 
-    <div class="card sec-card" style="width: 21rem">
-      <img
-        src="{% static 'luminance/img/abs.png' %}"
-        class="card-img-top fit-image"
-        alt="..."
-      />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card’s content.
-        </p>
-        <div class="d-flex justify-content-between align-items-center">
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-          <i class="fa-solid fa-heart text-danger fs-4 cursor-pointer"></i>
-        </div>
-      </div>
-    </div>
+          <!-- Tombol Simpan -->
+          <form method="POST" action="{% url 'save_gallery' gallery.id %}" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-link p-0 border-0">
+              {% if gallery.id in saved_gallery_ids %}
+                <i class="fa-solid fa-bookmark fa-lg"></i>
+              {% else %}
+                <i class="fa-regular fa-bookmark fa-lg"></i>
+              {% endif %}
+            </button>
+          </form>
 
-    <div class="card sec-card" style="width: 21rem">
-      <img
-        src="{% static 'luminance/img/abs.png' %}"
-        class="card-img-top fit-image"
-        alt="..."
-      />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card’s content.
-        </p>
-        <div class="d-flex justify-content-between align-items-center">
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-          <i class="fa-solid fa-heart text-danger fs-4 cursor-pointer"></i>
         </div>
-      </div>
-    </div>
-
-    <div class="card sec-card" style="width: 21rem">
-      <img
-        src="{% static 'luminance/img/abs.png' %}"
-        class="card-img-top fit-image"
-        alt="..."
-      />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card’s content.
-        </p>
-        <div class="d-flex justify-content-between align-items-center">
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-          <i class="fa-solid fa-heart text-danger fs-4 cursor-pointer"></i>
-        </div>
-      </div>
-    </div>
-    <div class="card sec-card" style="width: 21rem">
-      <img
-        src="{% static 'luminance/img/abs.png' %}"
-        class="card-img-top fit-image"
-        alt="..."
-      />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card’s content.
-        </p>
-        <div class="d-flex justify-content-between align-items-center">
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-          <i class="fa-solid fa-heart text-danger fs-4 cursor-pointer"></i>
-        </div>
-      </div>
-    </div>
-
-    <div class="card sec-card" style="width: 21rem">
-      <img
-        src="{% static 'luminance/img/abs.png' %}"
-        class="card-img-top fit-image"
-        alt="..."
-      />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card’s content.
-        </p>
-        <div class="d-flex justify-content-between align-items-center">
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-          <i class="fa-solid fa-heart text-danger fs-4 cursor-pointer"></i>
-        </div>
+        
       </div>
     </div>
   </div>
+  {% endfor %}
+</div>
+
+</div>
+
 </div>
 
 <div class="container-fluid">
