@@ -147,9 +147,9 @@ def login_view(request):
             login(request, user)
             # redirect sesuai grup
             if user.groups.filter(name='gallery_owner').exists():
-                return redirect('galeriSaya')
+                return redirect('profile')
             elif user.groups.filter(name='visitor').exists():
-                return redirect('home')
+                return redirect('profile')
             else:
                 return redirect('home')
         else:
@@ -271,6 +271,28 @@ def detail_galeri_view(request, pk):
 
 def detailKarya_view(request):
     return render(request, 'luminance/detailKarya.html')
+
+
+def detail_karya_view(request, pk):
+    artwork = get_object_or_404(Artwork, pk=pk)
+    gallery = artwork.gallery
+    profile = Profile.objects.filter(user=gallery.owner).first()
+
+    all_artworks = list(Artwork.objects.filter(gallery=gallery).order_by('id'))
+    current_index = all_artworks.index(artwork)
+
+    prev_artwork = all_artworks[current_index - 1] if current_index > 0 else None
+    next_artwork = all_artworks[current_index + 1] if current_index < len(all_artworks) - 1 else None
+
+    context = {
+        'artwork': artwork,
+        'gallery': gallery,
+        'profile': profile,
+        'prev_artwork': prev_artwork,
+        'next_artwork': next_artwork
+    }
+    return render(request, 'luminance/detailKarya.html', context)
+
 
 
 

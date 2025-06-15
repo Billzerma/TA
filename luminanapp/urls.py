@@ -18,6 +18,8 @@ urlpatterns = [
     path('galeri/<int:pk>/', views.detail_galeri_view, name='detail_galeri'),
 
     path('onKarya/', views.detailKarya_view, name='onKarya'),
+    path('karya/<int:pk>/', views.detail_karya_view, name='detail_karya'),
+
     
     path('galeriSaya/', views.manageGaleri_view, name='galeriSaya'),
     path('tambahGaleri/', views.tambahGaleri_view, name='tambahGaleri'),

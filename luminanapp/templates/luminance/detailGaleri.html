@@ -1,6 +1,5 @@
 {% extends 'luminance/base.html' %} {% block title %}Detail Galeri{% endblock %}
-{% block content %}
- {% load static %}
+{% block content %} {% load static %}
 <div class="container-fluid">
   <div class="row">
     <!-- Breadcrumb -->
@@ -65,23 +64,22 @@
 
         <h3 class="contact-gallery">Media sosial</h3>
         <ul class="d-flex list-unstyled gap-3 contact-gallery">
-  <li>
-    <a href="{{ gallery.ig }}" target="_blank">
-      <i class="fa-brands fa-instagram fa-xl"></i>
-    </a>
-  </li>
-  <li>
-    <a href="{{ gallery.fb }}" target="_blank">
-      <i class="fa-brands fa-facebook fa-xl"></i>
-    </a>
-  </li>
-  <li>
-    <a href="{{ gallery.xtwt }}" target="_blank">
-      <i class="fa-brands fa-x-twitter fa-xl"></i>
-    </a>
-  </li>
-</ul>
-
+          <li>
+            <a href="{{ gallery.ig }}" target="_blank">
+              <i class="fa-brands fa-instagram fa-xl"></i>
+            </a>
+          </li>
+          <li>
+            <a href="{{ gallery.fb }}" target="_blank">
+              <i class="fa-brands fa-facebook fa-xl"></i>
+            </a>
+          </li>
+          <li>
+            <a href="{{ gallery.xtwt }}" target="_blank">
+              <i class="fa-brands fa-x-twitter fa-xl"></i>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -98,10 +96,13 @@
             {% for artwork in artworks %}
             <li class="list-inline-item list-realis">
               <div class="image-hover-wrapper">
-                <img
-                  src="{{ artwork.image_url.url }}"
-                  class="img-fluid galeri-img-artwork shadow"
-                />
+                <a href="{% url 'detail_karya' artwork.pk %}">
+                  <img
+                    src="{{ artwork.image_url.url }}"
+                    class="img-fluid galeri-img-artwork shadow"
+                  />
+                </a>
+
                 <div class="image-title">{{ artwork.title }}</div>
               </div>
             </li>

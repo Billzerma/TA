@@ -1,62 +1,84 @@
+{% extends 'luminance/base.html' %} {% block title %}Beranda{% endblock %} 
+{%block content %} {% load static %}
+<div class="container-fluid">
+  <div class="row">
+    <nav
+      style="--bs-breadcrumb-divider: '>'"
+      aria-label="breadcrumb"
+      class="nav-bread border rounded"
+    >
+      <ol class="breadcrumb bread-pad">
+        <li class="breadcrumb-item"><a href="{% url 'galeri' %}">Galeri</a></li>
+        <li class="breadcrumb-item active" aria-current="page">
+          <a href="{% url 'detail_galeri'  pk=gallery.pk %}">{{ gallery.title }}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          {{ artwork.title }}
+        </li>
+      </ol>
+    </nav>
 
-{% extends 'luminance/base.html' %}
+    <div
+      class="col-md-9 artwork-port overflow-x-scroll"
+      style="max-height: 100vh"
+    >
+      <div class="row con-art">
+        <div class="container-fluid position-relative">
+          {% if prev_artwork %}
+          <a
+            href="{% url 'detail_karya' prev_artwork.pk %}"
+            class="btn btn-primary position-absolute start-0 top-50 translate-middle-y arrow-btn"
+            >❮</a
+          >
+          {% endif %}
+          <img
+            src="{{ artwork.image_url.url }}"
+            class="artwork-view w-90"
+            alt="{{ artwork.title }}"
+          />
 
-{% block title %}Beranda{% endblock %}
-
-{% block content %}
-{% load static %}
-    <div class="container-fluid">
-        <div class="row ">
-          <div class="col-md-9 artwork-port overflow-x-scroll" style="max-height: 100vh;">
-                <div class="row con-art">
-                    <div class="container-fluid position-relative ">
-                        <button class="btn btn-primary position-absolute start-0 top-50 translate-middle-y arrow-btn">
-                            ❮
-                        </button>
-                        <img src="{% static 'luminance/img/sni.jpg' %}" class="artwork-view w-100" alt="">
-                        <button class="btn btn-primary position-absolute end-0 top-50 translate-middle-y arrow-btn">
-                            ❯
-                        </button>
-                    </div>
-                </div>
-            </div>
-                
-            <div class="col-md-3 dkarya-info-karya">
-                <div class="container-fluid border  rounded karya-info">
-                    
-                    <div class="row  ">
-                       <div class="col-sm-4 justify-content-center ">
-                            <img src="{% static 'luminance/img/abs.png' %}" class="img-thumbnail photo-profil-galeri rounded-circle" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <h1 class="gallery-name">Omke Gallery Pvt. Ltd.</h1>
-                        </div>
-                    </div>
-                     <div class="row ">
-                        <h1 class="artwork-title">"Sniperhunter"</h1>
-                        <h2 class="artwork-medium">Canvas | 200 x 300 cm </h2>
-                        <p class="artwork-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi fugiat, doloremque neque velit,
-                        quae quibusdam, tenetur laborum vero est qui excepturi! Cum quidem ad deleniti, animi doloribus vitae fugiat quasi!
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, fugit quasi. Soluta asperiores laudantium molestias in reprehenderit quia culpa ipsam explicabo totam, natus eveniet quas architecto quaerat consequatur odio velit.</p>
-                            
-                        <p>Karya oleh <h3> muljaidi </h3></p>
-                     </div>
-                    
-                </div>
-
-                <div class="container-fluid more-art-by">
-                     <div class="row more-by-bg  rounded">
-                      <p class="more-by-style">Karya lain oleh <h3>Muljaidi</h3></p>
-                        <ul class="list-inline">
-                            <li class="list-inline-item "><img src="{% static 'luminance/img/sni.jpg' %}" class="img-fluid more-img-artwork shadow"></li>
-                            <li class="list-inline-item "><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid more-img-artwork shadow"></li>
-                            <li class="list-inline-item "><img src="{% static 'luminance/img/sni.jpg' %}" class="img-fluid more-img-artwork shadow"></li>
-                            <li class="list-inline-item "><img src="{% static 'luminance/img/recolor.jpg' %}" class="img-fluid more-img-artwork shadow"></li>
-                        </ul>
-                    </div>
-                </div>
-            
-            </div>
+          {% if next_artwork %}
+          <a
+            href="{% url 'detail_karya' next_artwork.pk %}"
+            class="btn btn-primary position-absolute end-0 top-50 translate-middle-y arrow-btn"
+            >❯</a
+          >
+          {% endif %}
         </div>
+      </div>
     </div>
+
+    <div class="col-md-3 dkarya-info-karya">
+      <div class="container-fluid border rounded karya-info">
+        <div class="row">
+          <div class="col-sm-4 justify-content-center">
+            <img
+              src="{{ profile.profile_picture.url }}"
+              class="img-thumbnail photo-profil-galeri rounded-circle"
+              alt="..."
+            />
+          </div>
+          <div class="col-md-8">
+            <h1 class="gallery-name">{{ gallery.title }}</h1>
+          </div>
+        </div>
+        <div class="row">
+          <h1 class="artwork-title">"{{ artwork.title }}"</h1>
+          <h2 class="artwork-medium">
+            <span>{{ artwork.media }}</span> | {{ artwork.dimension }}
+          </h2>
+          <p class="artwork-desc">{{ artwork.description }}</p>
+
+          <h3 class="artwork-desc">
+            Karya oleh <span>{{ artwork.artist }}</span>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container-fluid more-art-by">
+        <div class="row more-by-bg rounded"></div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

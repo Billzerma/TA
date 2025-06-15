@@ -38,26 +38,7 @@
               <li>
                 <a class="dropdown-item" href="{% url 'bantuan' %}">Bantuan</a>
               </li>
-              <li>
-                {% if request.user.is_authenticated %}
-                <form
-                  method="POST"
-                  action="{% url 'logout' %}"
-                  class="d-flex me-3"
-                  style="align-items: center;"
-                >
-                  {% csrf_token %}
-                  <button
-                    type="submit"
-                    class="log-out-button"
-                  
-                  >
-                    <i class="fa-solid fa-arrow-right-from-bracket" style="margin-right: 8px;"></i>
-                    <span>Keluar</span>
-                  </button>
-                </form>
-                {% endif %}
-              </li>
+      
             </ul>
           </li>
 
