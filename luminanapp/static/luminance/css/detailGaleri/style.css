@@ -19,7 +19,7 @@
 .galeri-img-artwork {
   width: 200px !important;
   height: 200px !important;
-  object-fit: cover; /* Menjaga proporsi gambar agar tidak terdistorsi */
+  object-fit: fill; /* Menjaga proporsi gambar agar tidak terdistorsi */
   margin: 16px 0px 0px 8px;
 }
 

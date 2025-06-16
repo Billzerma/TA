@@ -24,6 +24,8 @@ import os
 from django.conf import settings
 from .forms import ProfileForm
 from .models import Profile
+from django.db.models import Count, Q
+import random
 from django.db.models import Prefetch
 
 
@@ -136,7 +138,24 @@ def is_gallery_owner(user):
     return user.groups.filter(name='gallery_owner').exists()
 
 def home(request):
-    return render(request, 'luminance/home.html')
+    # Ambil 8 karya secara acak
+    semua_karya = list(Artwork.objects.all())
+    random.shuffle(semua_karya)
+    karya_list = semua_karya[:8]
+
+    # Ambil 4 galeri dengan like terbanyak
+    galeri_terpopuler = Gallery.objects.annotate(
+        jumlah_like=Count('like', filter=Q(like__gallery__isnull=False))
+    ).order_by('-jumlah_like')[:4]
+
+    context = {
+        'karya_list': karya_list,
+        'galeri_terpopuler': galeri_terpopuler,
+    }
+    return render(request, 'luminance/home.html', context)
+
+
+
 
 def login_view(request):
     if request.method == 'POST':
