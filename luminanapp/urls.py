@@ -19,7 +19,7 @@ urlpatterns = [
 
     path('onKarya/', views.detailKarya_view, name='onKarya'),
     path('karya/<int:pk>/', views.detail_karya_view, name='detail_karya'),
-
+    path('karya/<int:artwork_id>/like/', views.like_artwork, name='like_artwork'),
     
     path('galeriSaya/', views.manageGaleri_view, name='galeriSaya'),
     path('tambahGaleri/', views.tambahGaleri_view, name='tambahGaleri'),

@@ -138,12 +138,12 @@ def is_gallery_owner(user):
     return user.groups.filter(name='gallery_owner').exists()
 
 def home(request):
-    # Ambil 8 karya secara acak
+    
     semua_karya = list(Artwork.objects.all())
     random.shuffle(semua_karya)
     karya_list = semua_karya[:8]
 
-    # Ambil 4 galeri dengan like terbanyak
+   
     galeri_terpopuler = Gallery.objects.annotate(
         jumlah_like=Count('like', filter=Q(like__gallery__isnull=False))
     ).order_by('-jumlah_like')[:4]
@@ -248,25 +248,34 @@ def save_gallery(request, gallery_id):
         save.delete()
     return redirect('galeri')
 
+def like_artwork(request, artwork_id):
+    artwork = get_object_or_404(Artwork, pk=artwork_id)
+    # Pastikan user sudah login sebelum mencoba mengakses request.user
+    if request.user.is_authenticated:
+        # Cek apakah pengguna sudah pernah like artwork ini
+        # Penting: Pastikan model Like Anda memiliki field 'artwork' dan 'user'
+        if Like.objects.filter(user=request.user, artwork=artwork).exists():
+            # Jika sudah like, hapus like-nya (unlike)
+            Like.objects.filter(user=request.user, artwork=artwork).delete()
+        else:
+            # Jika belum like, buat like baru
+            Like.objects.create(user=request.user, artwork=artwork)
+
+    # Redirect kembali ke halaman detail karya setelah operasi
+    return redirect('detail_karya', pk=artwork.pk)
+
 
 
 def detailGaleri_view(request):
     return render(request, 'luminance/detailGaleri.html')
 
 def detail_galeri_view(request, pk):
-    # Ambil galeri berdasarkan pk
     gallery = get_object_or_404(Gallery, pk=pk)
-
-    # Ambil profil dari pemilik galeri
     profile = Profile.objects.filter(user=gallery.owner).first()
-
-    # Ambil semua karya seni dalam galeri tersebut
     artworks = Artwork.objects.filter(gallery=gallery)
 
-    # Target style yang ingin ditampilkan
     TARGET_STYLES = ['Realism', 'Impressionism', 'Cubism', 'Romanticism', 'Expressionism']
 
-    # Kelompokkan karya berdasarkan style dari prediksi ViT
     artworks_by_style = {}
     for artwork in artworks:
         vit_prediction = ViTPrediction.objects.filter(artwork=artwork).first()
@@ -293,6 +302,7 @@ def detailKarya_view(request):
 
 
 def detail_karya_view(request, pk):
+    user = request.user
     artwork = get_object_or_404(Artwork, pk=pk)
     gallery = artwork.gallery
     profile = Profile.objects.filter(user=gallery.owner).first()
@@ -303,12 +313,17 @@ def detail_karya_view(request, pk):
     prev_artwork = all_artworks[current_index - 1] if current_index > 0 else None
     next_artwork = all_artworks[current_index + 1] if current_index < len(all_artworks) - 1 else None
 
+    liked_artwork_ids = set(
+        Like.objects.filter(user=user, artwork__isnull=False).values_list('artwork_id', flat=True)
+    )
+
     context = {
         'artwork': artwork,
         'gallery': gallery,
         'profile': profile,
         'prev_artwork': prev_artwork,
-        'next_artwork': next_artwork
+        'next_artwork': next_artwork,
+        'liked_artwork_ids': liked_artwork_ids,
     }
     return render(request, 'luminance/detailKarya.html', context)
 
@@ -317,10 +332,21 @@ def detail_karya_view(request, pk):
 
 @login_required
 def manageGaleri_view(request):
+    user = request.user
+    profile, created = Profile.objects.get_or_create(user=user)
     galleries = Gallery.objects.filter(owner=request.user)
-    return render(request, 'luminance/manageGaleri.html', {'galleries': galleries})
+    context = {
+        'user': user,
+        'profile': profile,
+        'galleries':galleries
+    }
+
+    
+    return render(request, 'luminance/manageGaleri.html', context)
 
 def tambahGaleri_view(request):
+    user = request.user
+    profile, created = Profile.objects.get_or_create(user=user)
     if request.method == 'POST':
         form = UploadGalleryForm(request.POST, request.FILES)
         if form.is_valid():
@@ -330,12 +356,21 @@ def tambahGaleri_view(request):
             return redirect('galeriSaya')  # Redirect ke halaman galeriSaya tanpa pk
     else:
         form = UploadGalleryForm()
-    return render(request, 'luminance/tambahGaleri.html', {'form': form})
+
+        context = {
+        'user': user,
+        'profile': profile,
+        'form':form
+    }
+        
+    return render(request, 'luminance/tambahGaleri.html', context)
 
 
 
 def editGaleri_view(request, pk):
     galeri = get_object_or_404(Gallery, pk=pk)
+    user = request.user
+    profile, created = Profile.objects.get_or_create(user=user)
 
     if request.method == "POST":
         # Update gallery fields
@@ -373,6 +408,8 @@ def editGaleri_view(request, pk):
     context = {
         'gallery': galeri,
         'karya_per_style': karya_per_style,
+        'user': user,
+        'profile': profile,
     }
 
     return render(request, 'luminance/editGaleri.html', context)
