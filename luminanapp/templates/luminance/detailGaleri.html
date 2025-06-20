@@ -51,31 +51,38 @@
             <i class="fa-solid fa-location-dot fa-lg"></i>
           </div>
           <div class="col-sm-10 gallery-loc">
-            <p>{{ gallery.location }}</p>
+            <p>{{ profile.location }}</p>
           </div>
         </div>
 
         <h3 class="contact-gallery">Kontak kami</h3>
         <ul class="list-group list-group-flush contact-gallery">
           <li class="list-group-item">
-            <i class="fa-solid fa-envelope"></i> {{ gallery.contact }}
+            <h6 class="profil-email">
+              <i class="fa-solid fa-envelope"></i>
+              <span>{{ gallery.owner.email }}</span>
+            </h6>
+          </li>
+
+          <li class="list-group-item">
+            <i class="fa-solid fa-phone"></i> {{ profile.phone }}
           </li>
         </ul>
 
         <h3 class="contact-gallery">Media sosial</h3>
         <ul class="d-flex list-unstyled gap-3 contact-gallery">
           <li>
-            <a href="{{ gallery.ig }}" target="_blank">
+            <a href="{{ profile.instagram_link }}" target="_blank">
               <i class="fa-brands fa-instagram fa-xl"></i>
             </a>
           </li>
           <li>
-            <a href="{{ gallery.fb }}" target="_blank">
+            <a href="{{ profile.facebook_link }}" target="_blank">
               <i class="fa-brands fa-facebook fa-xl"></i>
             </a>
           </li>
           <li>
-            <a href="{{ gallery.xtwt }}" target="_blank">
+            <a href="{{ profile.x_link }}" target="_blank">
               <i class="fa-brands fa-x-twitter fa-xl"></i>
             </a>
           </li>

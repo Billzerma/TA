@@ -24,37 +24,7 @@
       <div class="container-fluid border rounded form-tambah-galeri">
         <form method="POST" enctype="multipart/form-data">
            {% csrf_token %}
-          <div class="mb-3">
-            <label for="judulGaleri" class="form-label">Judul</label>
-            <input
-              type="text"
-              name="title"
-              class="form-control"
-              id="judulGaleri"
-              aria-describedby="judulHelp"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="kontakGaleri" class="form-label">Kontak*</label>
-            <input
-            name="contact"
-              type="text"
-              class="form-control"
-              id="kontakGaleri"
-            />
-          </div>
-
-          <div class="mb-3">
-            <label for="lokasiGaleri" class="form-label">Lokasi</label>
-            <input
-            name="location"
-              type="text"
-              class="form-control"
-              id="lokasiGaleri"
-            />
-          </div>
-
-          <label for="inputGroupFile02" class="form-label">Thumbnail galeri*</label>
+              <label for="inputGroupFile02" class="form-label">Thumbnail galeri*</label>
           <div class="input-group mb-3">
             <input
             name="thumbnail"
@@ -65,43 +35,18 @@
             />
             <label class="input-group-text" for="inputGroupFile02">Upload</label>
           </div>
-          <label for="socialMedia" class="form-label">Media sosial</label>
-          <div class="row g-3">
-            
-            <div class="col">
-              <i class="fa-brands fa-instagram"></i>
-              <input
-              name="ig"
-                type="text"
-                class="form-control"
-                placeholder="Instagram URL" {# Ganti placeholder agar lebih spesifik #}
-                aria-label="Instagram URL"
-              />
-            </div>
-            
-            <div class="col">
-              <i class="fa-brands fa-facebook"></i>
-              <input
-              name="fb"
-                type="text"
-                class="form-control"
-                placeholder="Facebook URL" {# Ganti placeholder agar lebih spesifik #}
-                aria-label="Facebook URL"
-              />
-            </div>
-            <div class="col mb-3">
-              <i class="fa-brands fa-square-x-twitter"></i>
-              <input
-              name="xtwt"
-                type="text"
-                class="form-control"
-                placeholder="Twitter URL" {# Ganti placeholder agar lebih spesifik #}
-                aria-label="Twitter URL"
-              />
-            </div>
+          <div class="mb-3">
+            <label for="judulGaleri" class="form-label">Judul</label>
+            <input
+              type="text"
+              name="title"
+              class="form-control"
+              id="judulGaleri"
+              aria-describedby="judulHelp"
+            />
           </div>
 
-          <div class="mb-3">
+               <div class="mb-3">
             <label for="deskripsiGaleri" class="form-label">Deskripsi</label>
             <textarea
             name="description"
@@ -110,34 +55,33 @@
               rows="3"
             ></textarea>
           </div>
-
+        
           <button type="submit" class="btn btn-primary">Buat</button>
         </form>
       </div>
     </div>
 
-    <div class="col-md-4">
-      <label for="thum-preview">Thumbnail Preview</label>
-      <div
-        class="card sec-card-mygaleri"
-        style="width: 21rem; display: none"
-        id="cardPreview"
-      >
-        <img
-          src=""
-          class="card-img-top fit-image"
-          alt="Preview Image"
-          id="imagePreview"
-        />
-        <div class="card-body">
-          <h5 class="card-title">Nama Galeri</h5>
-          <p class="card-text">
-            Isi deskripsi galeri mu, untuk menarik minat banyak orang <i class="fa-regular fa-face-smile-wink fa-lg"></i>
-          </p>
-          
-        </div>
-      </div>
+<div class="col-md-4">
+  <label for="thum-preview">Thumbnail Preview</label>
+  <div
+    class="card sec-card-mygaleri"
+    style="width: 21rem; display: none"
+    id="cardPreview"
+  >
+    <img
+      src=""
+      class="card-img-top fit-image"
+      alt="Preview Image"
+      id="imagePreview"
+    />
+    <div class="card-body">
+      <h5 class="card-title" id="previewTitle">Nama Galeri</h5> {# Tambahkan ID untuk judul #}
+      <p class="card-text" id="previewDescription"> {# Tambahkan ID untuk deskripsi #}
+        Isi deskripsi galeri mu, untuk menarik minat banyak orang <i class="fa-regular fa-face-smile-wink fa-lg"></i>
+      </p>
     </div>
+  </div>
+</div>
   </div>
 </div>
 

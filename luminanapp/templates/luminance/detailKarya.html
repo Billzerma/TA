@@ -20,100 +20,6 @@
       </ol>
     </nav>
 
-<div class="col-md-3 dkarya-info-karya">
-  <div class="container-fluid border rounded karya-info">
-    <div class="mb-3">
-      <label for="exampleFormControlTextarea1" class="form-label">Tulis Komentar</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Posting komentar"></textarea>
-    </div>
-    <input class="btn btn-primary" type="submit" value="Submit" />
-
-    </div> 
-
-    <div class="comments-scroll-container"> 
-        <ul class="list-group list-group-flush mt-4">
-            <li class="list-group-item py-3">
-                <div class="d-flex align-items-center">
-                    <div class="flex-shrink-0">
-                        <img src="{{ profile.profile_picture.url }}"
-                             class="rounded-circle comment-profile-pic"
-                             alt="Foto profil user">
-                    </div>
-
-                    <div class="flex-grow-1 ms-3">
-                        <h6 class="mb-0 fw-bold">Nama Pengguna</h6>
-                        <small class="text-muted">2 jam yang lalu</small>
-                    </div>
-                </div>
-
-                <p class="mt-2 mb-0">
-                    Ini adalah isi komentar dari pengguna. Dengan layout ini, teks akan berada di bawah foto profil dan info pengguna, dimulai dari sisi paling kiri.
-                </p>
-            </li>
-
-            <li class="list-group-item py-3">
-                <div class="d-flex align-items-center">
-                    <div class="flex-shrink-0">
-                        <img src="{{ profile.profile_picture.url }}"
-                             class="rounded-circle comment-profile-pic"
-                             alt="Foto profil user">
-                    </div>
-
-                    <div class="flex-grow-1 ms-3">
-                        <h6 class="mb-0 fw-bold">Nama Pengguna</h6>
-                        <small class="text-muted">2 jam yang lalu</small>
-                    </div>
-                </div>
-
-                <p class="mt-2 mb-0">
-                    Ini adalah isi komentar dari pengguna. Dengan layout ini, teks akan berada di bawah foto profil dan info pengguna, dimulai dari sisi paling kiri.
-                </p>
-            </li>     
-        </ul>
-    </div>
-</div>
-
-
-
-<div class="col-md-6 artwork-port overflow-x-scroll">
-    <div class="row con-art">
-        <div class="container-fluid position-relative artwork-container"> {# Add a new class here for easier targeting #}
-            {% if prev_artwork %}
-            <a
-                href="{% url 'detail_karya' prev_artwork.pk %}"
-                class="btn btn-primary position-absolute start-0 top-50 translate-middle-y arrow-btn"
-                >❮</a
-            >
-            {% endif %}
-            <img
-                src="{{ artwork.image_url.url }}"
-                class="artwork-view w-90"
-                alt="{{ artwork.title }}"
-            />
-
-            {% if next_artwork %}
-            <a
-                href="{% url 'detail_karya' next_artwork.pk %}"
-                class="btn btn-primary position-absolute end-0 top-50 translate-middle-y arrow-btn"
-                >❯</a
-            >
-            {% endif %}
-
-            {# Moved the form inside the same relative container #}
-            <form method="POST" action="{% url 'like_artwork' artwork.pk %}" class="position-absolute bottom-0 start-50 translate-middle-x like-btn-position mt3">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-link p-0 border-0 ">
-                    {% if artwork.pk in liked_artwork_ids %}
-                        <i class="fa-solid fa-heart fa-2xl" style="color:red;"></i>
-                    {% else %}
-                        <i class="fa-regular fa-heart fa-2xl"></i>
-                    {% endif %}
-                </button>
-            </form>
-        </div>
-    </div>
-</div>
-
     <div class="col-md-3 dkarya-info-karya">
       <div class="container-fluid border rounded karya-info">
         <div class="row">
@@ -143,6 +49,114 @@
 
       <div class="container-fluid more-art-by">
         <div class="row more-by-bg rounded"></div>
+      </div>
+    </div>
+
+    <div class="col-md-6 artwork-port overflow-x-scroll">
+      <div class="row con-art">
+        <div class="container-fluid position-relative artwork-container">
+          {# Add a new class here for easier targeting #} {% if prev_artwork %}
+          <a
+            href="{% url 'detail_karya' prev_artwork.pk %}"
+            class="btn btn-primary position-absolute start-0 top-50 translate-middle-y arrow-btn"
+            >❮</a
+          >
+          {% endif %}
+          <img
+            src="{{ artwork.image_url.url }}"
+            class="artwork-view w-90"
+            alt="{{ artwork.title }}"
+          />
+
+          {% if next_artwork %}
+          <a
+            href="{% url 'detail_karya' next_artwork.pk %}"
+            class="btn btn-primary position-absolute end-0 top-50 translate-middle-y arrow-btn"
+            >❯</a
+          >
+          {% endif %} {# Moved the form inside the same relative container #}
+          <form
+            method="POST"
+            action="{% url 'like_artwork' artwork.pk %}"
+            class="position-absolute bottom-0 start-50 translate-middle-x like-btn-position mt3"
+          >
+            {% csrf_token %}
+            <button type="submit" class="btn btn-link p-0 border-0">
+              {% if artwork.pk in liked_artwork_ids %}
+              <i class="fa-solid fa-heart fa-2xl" style="color: red"></i>
+              {% else %}
+              <i class="fa-regular fa-heart fa-2xl"></i>
+              {% endif %}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 dkarya-info-karya">
+      <div class="container-fluid border rounded karya-info">
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label"
+            >Tulis Komentar</label
+          >
+          <textarea
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+            placeholder="Posting komentar"
+          ></textarea>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Submit" />
+      </div>
+
+      <div class="comments-scroll-container">
+        <ul class="list-group list-group-flush mt-4">
+          <li class="list-group-item py-3">
+            <div class="d-flex align-items-center">
+              <div class="flex-shrink-0">
+                <img
+                  src="{{ profile.profile_picture.url }}"
+                  class="rounded-circle comment-profile-pic"
+                  alt="Foto profil user"
+                />
+              </div>
+
+              <div class="flex-grow-1 ms-3">
+                <h6 class="mb-0 fw-bold">Nama Pengguna</h6>
+                <small class="text-muted">2 jam yang lalu</small>
+              </div>
+            </div>
+
+            <p class="mt-2 mb-0">
+              Ini adalah isi komentar dari pengguna. Dengan layout ini, teks
+              akan berada di bawah foto profil dan info pengguna, dimulai dari
+              sisi paling kiri.
+            </p>
+          </li>
+
+          <li class="list-group-item py-3">
+            <div class="d-flex align-items-center">
+              <div class="flex-shrink-0">
+                <img
+                  src="{{ profile.profile_picture.url }}"
+                  class="rounded-circle comment-profile-pic"
+                  alt="Foto profil user"
+                />
+              </div>
+
+              <div class="flex-grow-1 ms-3">
+                <h6 class="mb-0 fw-bold">Nama Pengguna</h6>
+                <small class="text-muted">2 jam yang lalu</small>
+              </div>
+            </div>
+
+            <p class="mt-2 mb-0">
+              Ini adalah isi komentar dari pengguna. Dengan layout ini, teks
+              akan berada di bawah foto profil dan info pengguna, dimulai dari
+              sisi paling kiri.
+            </p>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

@@ -34,21 +34,6 @@
             {{ gallery.title }}
           </li>
           <li class="list-group-item edit-info-gall">
-            <i class="fa-solid fa-location-dot fa-lg"></i> {{ gallery.location}}
-          </li>
-          <li class="list-group-item edit-info-gall">
-            <i class="fa-solid fa-phone"></i> {{ gallery.contact }}
-          </li>
-          <li class="list-group-item edit-info-gall">
-            <i class="fa-brands fa-instagram"></i> {{ gallery.ig }}
-          </li>
-          <li class="list-group-item edit-info-gall">
-            <i class="fa-brands fa-facebook"></i> {{ gallery.fb }}
-          </li>
-          <li class="list-group-item edit-info-gall">
-            <i class="fa-brands fa-square-x-twitter"></i> {{ gallery.xtwt }}
-          </li>
-          <li class="list-group-item edit-info-gall">
             <p>{{ gallery.description }}</p>
           </li>
 
@@ -104,28 +89,7 @@
                 />
               </div>
 
-              <div class="mb-3">
-                <label for="editKontakGaleri" class="form-label">Kontak*</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="contact"
-                  id="editKontakGaleri"
-                  value="{{ gallery.contact }}"
-                />
-              </div>
-
-              <div class="mb-3">
-                <label for="editLokasiGaleri" class="form-label">Lokasi</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="location"
-                  id="editLokasiGaleri"
-                  value="{{ gallery.location }}"
-                />
-              </div>
-
+             
               <label for="editThumbGaleri" class="form-label"
                 >Thumbnail galeri*</label
               >
@@ -142,41 +106,7 @@
                 >
               </div>
 
-              <label for="editSocialMedia" class="form-label"
-                >Media sosial</label
-              >
-              <div class="row g-3">
-                <div class="col">
-                  <i class="fa-brands fa-instagram"></i>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="ig"
-                    value="{{ gallery.ig }}"
-                    placeholder="Instagram URL"
-                  />
-                </div>
-                <div class="col">
-                  <i class="fa-brands fa-facebook"></i>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="fb"
-                    value="{{ gallery.fb }}"
-                    placeholder="Facebook URL"
-                  />
-                </div>
-                <div class="col mb-3">
-                  <i class="fa-brands fa-square-x-twitter"></i>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="xtwt"
-                    value="{{ gallery.xtwt }}"
-                    placeholder="Twitter URL"
-                  />
-                </div>
-              </div>
+              
 
               <div class="mb-3">
                 <label for="editDeskripsiGaleri" class="form-label"

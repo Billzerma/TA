@@ -375,11 +375,6 @@ def editGaleri_view(request, pk):
     if request.method == "POST":
         # Update gallery fields
         galeri.title = request.POST.get("title")
-        galeri.contact = request.POST.get("contact")
-        galeri.location = request.POST.get("location")
-        galeri.ig = request.POST.get("ig")
-        galeri.fb = request.POST.get("fb")
-        galeri.xtwt = request.POST.get("xtwt")
         galeri.description = request.POST.get("description")
 
         # Update thumbnail jika user upload file baru
@@ -419,12 +414,15 @@ def profile_view(request):
     user = request.user
     profile, created = Profile.objects.get_or_create(user=user)
 
+    # Ambil grup user (role)
+    roles = user.groups.values_list('name', flat=True)  
+
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
             messages.success(request, "Profil berhasil diperbarui.")
-            return redirect('profile')  # ganti dengan nama urlmu
+            return redirect('profile')
     else:
         form = ProfileForm(instance=profile)
 
@@ -432,8 +430,10 @@ def profile_view(request):
         'user': user,
         'profile': profile,
         'form': form,
+        'roles': roles,  # tambahkan ini
     }
     return render(request, 'luminance/profile.html', context)
+
 
 
 def update_foto(request):
@@ -444,9 +444,17 @@ def update_foto(request):
     return redirect("profile")  # Ganti dengan URL kamu
 
 @login_required
-def update_bio(request):
+def update_profile_details(request):
     if request.method == "POST":
+        user = request.user # Dapatkan objek User
+        profile = user.profile # Dapatkan objek Profile terkait
         profile = request.user.profile
+        profile.phone = request.POST.get("phone", "")
+        profile.location = request.POST.get("location", "")
+
+        profile.instagram_link = request.POST.get("instagram_link", "")
+        profile.facebook_link = request.POST.get("facebook_link", "")
+        profile.x_link = request.POST.get("x_link", "")
         profile.bio = request.POST.get("bio", "")
         profile.save()
-    return redirect("profile")
+    return redirect("profile") 

@@ -7,6 +7,11 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = CloudinaryField('image', blank=True, null=True)
     bio = models.TextField(blank=True)
+    phone = models.CharField(max_length=20, blank=True, null=True) # Tambahkan ini
+    location = models.CharField(max_length=100, blank=True, null=True)
+    instagram_link = models.URLField(max_length=200, blank=True, null=True)
+    facebook_link = models.URLField(max_length=200, blank=True, null=True)
+    x_link = models.URLField(max_length=200, blank=True, null=True) # Untuk Twitter/X
 
     def __str__(self):
         return self.user.username
@@ -15,12 +20,7 @@ class Gallery(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True)
-    location = models.CharField(max_length=255, blank=True)
-    contact = models.CharField(max_length=100, blank=True)
     thumbnail = CloudinaryField('image', blank=True, null=True)
-    ig = models.URLField()
-    fb = models.URLField()
-    xtwt = models.URLField()
     created_at = models.DateTimeField(auto_now_add=True)
 
 class Style(models.Model):

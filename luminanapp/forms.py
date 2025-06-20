@@ -21,10 +21,13 @@ class RegisterForm(UserCreationForm):
 class UploadGalleryForm(forms.ModelForm):
     class Meta:
         model = Gallery
-        fields = ['title', 'contact', 'location', 'thumbnail', 'ig', 'fb', 'xtwt', 'description']
+        fields = ['title',  'thumbnail','description']
 
 
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['profile_picture', 'bio']
+        fields = [
+            'profile_picture', 'bio', 'phone', 'location',
+            'instagram_link', 'facebook_link', 'x_link' # Tambahkan ini
+        ]
