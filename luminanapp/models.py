@@ -87,3 +87,11 @@ class SaveArtGallery(models.Model):
 
     def __str__(self):
         return f"Save by {self.user.username}"
+    
+class GalleryVisit(models.Model):
+    gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE, related_name='visits')
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True) # Opsional: catat siapa yang mengunjungi
+    visited_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Visit to {self.gallery.title} at {self.visited_at.strftime('%Y-%m-%d %H:%M')}"

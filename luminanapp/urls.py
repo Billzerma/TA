@@ -25,6 +25,8 @@ urlpatterns = [
     path('tambahGaleri/', views.tambahGaleri_view, name='tambahGaleri'),
     path('profile/', views.profile_view, name='profile'),
     path('profil/update-foto/', views.update_foto, name='update_foto'),
+
+    path('api/stats/gallery/<int:gallery_id>/', views.get_gallery_stats_api, name='api_gallery_stats'),
     
     path('profile/update_details/', views.update_profile_details, name='update_profile_details'),
     path('galeri/<int:pk>/edit/', views.editGaleri_view, name='editGaleri'),

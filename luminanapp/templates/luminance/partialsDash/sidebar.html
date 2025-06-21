@@ -20,14 +20,14 @@
       <span>Profile</span></a
     >
   </li>
-
+{% if request.user.groups.all.0.name == 'gallery_owner' %}
   <li class="nav-item">
     <a class="nav-link" href="{% url 'galeriSaya' %}">
       <i class="fa-solid fa-images"></i>
       <span>Galeri Saya</span></a
     >
   </li>
-
+{% endif %}
 
   <li class="nav-item">
     <a class="nav-link" href="{% url 'home' %}">

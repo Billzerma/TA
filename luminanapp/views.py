@@ -12,7 +12,7 @@ from luminanapp.decorator import group_required
 from .forms import UploadGalleryForm
 from .models import Gallery,Like, SaveArtGallery
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Gallery, Artwork, Style, ViTPrediction
+from .models import Gallery, Artwork, Style, ViTPrediction, Comment,GalleryVisit
 from django.views.decorators.csrf import csrf_exempt
 import cloudinary.uploader
 import torch
@@ -27,6 +27,12 @@ from .models import Profile
 from django.db.models import Count, Q
 import random
 from django.db.models import Prefetch
+from .forms import CommentForm
+from django.http import JsonResponse, HttpResponseForbidden
+from django.contrib.auth.decorators import login_required
+from django.db.models import Count, Q
+from django.db.models.functions import TruncMonth
+from datetime import datetime, timedelta
 
 
 
@@ -317,6 +323,25 @@ def detail_karya_view(request, pk):
         Like.objects.filter(user=user, artwork__isnull=False).values_list('artwork_id', flat=True)
     )
 
+
+    comments = Comment.objects.filter(artwork=artwork).order_by('-created_at')
+
+    if request.method == 'POST':
+       
+        if not request.user.is_authenticated:
+            return redirect('login') 
+
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.artwork = artwork
+            new_comment.user = request.user
+            new_comment.save()
+            return redirect('detail_karya', pk=artwork.pk)
+    else:
+        # Jika bukan POST request, buat form kosong
+        comment_form = CommentForm()
+
     context = {
         'artwork': artwork,
         'gallery': gallery,
@@ -324,6 +349,8 @@ def detail_karya_view(request, pk):
         'prev_artwork': prev_artwork,
         'next_artwork': next_artwork,
         'liked_artwork_ids': liked_artwork_ids,
+        'comments': comments,
+        'comment_form': comment_form,
     }
     return render(request, 'luminance/detailKarya.html', context)
 
@@ -415,7 +442,7 @@ def profile_view(request):
     profile, created = Profile.objects.get_or_create(user=user)
 
     # Ambil grup user (role)
-    roles = user.groups.values_list('name', flat=True)  
+    roles = user.groups.values_list('name', flat=True)
 
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)
@@ -426,11 +453,17 @@ def profile_view(request):
     else:
         form = ProfileForm(instance=profile)
 
+    # === TAMBAHKAN LOGIKA INI ===
+    # Ambil daftar galeri milik user untuk mengisi dropdown statistik
+    user_galleries = Gallery.objects.filter(owner=user)
+    # ============================
+
     context = {
         'user': user,
         'profile': profile,
         'form': form,
-        'roles': roles,  # tambahkan ini
+        'roles': roles,
+        'user_galleries': user_galleries, # <-- Tambahkan ke context
     }
     return render(request, 'luminance/profile.html', context)
 
@@ -458,3 +491,63 @@ def update_profile_details(request):
         profile.bio = request.POST.get("bio", "")
         profile.save()
     return redirect("profile") 
+
+
+
+
+
+@login_required
+def get_gallery_stats_api(request, gallery_id):
+    gallery = get_object_or_404(Gallery, pk=gallery_id)
+
+
+    if gallery.owner != request.user:
+        return HttpResponseForbidden("Anda tidak memiliki izin untuk melihat statistik ini.")
+
+
+    total_likes = Like.objects.filter(gallery=gallery).count()
+
+
+    style_names = ['Realism', 'Cubism', 'Impressionism', 'Expressionism','Romanticism']
+    styles = Style.objects.filter(name__in=style_names)
+    
+    style_counts = styles.annotate(
+        artwork_count=Count('vitprediction__artwork', 
+                             filter=Q(vitprediction__artwork__gallery=gallery))
+    ).values('name', 'artwork_count').order_by('name')
+
+    pie_chart_data = {
+        'labels': [item['name'] for item in style_counts],
+        'data': [item['artwork_count'] for item in style_counts],
+    }
+
+
+    one_year_ago = datetime.now() - timedelta(days=365)
+    monthly_visits = GalleryVisit.objects.filter(
+        gallery=gallery,
+        visited_at__gte=one_year_ago
+    ).annotate(
+        month=TruncMonth('visited_at')
+    ).values('month').annotate(
+        count=Count('id')
+    ).order_by('month')
+
+
+    month_labels = [(datetime.now() - timedelta(days=30*i)).strftime("%b %Y") for i in range(12)]
+    month_labels.reverse()
+    
+    visit_data_map = {item['month'].strftime("%b %Y"): item['count'] for item in monthly_visits}
+    
+    area_chart_data = {
+        'labels': month_labels,
+        'data': [visit_data_map.get(label, 0) for label in month_labels]
+    }
+
+
+    data = {
+        'gallery_title': gallery.title,
+        'total_likes': total_likes,
+        'pie_chart': pie_chart_data,
+        'area_chart': area_chart_data,
+    }
+    return JsonResponse(data)

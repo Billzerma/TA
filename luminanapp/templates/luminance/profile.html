@@ -91,360 +91,291 @@
         </div>
         <div class="card-body">
           <ul class="list-group list-group-flush mb-3">
-            <li class="list-group-item">
-              <h6 class="profil-user">
-                {{ user.username }} {% for role in roles %}
-                <span class="badge text-bg-success role-badge">{{ role }}</span>
-                {% endfor %}
-              </h6>
-            </li>
+  <li class="list-group-item">
+    <h6 class="profil-user">
+      {{ user.username }} {% for role in roles %}
+      <span class="badge text-bg-success role-badge">{{ role }}</span>
+      {% endfor %}
+    </h6>
+  </li>
 
-            <li class="list-group-item">
-              <h6 class="profil-email">
-                <i class="fa-solid fa-envelope"></i>
-                <span>{{ user.email }}</span>
-              </h6>
-            </li>
-            <li class="list-group-item">
-              <h6 class="profil-email">
-                <i class="fa-solid fa-phone"></i>
-                <span id="displayPhone"
-                  >{{ profile.phone|default:"phone" }}</span
-                >
-              </h6>
-            </li>
-            <li class="list-group-item">
-              <h6 class="profil-email">
-                <i class="fa-solid fa-location-dot"></i>
-                <span id="displayLocation"
-                  >{{ profile.location|default:"location" }}</span
-                >
-              </h6>
-            </li>
+  <li class="list-group-item">
+    <h6 class="profil-email">
+      <i class="fa-solid fa-envelope"></i>
+      <span>{{ user.email }}</span>
+    </h6>
+  </li>
+  <li class="list-group-item">
+    <h6 class="profil-email">
+      <i class="fa-solid fa-phone"></i>
+      <span id="displayPhone">{{ profile.phone|default:"phone" }}</span>
+    </h6>
+  </li>
+  {% if request.user.groups.all.0.name == 'gallery_owner' %}
+  <li class="list-group-item">
+    <h6 class="profil-email">
+      <i class="fa-solid fa-location-dot"></i>
+      <span id="displayLocation">{{ profile.location|default:"location" }}</span>
+    </h6>
+  </li>
 
-            <li class="list-group-item">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                  <h6 class="profil-email">
-                    <i class="fa-brands fa-instagram"></i>
-                    <a
-                      href="{{ profile.instagram_link }}"
-                      target="_blank"
-                      id="displayInstagramLink"
-                    >
-                      {{ profile.instagram_link|default:"Add Instagram Link" }}
-                    </a>
-                  </h6>
-                </li>
-                <li class="list-group-item">
-                  <h6 class="profil-email">
-                    <i class="fa-brands fa-facebook"></i>
-                    <a
-                      href="{{ profile.facebook_link }}"
-                      target="_blank"
-                      id="displayFacebookLink"
-                    >
-                      {{ profile.facebook_link|default:"Add Facebook Link" }}
-                    </a>
-                  </h6>
-                </li>
-                <li class="list-group-item">
-                  <h6 class="profil-email">
-                    <i class="fa-brands fa-x-twitter"></i> 
-                    <a
-                      href="{{ profile.x_link }}"
-                      target="_blank"
-                      id="displayXLink"
-                    >
-                      {{ profile.x_link|default:"Add X Link" }}
-                    </a>
-                  </h6>
-                </li>
-              </ul>
-            </li>
+  <li class="list-group-item">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <h6 class="profil-email">
+          <i class="fa-brands fa-instagram"></i>
+          <a
+            href="{{ profile.instagram_link }}"
+            target="_blank"
+            id="displayInstagramLink"
+          >
+            {{ profile.instagram_link|default:"Add Instagram Link" }}
+          </a>
+        </h6>
+      </li>
+      <li class="list-group-item">
+        <h6 class="profil-email">
+          <i class="fa-brands fa-facebook"></i>
+          <a
+            href="{{ profile.facebook_link }}"
+            target="_blank"
+            id="displayFacebookLink"
+          >
+            {{ profile.facebook_link|default:"Add Facebook Link" }}
+          </a>
+        </h6>
+      </li>
+      <li class="list-group-item">
+        <h6 class="profil-email">
+          <i class="fa-brands fa-x-twitter"></i>
+          <a href="{{ profile.x_link }}" target="_blank" id="displayXLink">
+            {{ profile.x_link|default:"Add X Link" }}
+          </a>
+        </h6>
+      </li>
+    </ul>
+  </li>
+  {% endif %}
 
-            <li class="list-group-item border-0">
-              <i class="fa-solid fa-quote-left"></i>
-              <p class="ms-2 bio-profile" id="displayBio">
-                {{ profile.bio|default:"Isi bio kamu di sini..." }}
-              </p>
-              <i class="fa-solid fa-quote-right float-right"></i>
-            </li>
-            <li class="list-group-item border-0">
+  <li class="list-group-item border-0">
+    <i class="fa-solid fa-quote-left"></i>
+    <p class="ms-2 bio-profile" id="displayBio">
+      {{ profile.bio|default:"Isi bio kamu di sini..." }}
+    </p>
+    <i class="fa-solid fa-quote-right float-right"></i>
+  </li>
+  <li class="list-group-item border-0">
+    <div class="card mb-4">
+      <div class="card-body">
+        <button
+          class="btn btn-primary"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#editProfileModal"
+        >
+          Edit Details
+        </button>
+
+        <div
+          class="modal fade"
+          id="editProfileModal"
+          tabindex="-1"
+          aria-labelledby="editProfileModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editProfileModalLabel">
+                  Edit Profile Details
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
               <form
                 method="POST"
                 action="{% url 'update_profile_details' %}"
                 id="formProfileDetails"
               >
                 {% csrf_token %}
-                <div class="card mb-4">
-                  <div class="card-body">
-                    <button
-                      class="btn btn-primary"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseProfileDetails"
-                      aria-expanded="false"
-                      aria-controls="collapseProfileDetails"
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="phoneInput" class="form-label">Phone</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="phone"
+                      id="phoneInput"
+                      value="{{ profile.phone|default:'' }}"
+                    />
+                  </div>
+                  {% if request.user.groups.all.0.name == 'gallery_owner' %}
+                  <div class="mb-3">
+                    <label for="locationInput" class="form-label"
+                      >Location</label
                     >
-                      Edit Details
-                    </button>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="location"
+                      id="locationInput"
+                      value="{{ profile.location|default:'' }}"
+                    />
+                  </div>
 
-                    <div class="collapse mt-3" id="collapseProfileDetails">
-                      <div class="card card-body">
-                        <div class="mb-3">
-                          <label for="phoneInput" class="form-label"
-                            >Phone</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            name="phone"
-                            id="phoneInput"
-                            value="{{ profile.phone|default:'' }}"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label for="locationInput" class="form-label"
-                            >Location</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            name="location"
-                            id="locationInput"
-                            value="{{ profile.location|default:'' }}"
-                          />
-                        </div>
+                  <div class="mb-3">
+                    <label for="instagramLinkInput" class="form-label"
+                      >Instagram Link</label
+                    >
+                    <input
+                      type="url"
+                      class="form-control"
+                      name="instagram_link"
+                      id="instagramLinkInput"
+                      value="{{ profile.instagram_link|default:'' }}"
+                      placeholder="https://instagram.com/yourusername"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="facebookLinkInput" class="form-label"
+                      >Facebook Link</label
+                    >
+                    <input
+                      type="url"
+                      class="form-control"
+                      name="facebook_link"
+                      id="facebookLinkInput"
+                      value="{{ profile.facebook_link|default:'' }}"
+                      placeholder="https://facebook.com/yourusername"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="xLinkInput" class="form-label"
+                      >X (Twitter) Link</label
+                    >
+                    <input
+                      type="url"
+                      class="form-control"
+                      name="x_link"
+                      id="xLinkInput"
+                      value="{{ profile.x_link|default:'' }}"
+                      placeholder="https://x.com/yourusername"
+                    />
+                  </div>
+                  {% endif %}
 
-                        <div class="mb-3">
-                          <label for="instagramLinkInput" class="form-label"
-                            >Instagram Link</label
-                          >
-                          <input
-                            type="url"
-                            {#
-                            Gunakan
-                            type="url"
-                            untuk
-                            validasi
-                            browser
-                            #}
-                            class="form-control"
-                            name="instagram_link"
-                            id="instagramLinkInput"
-                            value="{{ profile.instagram_link|default:'' }}"
-                            placeholder="https://instagram.com/yourusername"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label for="facebookLinkInput" class="form-label"
-                            >Facebook Link</label
-                          >
-                          <input
-                            type="url"
-                            class="form-control"
-                            name="facebook_link"
-                            id="facebookLinkInput"
-                            value="{{ profile.facebook_link|default:'' }}"
-                            placeholder="https://facebook.com/yourusername"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label for="xLinkInput" class="form-label"
-                            >X (Twitter) Link</label
-                          >
-                          <input
-                            type="url"
-                            class="form-control"
-                            name="x_link"
-                            id="xLinkInput"
-                            value="{{ profile.x_link|default:'' }}"
-                            placeholder="https://x.com/yourusername"
-                          />
-                        </div>
-
-                        <div class="mb-3">
-                          <label for="bioTextarea" class="form-label"
-                            >Bio</label
-                          >
-                          <textarea
-                            class="form-control"
-                            name="bio"
-                            id="bioTextarea"
-                            rows="3"
-                          >
+                  <div class="mb-3">
+                    <label for="bioTextarea" class="form-label">Bio</label>
+                    <textarea
+                      class="form-control"
+                      name="bio"
+                      id="bioTextarea"
+                      rows="3"
+                    >
 {{ profile.bio|default:'' }}</textarea
-                          >
-                        </div>
-                      </div>
-                      <button type="submit" class="btn btn-success mt-3">
-                        Simpan Perubahan
-                      </button>
-                    </div>
+                    >
                   </div>
                 </div>
+                <div class="modal-footer">
+                
+                  <button type="submit" class="btn btn-success">
+                    Simpan Perubahan
+                  </button>
+                </div>
               </form>
-            </li>
-          </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>
         </div>
       </div>
     </div>
   </div>
 
+  {% if request.user.groups.all.0.name == 'gallery_owner' %}
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-600">Statistik galeri</h1>
   </div>
 
-  <div class="row">
-    <div class="dropdown ms-4">
-      <button
-        class="btn btn-secondary dropdown-toggle"
-        type="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        Pilih Galeri
-      </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-      </ul>
-    </div>
-  </div>
-  <hr />
-
-  <div class="row">
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-primary shadow h-100 py-2 ms-4">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div
-                class="text-xs font-weight-bold text-primary text-uppercase mb-1"
-              >
-                Earnings (Monthly)
-              </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-calendar fa-2x text-gray-300"></i>
-            </div>
-          </div>
+   <div class="row">
+        <div class="dropdown ms-1">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="galleryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Pilih Galeri
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="galleryDropdown">
+                {% for gallery in user_galleries %}
+                <li><a class="dropdown-item gallery-select-item" href="#" data-gallery-id="{{ gallery.pk }}">{{ gallery.title }}</a></li>
+                {% empty %}
+                <li><a class="dropdown-item disabled" href="#">Anda belum memiliki galeri</a></li>
+                {% endfor %}
+            </ul>
         </div>
-      </div>
+    </div>
+    <hr />
+
+    <div id="stats-placeholder" class="text-center p-5">
+        <h4 class="text-muted">Silakan pilih galeri untuk melihat statistiknya.</h4>
     </div>
 
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-success shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div
-                class="text-xs font-weight-bold text-success text-uppercase mb-1"
-              >
-                Earnings (Annual)
-              </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+    <div id="stats-content" style="display: none;">
+        <div class="row">
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2 ms-4">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Likes</div>
+                                <div id="total-likes-value" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-heart fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-auto">
-              <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-xl-8 col-lg-7">
-      <div class="card shadow mb-4 ms-4">
-        <div
-          class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
-        >
-          <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-          <div class="dropdown no-arrow">
-            <a
-              class="dropdown-toggle"
-              href="#"
-              role="button"
-              id="dropdownMenuLink"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-            </a>
-            <div
-              class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-              aria-labelledby="dropdownMenuLink"
-            >
-              <div class="dropdown-header">Dropdown Header:</div>
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
+        <div class="row">
+            <div class="col-xl-8 col-lg-7">
+                <div class="card shadow mb-4 ms-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Grafik Kunjungan Galeri (12 Bulan Terakhir)</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="visitsAreaChart"></canvas>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="chart-area">
-            <canvas id="myAreaChart"></canvas>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="col-xl-4 col-lg-5">
-      <div class="card shadow mb-4">
-        <div
-          class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
-        >
-          <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-          <div class="dropdown no-arrow">
-            <a
-              class="dropdown-toggle"
-              href="#"
-              role="button"
-              id="dropdownMenuLink"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-            </a>
-            <div
-              class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-              aria-labelledby="dropdownMenuLink"
-            >
-              <div class="dropdown-header">Dropdown Header:</div>
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
+            <div class="col-xl-4 col-lg-5">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Komposisi Gaya Lukis</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-pie pt-4 pb-2">
+                            <canvas id="stylesPieChart"></canvas>
+                        </div>
+                        <div id="pie-chart-legend" class="mt-4 text-center small">
+                            </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="card-body">
-          <div class="chart-pie pt-4 pb-2">
-            <canvas id="myPieChart"></canvas>
-          </div>
-          <div class="mt-4 text-center small">
-            <span class="mr-2">
-              <i class="fas fa-circle text-primary"></i> Direct
-            </span>
-            <span class="mr-2">
-              <i class="fas fa-circle text-success"></i> Social
-            </span>
-            <span class="mr-2">
-              <i class="fas fa-circle text-info"></i> Referral
-            </span>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+
+  {% endif %}
 
   {% endblock %}
 </div>
