@@ -1,9 +1,10 @@
-.pp{
-    width: 200px;
-    height: 200px;
-    border-radius: 100px !important;
-    object-fit: cover;
-    margin-left: 48px;
+.pp {
+  display: block;
+  margin: 0 auto;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .join-date{

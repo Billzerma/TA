@@ -33,10 +33,11 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
 from django.db.models.functions import TruncMonth
 from datetime import datetime, timedelta
+import torch.nn.functional as F
+import numpy as np
 
 
-
-model_dir = os.path.join(settings.BASE_DIR, "luminanapp", "vit-style-classification")
+model_dir = os.path.join(settings.BASE_DIR, "luminanapp", "v2")
 
 model = ViTForImageClassification.from_pretrained(model_dir)
 processor = ViTImageProcessor.from_pretrained(model_dir)
@@ -47,10 +48,21 @@ def predict_style(image_path):
 
     with torch.no_grad():
         outputs = model(**inputs)
-        predicted_class = outputs.logits.argmax(-1).item()
-    
+        logits = outputs.logits
+        probs = F.softmax(logits, dim=-1).squeeze().numpy()
+
+    predicted_class = np.argmax(probs)
+    confidence = probs[predicted_class]
     label = model.config.id2label.get(predicted_class, None)
-    return label
+
+    # 🔁 Buat dict semua skor (gaya: persentase)
+    all_confidences = {
+        model.config.id2label[i]: float(f"{probs[i]*100:.2f}")
+        for i in range(len(probs))
+    }
+
+    return label, confidence, all_confidences
+
 
 def upload_artwork(request, pk):
     if request.method == "POST":
@@ -75,11 +87,12 @@ def upload_artwork(request, pk):
                 temp_file.write(chunk)
             temp_image_path = temp_file.name
 
-        predicted_style_name = predict_style(temp_image_path)
-        os.remove(temp_image_path)  # Hapus file sementara
+        predicted_style_name, confidence, all_confidences = predict_style(temp_image_path)
+        os.remove(temp_image_path)
 
         if predicted_style_name is None:
             predicted_style_name = "Unknown"
+            confidence = 0.0
 
         style, _ = Style.objects.get_or_create(name=predicted_style_name)
 
@@ -95,14 +108,17 @@ def upload_artwork(request, pk):
             description= description,
         )
 
+            # Simpan ke DB
         ViTPrediction.objects.create(
             artwork=artwork,
             predicted_style=style,
-            confidence_score=1.0,
+            confidence_score=confidence,
             model_version="ViT-B/16",
         )
 
-        messages.success(request, "Karya berhasil diunggah dan diprediksi.")
+        # 🔁 Tambahkan semua confidence ke pesan
+        confidence_str = ", ".join([f"{k}: {v}%" for k, v in all_confidences.items()])
+        messages.success(request, f"Karya berhasil diunggah. Gaya: {predicted_style_name} ({confidence * 100:.2f}%)<br>Confidence semua gaya: {confidence_str}")
         return redirect('editGaleri', pk=pk)
 
 def hapus_karya(request, pk):
@@ -256,18 +272,16 @@ def save_gallery(request, gallery_id):
 
 def like_artwork(request, artwork_id):
     artwork = get_object_or_404(Artwork, pk=artwork_id)
-    # Pastikan user sudah login sebelum mencoba mengakses request.user
+   
     if request.user.is_authenticated:
-        # Cek apakah pengguna sudah pernah like artwork ini
-        # Penting: Pastikan model Like Anda memiliki field 'artwork' dan 'user'
+       
         if Like.objects.filter(user=request.user, artwork=artwork).exists():
-            # Jika sudah like, hapus like-nya (unlike)
+            
             Like.objects.filter(user=request.user, artwork=artwork).delete()
         else:
-            # Jika belum like, buat like baru
+           
             Like.objects.create(user=request.user, artwork=artwork)
 
-    # Redirect kembali ke halaman detail karya setelah operasi
     return redirect('detail_karya', pk=artwork.pk)
 
 
@@ -380,7 +394,7 @@ def tambahGaleri_view(request):
             gallery = form.save(commit=False)
             gallery.owner = request.user
             gallery.save()
-            return redirect('galeriSaya')  # Redirect ke halaman galeriSaya tanpa pk
+            return redirect('galeriSaya')  
     else:
         form = UploadGalleryForm()
 
@@ -453,10 +467,8 @@ def profile_view(request):
     else:
         form = ProfileForm(instance=profile)
 
-    # === TAMBAHKAN LOGIKA INI ===
-    # Ambil daftar galeri milik user untuk mengisi dropdown statistik
+    
     user_galleries = Gallery.objects.filter(owner=user)
-    # ============================
 
     context = {
         'user': user,

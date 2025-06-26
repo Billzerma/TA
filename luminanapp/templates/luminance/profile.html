@@ -2,7 +2,7 @@
 {%block content %} {% load static %}
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-  <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+  <h1 class="h3 mb-0 text-gray-800">Profil</h1>
 </div>
 <div class="container-fluid">
   <div class="row">
@@ -28,26 +28,14 @@
                   src="{{ profile.profile_picture.url }}"
                   alt="Foto Profil"
                   class="pp"
-                  style="
-                    display: block;
-                    margin: 0 auto;
-                    width: 150px;
-                    height: 150px;
-                    object-fit: cover;
-                  "
+                  
                 />
                 {% else %}
                 <img
                   src="{% static 'luminance/img/profilFoto.jpg' %}"
                   alt="Default Foto"
                   class="pp"
-                  style="
-                    display: block;
-                    margin: 0 auto;
-                    width: 150px;
-                    height: 150px;
-                    object-fit: cover;
-                  "
+             
                 />
                 {% endif %}
               </li>
@@ -211,6 +199,7 @@
                       name="phone"
                       id="phoneInput"
                       value="{{ profile.phone|default:'' }}"
+                      required
                     />
                   </div>
                   {% if request.user.groups.all.0.name == 'gallery_owner' %}
@@ -224,6 +213,7 @@
                       name="location"
                       id="locationInput"
                       value="{{ profile.location|default:'' }}"
+                      required
                     />
                   </div>
 
