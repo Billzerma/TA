@@ -3,6 +3,7 @@
 {% block content %} 
 {% load static %}
 <div class="container-fluid">
+
   {% if messages %} {% for message in messages %}
   
 
@@ -10,7 +11,7 @@
     class="alert alert-{{ message.tags }} alert-dismissible fade show mt-3"
     role="alert"
   >
-    {{ message }}
+     {{ message|safe }}
     <button
       type="button"
       class="btn-close"
@@ -300,8 +301,9 @@
 
       </div>
     </div>
+    
 
-    <div class="col-md-7 bg-edit-img border rounded">
+<div class="col-md-7 bg-edit-img border rounded">
       {% for style_name, karya_list in karya_per_style.items %}
       <div class="row">
         <div class="scroll-wrapper">
@@ -593,7 +595,10 @@
       </div>
       {% endfor %}
     </div>
+
   </div>
 </div>
+
+
 
 {% endblock %}

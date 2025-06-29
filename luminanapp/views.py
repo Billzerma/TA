@@ -12,7 +12,7 @@ from luminanapp.decorator import group_required
 from .forms import UploadGalleryForm
 from .models import Gallery,Like, SaveArtGallery
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Gallery, Artwork, Style, ViTPrediction, Comment,GalleryVisit
+from .models import Gallery, Artwork, Style, ViTPrediction, Comment,GalleryVisit, ViTPrediction
 from django.views.decorators.csrf import csrf_exempt
 import cloudinary.uploader
 import torch
@@ -37,10 +37,13 @@ import torch.nn.functional as F
 import numpy as np
 
 
-model_dir = os.path.join(settings.BASE_DIR, "luminanapp", "v2")
+
+model_dir = os.path.join(settings.BASE_DIR, "luminanapp", "v3")
+
 
 model = ViTForImageClassification.from_pretrained(model_dir)
 processor = ViTImageProcessor.from_pretrained(model_dir)
+
 
 def predict_style(image_path):
     image = Image.open(image_path).convert("RGB")
@@ -52,17 +55,18 @@ def predict_style(image_path):
         probs = F.softmax(logits, dim=-1).squeeze().numpy()
 
     predicted_class = np.argmax(probs)
-    confidence = probs[predicted_class]
+   
+    confidence = float(probs[predicted_class]) 
+
     label = model.config.id2label.get(predicted_class, None)
 
-    # 🔁 Buat dict semua skor (gaya: persentase)
+   
     all_confidences = {
         model.config.id2label[i]: float(f"{probs[i]*100:.2f}")
         for i in range(len(probs))
     }
 
-    return label, confidence, all_confidences
-
+    return label, confidence, all_confidences 
 
 def upload_artwork(request, pk):
     if request.method == "POST":
@@ -77,11 +81,10 @@ def upload_artwork(request, pk):
         description = request.POST.get("description")
         image_file = request.FILES.get("image")
 
-        # Upload ke Cloudinary
+        
         uploaded_image = cloudinary.uploader.upload(image_file)
         image_url = uploaded_image['secure_url']
 
-        # Simpan gambar sementara untuk prediksi
         with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
             for chunk in image_file.chunks():
                 temp_file.write(chunk)
@@ -108,7 +111,6 @@ def upload_artwork(request, pk):
             description= description,
         )
 
-            # Simpan ke DB
         ViTPrediction.objects.create(
             artwork=artwork,
             predicted_style=style,
@@ -116,9 +118,11 @@ def upload_artwork(request, pk):
             model_version="ViT-B/16",
         )
 
-        # 🔁 Tambahkan semua confidence ke pesan
         confidence_str = ", ".join([f"{k}: {v}%" for k, v in all_confidences.items()])
-        messages.success(request, f"Karya berhasil diunggah. Gaya: {predicted_style_name} ({confidence * 100:.2f}%)<br>Confidence semua gaya: {confidence_str}")
+        messages.success(
+            request,
+            f"Karya berhasil diunggah. Gaya: {predicted_style_name} ({confidence * 100:.2f}%)<br><br>Confidence semua gaya:<br><br>{confidence_str}"
+        )
         return redirect('editGaleri', pk=pk)
 
 def hapus_karya(request, pk):
@@ -143,16 +147,16 @@ def edit_karya(request, pk):
         messages.success(request, "Karya berhasil diperbarui.")
         return redirect("editGaleri", pk=karyaedit.gallery.pk)
 
-# view yang sudah diperbaiki
+
 def hapus_galeri(request, pk):
     galeri = get_object_or_404(Gallery, pk=pk)
     if request.method == "POST":
         galeri.delete()
         messages.success(request, "Galeri berhasil dihapus.")
-        # Arahkan ke halaman daftar galeri (misal: 'galeriSaya')
+       
         return redirect("galeriSaya") 
     
-    # Jika bukan POST, kembalikan ke halaman detail semula
+
     return redirect("editGaleri", pk=pk)
 
 
@@ -316,7 +320,6 @@ def detail_galeri_view(request, pk):
     return render(request, 'luminance/detailGaleri.html', context)
 
 
-
 def detailKarya_view(request):
     return render(request, 'luminance/detailKarya.html')
 
@@ -414,11 +417,11 @@ def editGaleri_view(request, pk):
     profile, created = Profile.objects.get_or_create(user=user)
 
     if request.method == "POST":
-        # Update gallery fields
+        
         galeri.title = request.POST.get("title")
         galeri.description = request.POST.get("description")
 
-        # Update thumbnail jika user upload file baru
+        
         if 'thumbnail' in request.FILES:
             galeri.thumbnail = request.FILES['thumbnail']
 
@@ -455,7 +458,6 @@ def profile_view(request):
     user = request.user
     profile, created = Profile.objects.get_or_create(user=user)
 
-    # Ambil grup user (role)
     roles = user.groups.values_list('name', flat=True)
 
     if request.method == 'POST':
@@ -475,10 +477,9 @@ def profile_view(request):
         'profile': profile,
         'form': form,
         'roles': roles,
-        'user_galleries': user_galleries, # <-- Tambahkan ke context
+        'user_galleries': user_galleries, 
     }
     return render(request, 'luminance/profile.html', context)
-
 
 
 def update_foto(request):
@@ -486,13 +487,12 @@ def update_foto(request):
         profile = request.user.profile
         profile.profile_picture = request.FILES["profile_picture"]
         profile.save()
-    return redirect("profile")  # Ganti dengan URL kamu
-
+    return redirect("profile")  
 @login_required
 def update_profile_details(request):
     if request.method == "POST":
-        user = request.user # Dapatkan objek User
-        profile = user.profile # Dapatkan objek Profile terkait
+        user = request.user 
+        profile = user.profile 
         profile = request.user.profile
         profile.phone = request.POST.get("phone", "")
         profile.location = request.POST.get("location", "")
@@ -505,20 +505,14 @@ def update_profile_details(request):
     return redirect("profile") 
 
 
-
-
-
 @login_required
 def get_gallery_stats_api(request, gallery_id):
     gallery = get_object_or_404(Gallery, pk=gallery_id)
 
-
     if gallery.owner != request.user:
         return HttpResponseForbidden("Anda tidak memiliki izin untuk melihat statistik ini.")
 
-
     total_likes = Like.objects.filter(gallery=gallery).count()
-
 
     style_names = ['Realism', 'Cubism', 'Impressionism', 'Expressionism','Romanticism']
     styles = Style.objects.filter(name__in=style_names)
@@ -533,7 +527,6 @@ def get_gallery_stats_api(request, gallery_id):
         'data': [item['artwork_count'] for item in style_counts],
     }
 
-
     one_year_ago = datetime.now() - timedelta(days=365)
     monthly_visits = GalleryVisit.objects.filter(
         gallery=gallery,
@@ -544,7 +537,6 @@ def get_gallery_stats_api(request, gallery_id):
         count=Count('id')
     ).order_by('month')
 
-
     month_labels = [(datetime.now() - timedelta(days=30*i)).strftime("%b %Y") for i in range(12)]
     month_labels.reverse()
     
@@ -554,7 +546,6 @@ def get_gallery_stats_api(request, gallery_id):
         'labels': month_labels,
         'data': [visit_data_map.get(label, 0) for label in month_labels]
     }
-
 
     data = {
         'gallery_title': gallery.title,
